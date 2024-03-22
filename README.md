@@ -26,3 +26,17 @@ install node.js
   npm install
   npx expo start
 ```
+## Simulator
+
+To simulate this project run
+
+```bash
+  npx expo start
+```
+
+then press a, i, etc. after opening simulator
+
+- expo app in mobile(QrCode)
+- android studio android [link](https://docs.expo.dev/workflow/android-studio-emulator/)
+- xcode(ios) [link](https://docs.expo.dev/workflow/ios-simulator/)
+
