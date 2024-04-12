@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
-import { initializeDatabase, checkUser, deleteAllUser } from '../dbManager/UserManager'; // Import deleteAllUser
+import { initializeDatabase, checkUser } from '../dbManager/UserManager';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }) => {
     checkUser(username, password)
       .then(userExists => {
         if (userExists) {
-          navigation.navigate('Home'); 
+          navigation.navigate('Home', { username: username }); 
         } else {
           alert('Invalid username or password');
         }
@@ -40,17 +40,10 @@ const LoginScreen = ({ navigation }) => {
     navigation.navigate('Register');
   };
 
-  const handleDeleteAll = () => {
-    deleteAllUser() // Call the deleteAllUser function
-      .then(() => {
-        console.log('All users deleted successfully');
-        alert('All users deleted successfully');
-      })
-      .catch(error => {
-        console.error('Error deleting users:', error);
-        alert('An error occurred while deleting users');
-      });
-  };
+  const handleAdmin = () => {
+    navigation.navigate('Admin');
+  }
+
 
   return (
     <View style={styles.container}>
@@ -70,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <Button title="Login" onPress={handleLogin} />
       <Button title="Register" onPress={handleRegister} />
-      <Button title="Delete All Users" onPress={handleDeleteAll} />
+      <Button title="Admin" onPress={handleAdmin} />
     </View>
   );
 };
@@ -90,6 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
+  
 });
 
 export default LoginScreen;

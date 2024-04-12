@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
-import { addUser } from '../dbManager/UserManager';
+import { addUser, haveUser } from '../dbManager/UserManager';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegister = () => {
-    // Validate username and password (you can add more validation logic as needed)
-    if (!username.trim() || !password.trim()) {
-      Alert.alert('Error', 'Please enter both username and password');
+  const handleRegister = async () => {
+    if (!username.trim() || !password.trim() || !confirmPassword.trim()) {
+      Alert.alert('Error', 'Please enter all fields');
       return;
     }
-
-    // Add user to the database
-    addUser(username, password)
+    if (password.trim() !== confirmPassword.trim()) {
+      Alert.alert('Error', 'Passwords do not match');
+      return;
+    }
+    else if (await haveUser(username.trim())) {
+      Alert.alert('Error', 'Username already exists');
+      return;
+    } else {
+      addUser(username.trim(), password.trim())
       .then(() => {
-        // Registration successful, navigate to login screen
         navigation.navigate('Login');
       })
       .catch(error => {
         console.error('Error registering user:', error);
         Alert.alert('Error', 'An error occurred while registering the user');
       });
+    }  
   };
 
   return (
@@ -39,6 +45,13 @@ const RegisterScreen = ({ navigation }) => {
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        secureTextEntry
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
         secureTextEntry
       />
       <Button title="Register" onPress={handleRegister} />
