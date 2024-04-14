@@ -5,6 +5,7 @@ import LoginScreen from './Screen/LoginScreen';
 import HomeScreen from './Screen/HomeScreen';
 import RegisterScreen from './Screen/RegisterScreen';
 import AdminScreen from './Screen/AdminScreen';
+import AdminInitDatabase from './Screen/AdminInitDatabase';
 import useDatabase from './dbManager/useDatabase';
 
 const Stack = createStackNavigator();
@@ -22,6 +23,7 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerLeft: null }} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Admin" component={AdminScreen} />
+        <Stack.Screen name="AdminInitDatabase" component={AdminInitDatabase} />
       </Stack.Navigator>
     </NavigationContainer>
   );
