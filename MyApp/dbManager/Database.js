@@ -80,8 +80,9 @@ const createPost = (title, content , username) => {
   return new Promise((resolve, reject) => {
       db.transaction(tx => {
       tx.executeSql(
-          "INSERT INTO posts (title, content, repost, status  ,username) VALUES (?, ?, ?, ?, ?)",
-          [title, content, 0, false, username],
+          "INSERT INTO posts (title, content, repost, status," +
+          "location , anonymous ,username) VALUES (?, ?, ?, ?, ? , ? , ?)",
+          [title, content, 0, false, 'default location' , false, username],
           (_, result) => {
           console.log('Post created successfully');
           resolve();
@@ -262,6 +263,27 @@ const deleteComment = (commentId) => {
 
 }
 
+// Admin Database Functions
+const dropTables = () => {
+  const tablename = "posts";
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'DROP TABLE IF EXISTS ' + tablename ,
+        [],
+        (_, result) => {
+          console.log(tablename + ' table dropped successfully');
+          resolve();
+        },
+        (_, error) => {
+          console.error('Error dropping table:', error);
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
 const database = { 
 //  initializeDatabase,
   userInitializeDatabase,
@@ -279,6 +301,7 @@ const database = {
 // Comment Database Functions
   createComment,
   deleteComment,
+  dropTables,
 
 };
 
