@@ -16,7 +16,7 @@ const RegisterScreen = ({ navigation }) => {
       Alert.alert('Error', 'Passwords do not match');
       return;
     }
-    else if (await database.haveUser(username.trim())) {
+    else if (await database.isUserExists(username.trim())) {
       Alert.alert('Error', 'Username already exists');
       return;
     } else {

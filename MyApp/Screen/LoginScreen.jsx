@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = () => {
 
-    database.checkUser(username, password)
+    database.isUser(username, password)
       .then(userExists => {
         if (userExists) {
           navigation.navigate('Home', { username: username }); 
