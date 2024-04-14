@@ -1,28 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
-import { initializeDatabase, checkUser } from '../dbManager/UserManager';
+import { database } from '../dbManager/Database';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [databaseInitialized, setDatabaseInitialized] = useState(false);
-
-  useEffect(() => {
-    initializeDatabase()
-      .then(() => setDatabaseInitialized(true))
-      .catch(error => {
-        console.error('Error initializing database:', error);
-        Alert.alert('Error', 'An error occurred while initializing the database');
-      });
-  }, []);
 
   const handleLogin = () => {
-    if (!databaseInitialized) {
-      Alert.alert('Error', 'Database is not initialized');
-      return;
-    }
 
-    checkUser(username, password)
+    database.checkUser(username, password)
       .then(userExists => {
         if (userExists) {
           navigation.navigate('Home', { username: username }); 
@@ -39,10 +25,6 @@ const LoginScreen = ({ navigation }) => {
   const handleRegister = () => {
     navigation.navigate('Register');
   };
-
-  const handleAdmin = () => {
-    navigation.navigate('Admin');
-  }
 
 
   return (
@@ -63,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <Button title="Login" onPress={handleLogin} />
       <Button title="Register" onPress={handleRegister} />
-      <Button title="Admin" onPress={handleAdmin} />
+      <Button title="Admin" onPress={() => navigation.navigate('Admin')} />
     </View>
   );
 };

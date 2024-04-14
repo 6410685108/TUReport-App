@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { deleteAllUser } from '../dbManager/UserManager';
+import { database } from '../dbManager/Database';
 import { Alert } from 'react-native';
 
 const AdminScreen = ({ navigation }) => {
-  const handleDeleteAll = () => {
+  const handleDeleteAllUser = () => {
     Alert.alert(
         'Confirmation',
         'Are you sure you want to delete all users?',
@@ -16,9 +16,8 @@ const AdminScreen = ({ navigation }) => {
           {
             text: 'Delete',
             onPress: () => {
-              deleteAllUser()
+              database.deleteAllUser()
                 .then(() => {
-                  console.log('All users deleted successfully');
                   alert('All users deleted successfully');
                 })
                 .catch(error => {
@@ -31,11 +30,39 @@ const AdminScreen = ({ navigation }) => {
         ],
     );
   };
+  
+  const handleDeleteAllPost = () => {
+    Alert.alert(
+        'Confirmation',
+        'Are you sure you want to delete all posts?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Delete',
+            onPress: () => {
+              database.deleteAllPosts()
+                .then(() => {
+                  alert('All posts deleted successfully');
+                })
+                .catch(error => {
+                  console.error('Error deleting posts:', error);
+                  alert('An error occurred while deleting posts');
+                });
+            },
+            style: 'destructive',
+          }
+        ],
+    );
+  };
 
   return (
     <View style={styles.container}>
       <Text>Admin Screen</Text>
-      <Button title="Delete All Users" onPress={handleDeleteAll} />
+      <Button title="Delete All Users" onPress={handleDeleteAllUser} />
+      <Button title="Delete All Posts" onPress={handleDeleteAllPost} />
     </View>
   );
 };

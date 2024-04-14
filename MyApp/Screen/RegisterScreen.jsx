@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
-import { addUser, haveUser } from '../dbManager/UserManager';
+import { database } from '../dbManager/Database';
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -16,11 +16,11 @@ const RegisterScreen = ({ navigation }) => {
       Alert.alert('Error', 'Passwords do not match');
       return;
     }
-    else if (await haveUser(username.trim())) {
+    else if (await database.haveUser(username.trim())) {
       Alert.alert('Error', 'Username already exists');
       return;
     } else {
-      addUser(username.trim(), password.trim())
+      database.addUser(username.trim(), password.trim())
       .then(() => {
         navigation.navigate('Login');
       })
