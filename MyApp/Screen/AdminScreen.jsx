@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { database } from '../dbManager/Database';
 import { Alert } from 'react-native';
+import useDatabase from '../dbManager/useDatabase';
 
 const AdminScreen = ({ navigation }) => {
+  
   const handleDeleteAllUser = () => {
     Alert.alert(
         'Confirmation',
@@ -58,11 +60,14 @@ const AdminScreen = ({ navigation }) => {
     );
   };
 
+
   return (
     <View style={styles.container}>
       <Text>Admin Screen</Text>
       <Button title="Delete All Users" onPress={handleDeleteAllUser} />
       <Button title="Delete All Posts" onPress={handleDeleteAllPost} />
+      <Button title="Drop Tables" onPress={() => database.dropTables()} />
+      <Button title="Initialize Database" onPress={() => navigation.navigate('AdminInitDatabase')} />
     </View>
   );
 };

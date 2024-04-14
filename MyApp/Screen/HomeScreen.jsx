@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Posts from './components/Posts';
 import { database } from '../dbManager/Database';
@@ -36,10 +36,10 @@ const HomeScreen = () => {
         placeholder="Content"
         value={content}
         onChangeText={setContent}
-      />
-      <Button title="Logout" onPress={handleLogout} />
+      />  
       <Button title="Create Post" onPress={handleCreatePost} />
       <Button title="Admin" onPress={() => navigation.navigate('Admin')} />
+      <Button title="Logout" onPress={handleLogout} />
     </View>
   );
 };
@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 30,
+    width: '40%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 10,
+    paddingHorizontal: 10,
   },
 });
 

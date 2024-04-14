@@ -22,11 +22,6 @@ const LoginScreen = ({ navigation }) => {
       });
   };
 
-  const handleRegister = () => {
-    navigation.navigate('Register');
-  };
-
-
   return (
     <View style={styles.container}>
       <Text>Login Screen</Text>
@@ -44,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} />
-      <Button title="Register" onPress={handleRegister} />
+      <Button title="Register" onPress={() => navigation.navigate('Register')} />
       <Button title="Admin" onPress={() => navigation.navigate('Admin')} />
     </View>
   );

@@ -1,5 +1,5 @@
 import React , {useState , useEffect}from "react";
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View , ScrollView} from 'react-native';
 import { database } from '../../dbManager/Database';
 
 const Posts = () => {
@@ -16,11 +16,24 @@ const Posts = () => {
 
 
     return (
+
         <View>
-            {posts.map(post => (
-                <Text key={post.id}> {post.title}: {post.content}: {post.username}</Text>
-            ))}
+        {posts.map(post => (
+            <View key={post.id}>
+            <Text>
+                {post.title}: {post.content}{'\n'}
+                Username: {post.username}{'\n'}
+                Repost: {post.repost}{'\n'}
+                Status: {post.status}{'\n'}
+                Location: {post.location}{'\n'}
+                Anonymous: {post.anonymous}
+            </Text>
+            <Text>------------------------------------{'\n'}</Text>
+            </View>
+        ))}
         </View>
+
+
     );
 }
 
