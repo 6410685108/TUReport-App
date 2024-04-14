@@ -5,9 +5,9 @@ const useDatabase = () => {
   const [databaseInitialized, setDatabaseInitialized] = useState(false);
 
   const initializeDatabase = () => {
-    database
-      .postInitializeDatabase()
+      database.postInitializeDatabase()
       .then(() => database.userInitializeDatabase())
+      .then(() => database.commentInitializeDatabase())
       .then(() => setDatabaseInitialized(true))
       .catch((error) => {
         console.error("Error initializing database:", error);
