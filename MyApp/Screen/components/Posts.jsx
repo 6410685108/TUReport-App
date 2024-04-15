@@ -1,9 +1,11 @@
 import React , {useState , useEffect}from "react";
 import { StyleSheet, Text, View , TextInput , Button} from 'react-native';
 import { database } from '../../dbManager/Database';
+import Comments from "./Comments";
 
 const Posts = ({username}) => {
     const [comment , setComment] = useState('');
+    const [refreshId , setRefreshId] = useState(0);
 
     useEffect(() => {
         refreshPosts();
@@ -20,11 +22,11 @@ const Posts = ({username}) => {
         database.createComment(postid, username ,comment);
         setComment('');
         refreshPosts();
+        setRefreshId(refreshId + 1);
     }
 
 
     return (
-
         <View>
         {posts.map(post => (
             <View key={post.id}>
@@ -36,14 +38,15 @@ const Posts = ({username}) => {
                 Location: {post.location}{'\n'}
                 Anonymous: {post.anonymous}
             </Text>
+            <Comments postid={post.id} key={refreshId} />
             <TextInput
                 style={styles.input}
                 placeholder="Comment"
                 value={comment}
                 onChangeText={setComment}
             />
+            
             <Button title="Comment" onPress={() => handleComment(post.id)} />
-            <Text>------------------------------------{'\n'}</Text>
             </View>
         ))}
         </View>

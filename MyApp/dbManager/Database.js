@@ -1,7 +1,7 @@
 import React from "react";
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabase("appdb.db");
+const db = SQLite.openDatabase("mydb.db");
 
 const userInitializeDatabase = () => {
     return new Promise((resolve, reject) => {
@@ -86,7 +86,7 @@ const createPost = (title, content , username) => {
           (_, result) => {
           console.log('Post created successfully');
           resolve();
-          }
+          }, (_, error) => {console.log('Error creating post:', error); reject(error);}
       );
       });
   });
@@ -263,6 +263,41 @@ const deleteComment = (commentId) => {
 
 }
 
+const getComments = (postid , callback) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT * FROM comments WHERE postId = ?',
+      [postid],
+      (_, { rows: { _array } }) => {
+        callback(_array);
+      },
+      (_, error) => {
+        console.error('Error fetching comments:', error);
+      }
+    );
+  });
+}
+
+const deleteAllComment = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'DELETE FROM comments',
+        [],
+        (_, result) => {
+          console.log('All comments deleted successfully');
+          resolve();
+        },
+        (_, error) => {
+          console.error('Error deleting comments:', error);
+          reject(error);
+        }
+      );
+    });
+  });
+
+}
+
 // Admin Database Functions
 const dropTables = () => {
   const tablename = "posts";
@@ -301,6 +336,9 @@ const database = {
 // Comment Database Functions
   createComment,
   deleteComment,
+  getComments,
+  deleteAllComment,
+
   dropTables,
 
 };

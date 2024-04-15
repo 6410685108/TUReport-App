@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { database } from '../dbManager/Database';
 import { Alert } from 'react-native';
-import useDatabase from '../dbManager/useDatabase';
 
 const AdminScreen = ({ navigation }) => {
   
@@ -67,6 +66,7 @@ const AdminScreen = ({ navigation }) => {
       <Button title="Delete All Users" onPress={handleDeleteAllUser} />
       <Button title="Delete All Posts" onPress={handleDeleteAllPost} />
       <Button title="Drop Tables" onPress={() => database.dropTables()} />
+      <Button title="Delete All Comments" onPress={() => database.deleteAllComment()} />
       <Button title="Initialize Database" onPress={() => navigation.navigate('AdminInitDatabase')} />
     </View>
   );
