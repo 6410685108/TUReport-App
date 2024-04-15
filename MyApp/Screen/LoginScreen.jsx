@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
-import { database } from '../dbManager/Database';
+import React, { useState, useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import { AuthContext } from "./system/Authenticate";
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { isLogin, login } = useContext(AuthContext);
+
+  useEffect(() => {if(isLogin) navigation.navigate('Home')})
 
   const handleLogin = () => {
-
-    database.isUser(username, password)
-      .then(userExists => {
-        if (userExists) {
-          navigation.navigate('Home', { username: username }); 
-        } else {
-          alert('Invalid username or password');
-        }
-      })
-      .catch(error => {
-        console.error('Error checking user:', error);
-        alert('Error occurred while checking user');
-      });
+    login(navigation,username, password);
   };
 
   return (

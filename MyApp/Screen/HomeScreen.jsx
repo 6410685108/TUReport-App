@@ -1,18 +1,17 @@
-import React , { useState } from 'react';
+import React , { useState, useContext } from 'react';
 import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import Posts from './components/Posts';
 import { database } from '../dbManager/Database';
+import { AuthContext } from "./system/Authenticate";
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
+const HomeScreen = ({ navigation }) => {
+  const { username , logout } = useContext(AuthContext);
   const [postname , setPostname] = useState('');
   const [content , setContent] = useState('');
   const [refreshId , setRefreshId] = useState(0);
-  const { username } = route.params;
 
   const handleLogout = () => {
+    logout();
     navigation.navigate('Login');
   };
 
@@ -23,7 +22,7 @@ const HomeScreen = () => {
   
   return (
     <View style={styles.container}>
-      <Posts key={refreshId}/>
+      <Posts key={refreshId} username={username}/>
       <Text>Welcome, {username}!</Text>
       <TextInput
         style={styles.input}
