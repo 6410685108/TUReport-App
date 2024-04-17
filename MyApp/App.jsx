@@ -1,35 +1,38 @@
-import React , { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './Screen/LoginScreen';
-import HomeScreen from './Screen/HomeScreen';
-import RegisterScreen from './Screen/RegisterScreen';
-import AdminScreen from './Screen/AdminScreen';
-import AdminInitDatabase from './Screen/AdminInitDatabase';
-import useDatabase from './dbManager/useDatabase';
-import { AuthProvider } from './Screen/system/Authenticate';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebase_auth } from './firebaseConfig';
+import Login from './app/screens/Login';
+import Register from './app/screens/Register';
+import Home from './app/screens/Home';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
-const App = () => {
-  const databaseInitialized = useDatabase();
+
+export default function App() {
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
-    console.log('Database initialized:', databaseInitialized);
-  }, [databaseInitialized]);
+    const unsubscribe = onAuthStateChanged(firebase_auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} options={{ headerLeft: null }} />
-          <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="Admin" component={AdminScreen} />
-          <Stack.Screen name="AdminInitDatabase" component={AdminInitDatabase} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthProvider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        {user ? (
+          <Stack.Screen name='Home' component={Home} />
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+            <Stack.Screen name="Register" component={Register} options={{headerShown: false}} />
+          </>
+        )}
+      </Stack.Navigator>
+  </NavigationContainer>
   );
-};
-
-export default App;
+}
