@@ -11,8 +11,6 @@ const RegisterScreen = ({ navigation }) => {
         setLoading(true);
         try {
             const response = await createUserWithEmailAndPassword(auth,email, password);
-            //console.log(response);
-
         } catch (error) {
             alert(error.message);
             console.log(error);

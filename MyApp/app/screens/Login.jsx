@@ -13,21 +13,6 @@ const Login = ({ navigation }) => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth,email, password);
-            //console.log(response);
-        } catch (error) {
-            alert(error.message);
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    const signUp = async () => {
-        setLoading(true);
-        try {
-            const response = await createUserWithEmailAndPassword(auth,email, password);
-            //console.log(response);
-
         } catch (error) {
             alert(error.message);
             console.log(error);
@@ -60,6 +45,7 @@ const Login = ({ navigation }) => {
                 <>
                     <Button title="Login" onPress={signIn} />
                     <Button title="Goto Register" onPress={() => navigation.navigate('Register')} />
+                    <Button title="Test Page For Backend" onPress={() => navigation.navigate('Test')} />
                 </>
             )}
             

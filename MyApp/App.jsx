@@ -13,6 +13,8 @@ import Finish from './app/tabs/Finish';
 import Profile from './app/tabs/Profile';
 import QandA from './app/tabs/QandA';
 
+import Test from './app/screens/Test';
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -46,6 +48,11 @@ export default function App() {
               name="Register"
               component={Register}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Test"
+              component={Test}
+              options={{ headerShown: true }}
             />
           </>
         )}
