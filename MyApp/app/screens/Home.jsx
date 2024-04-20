@@ -46,7 +46,7 @@ const Home = () => {
         <View style={styles.container}>
             <View style={styles.nav}>
               <View style={styles.inNav}>
-                <Image style={[styles.logo, {margin: 5}]} source={{uri: 'https://w7.pngwing.com/pngs/283/132/png-transparent-house-business-real-estate-logo-service-house-text-service-room-thumbnail.png',}} />
+                <Image style={[styles.logo, {margin: 5}]} source={require('../picture/homeLogo.png')} />
                 <Text style={[{margin: 5, fontSize: 40, fontWeight: 'bold'}]}>HOME</Text>
               </View>
               <Image style={{width: 40, height: 40, marginRight: 5}}source={{uri: 'https://www.vhv.rs/dpng/d/426-4263273_white-bell-notification-icon-transparent-clipart-bell-icon.png'}}/>
