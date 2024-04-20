@@ -32,17 +32,17 @@ const CreatePost = () => {
     <View>
       <View style={styles.nav}>
         <View style={styles.inNav}>
-          <Image style={[styles.logo, {margin: 5}]} source={{uri: 'https://w7.pngwing.com/pngs/283/132/png-transparent-house-business-real-estate-logo-service-house-text-service-room-thumbnail.png',}} />
+          <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
           <Text style={[{margin: 5, fontSize: 40, fontWeight: 'bold'}]}>CREATE POST</Text>
         </View>
       </View>
       <View >
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={{uri: 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}}/>
+          <Image style={{width: 30, height: 30}}source={require('../picture/user_profile.png')}/>
           <Text style={[{margin: 5, fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
         </View>
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={{uri: 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}}/>
+          <Image style={{width: 30, height: 30}}source={require('../picture/addTopic.png')}/>
           <TextInput
           placeholder="Add topic"
           placeholderTextColor="black" 
@@ -53,7 +53,7 @@ const CreatePost = () => {
           />
         </View>
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={{uri: 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}}/>
+          <Image style={{width: 30, height: 30}}source={require('../picture/AddMoreDetail.png')}/>
           <TextInput
           placeholder="Add more details"
           placeholderTextColor="black" 
@@ -64,7 +64,7 @@ const CreatePost = () => {
           />
         </View>
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={{uri: 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}}/>
+          <Image style={{width: 30, height: 30}}source={require('../picture/map.png')}/>
           <TextInput
           placeholder="Add location"
           placeholderTextColor="black" 
@@ -76,7 +76,7 @@ const CreatePost = () => {
         </View>
         <View style={styles.content}>
           <TouchableOpacity onPress={handleAddPhoto}>
-            <Image style={{width: 30, height: 30}}source={{uri: 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}}/>
+            <Image style={{width: 30, height: 30}}source={require('../picture/photo.png')}/>
           </TouchableOpacity>
           <Text style={styles.boxx}>Add photos</Text>
         </View>
