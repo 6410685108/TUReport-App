@@ -7,8 +7,11 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { firebase_auth } from './firebaseConfig';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';
-import Home from './app/screens/Home';
-import Test from './app/screens/Test';
+import Home from './app/tabs/Home';
+import CreatePost from './app/tabs/CreatePost';
+import Finish from './app/tabs/Finish';
+import Profile from './app/tabs/Profile';
+import QandA from './app/tabs/QandA';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,7 +68,10 @@ function AuthenticatedScreens() {
       }}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Test" component={Test} />
+      <Tab.Screen name="Finish" component={Finish} />
+      <Tab.Screen name="CreatePost" component={CreatePost} />
+      <Tab.Screen name="QandA" component={QandA} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
 
   );

@@ -28,3 +28,20 @@ async function getCities(db) {
   const cityList = citySnapshot.docs.map(doc => doc.data());
   return cityList;
 }
+
+export async function collectMessages(filterCriteria = {}) {
+  try {
+    const messagesCollection = collection(firebase_db, 'messages'); // Replace 'messages' with your actual collection name
+
+    // Build a query with optional filtering based on filterCriteria
+    const q = query(messagesCollection, where(...Object.entries(filterCriteria))); // Destructure filterCriteria for dynamic queries
+
+    const querySnapshot = await getDocs(q);
+    const messages = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })); // Include document ID
+
+    return messages; // Return the array of messages
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    // Handle errors appropriately (e.g., display error messages to the user)
+  }
+}
