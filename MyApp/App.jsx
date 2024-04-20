@@ -12,6 +12,7 @@ import CreatePost from './app/tabs/CreatePost';
 import Finish from './app/tabs/Finish';
 import Profile from './app/tabs/Profile';
 import QandA from './app/tabs/QandA';
+import { Image } from 'react-native';
 
 import Test from './app/screens/Test';
 
@@ -74,11 +75,46 @@ function AuthenticatedScreens() {
         },
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Finish" component={Finish} />
-      <Tab.Screen name="CreatePost" component={CreatePost} />
-      <Tab.Screen name="QandA" component={QandA} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Home" component={Home} options={{ 
+        tabBarIcon: ({focused, color, size}) => (
+        <Image 
+          source={require('./app/picture/home.png')} 
+          style={{width: size, height: size, tintColor: color}} 
+        />
+      ),
+  }} />
+      <Tab.Screen name="Finish" component={Finish} options={{ 
+        tabBarIcon: ({focused, color, size}) => (
+        <Image 
+          source={require('./app/picture/finish.png')} 
+          style={{width: size, height: size, tintColor: color}} 
+        />
+      ),
+  }}/>
+      <Tab.Screen name="CreatePost" component={CreatePost} options={{ 
+        tabBarIcon: ({focused, color, size}) => (
+        <Image 
+          source={require('./app/picture/createpost.png')} 
+          style={{width: size, height: size, tintColor: color}} 
+        />
+      ),
+  }}/>
+      <Tab.Screen name="QandA" component={QandA} options={{ 
+        tabBarIcon: ({focused, color, size}) => (
+        <Image 
+          source={require('./app/picture/qa_icon.png')} 
+          style={{width: size, height: size, tintColor: color}} 
+        />
+      ),
+  }}/>
+      <Tab.Screen name="Profile" component={Profile} options={{ 
+        tabBarIcon: ({focused, color, size}) => (
+        <Image 
+          source={require('./app/picture/user.png')} 
+          style={{width: size, height: size, tintColor: color}} 
+        />
+      ),
+  }}/>
     </Tab.Navigator>
 
   );
