@@ -53,8 +53,8 @@ const Home = () => {
       <View style={styles.nav}>
         <View style={styles.inNav}>
           <Image
-            style={[styles.logo]}
-            source={require("../picture/homeLogo.png")}
+            style={styles.logo}
+            source={require('../picture/home.png')}
           />
           <Text style={{ marginLeft: 5, fontSize: 25 }}>HOME</Text>
         </View>
@@ -89,7 +89,7 @@ const Home = () => {
       </View>
 
       <Posts />
-      <Button title="Logout" onPress={handleLogout} />
+      <Button title="Logout" onPress={handleLogout}/>
     </View>
   );
 };

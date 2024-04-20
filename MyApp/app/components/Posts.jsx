@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 
 const Posts = () => {
   return (
-    <View>
+    <ScrollView>
         {/* use function map to show all post */}
-      <View style={{margin: 10, padding: 15, backgroundColor: 'lightgrey', borderRadius: 20}}>
+      <View style={{margin: 10, padding: 15, backgroundColor: '#ECECEC', borderRadius: 20}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View style={{flexDirection: 'row'}}>
                 <Image style={{width: 30, height: 30}}source={{uri: 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}}/>
@@ -22,16 +22,16 @@ const Posts = () => {
         <Image style={{width: '100%', height: 250, borderRadius: 20, marginTop: 10}} source={{uri: 'https://files.ejan.co/wp-content/uploads/2023/12/2320_4.jpg'}}/>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
             <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {console.log('Repost pressed!')}}>
-                <Image style={{width: 30, height: 30}} source={{uri: 'https://w7.pngwing.com/pngs/408/714/png-transparent-repost-zondicons-icon.png'}} />
+                <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon.png')} />
                 <Text style={{paddingLeft: 5}}>10</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {console.log('Bookmark pressed!')}}>
-                <Image style={{width: 30, height: 30}} source={{uri: 'https://i.pinimg.com/736x/53/53/4a/53534aa10681e044afadc9966183b24a.jpg'}} />
+                <Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />
             </TouchableOpacity>
         </View>
-        <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginTop: 10}}/>
+        <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginVertical: 10}}/>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
