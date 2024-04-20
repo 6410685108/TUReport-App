@@ -16,22 +16,22 @@ install node.js
 [link](https://nodejs.org/en/download)
 
 ```bash
-  node -v
-  npm install -g expo-cli
+node -v
+npm install -g expo-cli
 ```
   clone git
 
 ```bash
-  cd MyApp
-  npm install
-  npx expo start
+cd MyApp
+npm install
+npx expo start
 ```
 ## Simulator
 
 To simulate this project run
 
 ```bash
-  npx expo start
+npx expo start
 ```
 
 then press a, i, etc. after opening simulator
