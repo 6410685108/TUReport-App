@@ -32,6 +32,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+
         {user ? (
           <Stack.Screen
             name="Authenticated"
@@ -58,7 +59,7 @@ export default function App() {
           </>
         )}
       </Stack.Navigator>
-      <StatusBar style="auto" />
+      <StatusBar hidden />
     </NavigationContainer>
   );
 }
@@ -82,6 +83,7 @@ function AuthenticatedScreens() {
           style={{width: size, height: size, tintColor: color}} 
         />
       ),
+        headerShown: false
   }} />
       <Tab.Screen name="Finish" component={Finish} options={{ 
         tabBarIcon: ({focused, color, size}) => (
@@ -90,6 +92,7 @@ function AuthenticatedScreens() {
           style={{width: size, height: size, tintColor: color}} 
         />
       ),
+      headerShown: false
   }}/>
       <Tab.Screen name="CreatePost" component={CreatePost} options={{ 
         tabBarIcon: ({focused, color, size}) => (
@@ -98,6 +101,7 @@ function AuthenticatedScreens() {
           style={{width: size, height: size, tintColor: color}} 
         />
       ),
+      headerShown: false
   }}/>
       <Tab.Screen name="QandA" component={QandA} options={{ 
         tabBarIcon: ({focused, color, size}) => (
@@ -106,6 +110,7 @@ function AuthenticatedScreens() {
           style={{width: size, height: size, tintColor: color}} 
         />
       ),
+      headerShown: false
   }}/>
       <Tab.Screen name="Profile" component={Profile} options={{ 
         tabBarIcon: ({focused, color, size}) => (
@@ -114,6 +119,7 @@ function AuthenticatedScreens() {
           style={{width: size, height: size, tintColor: color}} 
         />
       ),
+      headerShown: false
   }}/>
     </Tab.Navigator>
 
