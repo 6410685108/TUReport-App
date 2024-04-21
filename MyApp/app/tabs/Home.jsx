@@ -39,15 +39,6 @@ const Home = () => {
     },
   ];
 
-  const handleLogout = async () => {
-    try {
-      await firebase_auth.signOut();
-      console.log("User logged out successfully");
-    } catch (error) {
-      console.error("Error logging out:", error.message);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
@@ -89,7 +80,6 @@ const Home = () => {
       </View>
 
       <Posts />
-      <Button title="Logout" onPress={handleLogout}/>
     </View>
   );
 };

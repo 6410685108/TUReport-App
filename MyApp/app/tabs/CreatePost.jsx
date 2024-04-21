@@ -4,22 +4,40 @@ import { firebase_db } from '../../firebaseConfig'; // Import firebase_db from y
 import { collection , addDoc } from 'firebase/firestore/lite';
 
 const CreatePost = () => {
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
+  const [topic, setTopic] = useState('');
+  const [details, setDetails] = useState('');
+  const [location, setLocation] = useState('');
   const [anonymous, setanonymous] = useState(false);
 
+  // const handleMessageSubmit = async () => {
+  //   if (!message) {
+  //     return; // Handle empty message case (optional)
+  //   }
+  
+  //   try {
+  //     const messagesCollection = collection(firebase_db, 'messages');
+  //     await addDoc(messagesCollection, { message, sender: 'yourUserId' }); 
+  //     setMessage(''); 
+  //   } catch (error) {
+  //     console.error('Error sending message:', error);
+  //   }
+
+  // };
   const handleMessageSubmit = async () => {
-    if (!message) {
-      return; // Handle empty message case (optional)
+    if (!topic || !details || !location) {
+      return;
     }
   
     try {
       const messagesCollection = collection(firebase_db, 'messages');
-      await addDoc(messagesCollection, { message, sender: 'yourUserId' }); 
-      setMessage(''); 
+      await addDoc(messagesCollection, { topic, details, location, sender: 'yourUserId' }); 
+      setTopic('');
+      setDetails('');
+      setLocation('');
     } catch (error) {
       console.error('Error sending message:', error);
     }
-
   };
   const handleAcceptToggle = () => {
     setanonymous(!anonymous);
@@ -33,62 +51,65 @@ const CreatePost = () => {
       <View style={styles.nav}>
         <View style={styles.inNav}>
           <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
-          <Text style={[{margin: 5, fontSize: 40, fontWeight: 'bold'}]}>CREATE POST</Text>
+          <Text style={[{margin: 5, fontSize: 35, fontWeight: 'bold',}]}>CREATE POST</Text>
         </View>
       </View>
       <View >
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={require('../picture/user_profile.png')}/>
+          <Image style={styles.log2}source={require('../picture/user_profile.png')}/>
           <Text style={[{margin: 5, fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
         </View>
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={require('../picture/addTopic.png')}/>
+          <Image style={styles.log2}source={require('../picture/addTopic.png')}/>
           <TextInput
           placeholder="Add topic"
           placeholderTextColor="black" 
-          value={message}
-          onChangeText={setMessage}
+          value={topic}
+          onChangeText={setTopic}
           multiline
           style={styles.boxx}
           />
         </View>
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={require('../picture/AddMoreDetail.png')}/>
+          <Image style={styles.log2}source={require('../picture/AddMoreDetail.png')}/>
           <TextInput
           placeholder="Add more details"
           placeholderTextColor="black" 
-          value={message}
-          onChangeText={setMessage}
+          value={details}
+          onChangeText={setDetails}
           multiline
-          style={styles.boxx}
+          style={[styles.boxx,{height:100, textAlignVertical: 'top',}]}
           />
         </View>
         <View style={styles.content}>
-          <Image style={{width: 30, height: 30}}source={require('../picture/map.png')}/>
+          <Image style={styles.log2}source={require('../picture/map.png')}/>
           <TextInput
           placeholder="Add location"
           placeholderTextColor="black" 
-          value={message}
-          onChangeText={setMessage}
+          value={location}
+          onChangeText={setLocation}
           multiline
           style={styles.boxx}
           />
         </View>
         <View style={styles.content}>
           <TouchableOpacity onPress={handleAddPhoto}>
-            <Image style={{width: 30, height: 30}}source={require('../picture/photo.png')}/>
+            <Image style={styles.log2}source={require('../picture/photo.png')}/>
           </TouchableOpacity>
-          <Text style={styles.boxx}>Add photos</Text>
+          <TouchableOpacity onPress={handleAddPhoto}>
+            <Text style={styles.boxx}>Add photos</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.content}>
-          <TouchableOpacity onPress={handleAcceptToggle} style={[styles.button, { backgroundColor: anonymous ? 'black' : 'white' }]}>
-              <Text style={{ color: anonymous ? 'white' : 'black' }}>O</Text>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
+          {anonymous ? (
+            <Text style={styles.checkmark}>✓</Text>
+          ) : null}
+        </TouchableOpacity>
           <Text style={styles.boxx}>Anonymous</Text>
         </View>
 
       </View>
-
       <TouchableOpacity onPress={handleMessageSubmit}>
         <Text style={styles.botsub}>Submit</Text>
       </TouchableOpacity>
@@ -110,12 +131,12 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    left: 75,
+    left: 50,
     padding: 10,
   },
   boxx: {
     width: 280,
-    height: 40,
+    height: 35,
     padding: 10,
     marginLeft: 10,
     borderWidth: 2,
@@ -123,9 +144,33 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     margin: 0,
   },
+  circle: {
+    width: 25,
+    height: 25,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:5,
+    marginRight:10,
+    left:5,
+  },
+  checkmark: {
+    fontSize: 20,
+    color: 'black',
+    textAlign: 'center',
+    lineHeight: 25,
+  },
   logo: {
-      width: 40,
-      height: 40,
+    width: 60,
+    height: 60,
+    marginTop: 0,
+  },
+  log2: {
+    width: 35,
+    height: 35,
   },
   botsub: {
     marginTop: 50,
@@ -136,7 +181,7 @@ const styles = StyleSheet.create({
     width:80,
     textAlign: 'center',
     alignSelf: 'flex-end',
-    right:20,
+    right:40,
     
   },
 });
