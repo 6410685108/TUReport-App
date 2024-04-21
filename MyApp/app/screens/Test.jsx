@@ -5,26 +5,24 @@ import { db } from "../system/db";
 const Test = () => {
 
     const btnHandler = () => {
-        // db.collectPost("testTitle", "testContent", "testAuthor"); done
+        // db.createPost("testTitle", "testContent", "testAuthor"); done
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
+        const fetchData = async () => {                      
+            try {    
                 const data = await db.getAllPosts();
-                const testData = data[0];
-                console.log(testData);
+                console.log(data)
             } catch (error) {
                 console.error('Error fetching posts: ', error);
             }
         };
     
-        fetchData(); // Call the fetchData function here
-    
-        // Clean up function (if needed)
+        fetchData();
+
         return () => {
-            // Any cleanup logic
         };
+
     }, []);
 
    

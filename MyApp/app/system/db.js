@@ -1,18 +1,20 @@
-import { firebase_db } from '../../firebaseConfig'; // Import firebase_db from your firebaseConfig
+import { firebase_auth, firebase_db } from '../../firebaseConfig'; // Import firebase_db from your firebaseConfig
 import { collection , addDoc , getDocs , updateDoc , doc , getDoc , setDoc } from 'firebase/firestore/lite';
 
-const createPost = async (title, content, picUrl) => {
-
+const createPost = async (title, detail, location , picUrl , anonymous, author) => {
     try {
         const postCollectionRef = collection(firebase_db, 'posts');
         await addDoc(postCollectionRef, {
             title: title,
-            content: content,
+            detail: detail,
+            location: location,
             picUrl: picUrl,
-            
+            anonymous: anonymous,
+            author: author,
         });
     } catch (error) {
         console.error('Error creating post:', error);
+        throw error;
     }
 
 };
@@ -71,6 +73,21 @@ const userBookmark = async (postId, userId) => {
     }
 };
 
+const getUserEmail = async () => {
+    try {
+        const currentUser = firebase_auth.currentUser;
+        if (currentUser) {
+            return currentUser.email;
+        } else {
+            console.log('No user signed in');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error getting user email:', error);
+        throw error;
+    }
+};
+
 
 const db = {  // code : test
     createPost , // done : pass # Not have comment now
@@ -80,6 +97,7 @@ const db = {  // code : test
     createComment , // done : none
 
     userBookmark , // done : none
+    getUserEmail ,
 
 };
 

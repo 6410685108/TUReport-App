@@ -1,7 +1,7 @@
 import React , { useState } from "react";
 import { View, Text, StyleSheet , TextInput, ActivityIndicator, Button } from "react-native";
 import { firebase_auth } from "../../firebaseConfig";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -20,6 +20,19 @@ const Login = ({ navigation }) => {
             setLoading(false);
         }
     }
+
+    const easyLogin = async () => {
+        setLoading(true);
+        try {
+            const response = await signInWithEmailAndPassword(auth,"t@t.com", "111111");
+        } catch (error) {
+            alert(error.message);
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
 
     return (
         <View style={styles.container}>
@@ -46,6 +59,7 @@ const Login = ({ navigation }) => {
                     <Button title="Login" onPress={signIn} />
                     <Button title="Goto Register" onPress={() => navigation.navigate('Register')} />
                     <Button title="Test Page For Backend" onPress={() => navigation.navigate('Test')} />
+                    <Button title="EZ Login" onPress={easyLogin} />
                 </>
             )}
             

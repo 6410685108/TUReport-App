@@ -1,37 +1,22 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-import { firebase_db } from '../../firebaseConfig'; // Import firebase_db from your firebaseConfig
-import { collection , addDoc } from 'firebase/firestore/lite';
+import { db } from '../system/db';
 
 const CreatePost = () => {
-  // const [message, setMessage] = useState('');
   const [topic, setTopic] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState('');
-  const [anonymous, setanonymous] = useState(false);
+  const [anonymous, setAnonymous] = useState(false);
 
-  // const handleMessageSubmit = async () => {
-  //   if (!message) {
-  //     return; // Handle empty message case (optional)
-  //   }
-  
-  //   try {
-  //     const messagesCollection = collection(firebase_db, 'messages');
-  //     await addDoc(messagesCollection, { message, sender: 'yourUserId' }); 
-  //     setMessage(''); 
-  //   } catch (error) {
-  //     console.error('Error sending message:', error);
-  //   }
-
-  // };
   const handleMessageSubmit = async () => {
     if (!topic || !details || !location) {
       return;
     }
-  
     try {
-      const messagesCollection = collection(firebase_db, 'messages');
-      await addDoc(messagesCollection, { topic, details, location, sender: 'yourUserId' }); 
+      const email = db.getUserEmail()._j;
+      console.log("Email:", email);
+      const response = db.createPost(topic, details, location , "photo" , anonymous , email);
+      console.log("Post created:", response); 
       setTopic('');
       setDetails('');
       setLocation('');
@@ -39,9 +24,11 @@ const CreatePost = () => {
       console.error('Error sending message:', error);
     }
   };
+
   const handleAcceptToggle = () => {
-    setanonymous(!anonymous);
+    setAnonymous(!anonymous);
   };
+
   const handleAddPhoto = () => {
     // Jamesssssssssss
   };
@@ -113,7 +100,6 @@ const CreatePost = () => {
       <TouchableOpacity onPress={handleMessageSubmit}>
         <Text style={styles.botsub}>Submit</Text>
       </TouchableOpacity>
-
     </View>
   );
 };

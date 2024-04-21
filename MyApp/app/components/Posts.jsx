@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { db } from "../system/db";
 
 const Posts = () => {
+    const allposts = db.getAllPosts();
+
     const testInfo = [{
         username: 'JohnSmith',
         time: '4h',

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ActivityIndicator } from 'react-native';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { firebase_auth } from "../../firebaseConfig";
 
 const RegisterScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const auth = firebase_auth;
 
     const handleRegister = async () => {
         setLoading(true);
@@ -18,6 +21,7 @@ const RegisterScreen = ({ navigation }) => {
             setLoading(false);
         }
     }
+
   return (
     <View style={styles.container}>
       <Text>Register Screen</Text>

@@ -8,7 +8,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { firebase_auth } from "../../firebaseConfig";
 import Posts from "../components/Posts";
 import { SelectCountry } from "react-native-element-dropdown";
 
