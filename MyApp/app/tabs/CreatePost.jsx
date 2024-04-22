@@ -60,11 +60,11 @@ const CreatePost = () => {
       </View>
       <View >
         <View style={styles.content}>
-          <Image style={styles.log2}source={require('../picture/user_profile.png')}/>
-          <Text style={[{margin: 5, fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
+          <Image style={styles.logo2}source={require('../picture/user_profile.png')}/>
+          <Text style={[{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
         </View>
         <View style={styles.content}>
-          <Image style={styles.log2}source={require('../picture/addTopic.png')}/>
+          <Image style={styles.logo2}source={require('../picture/addTopic.png')}/>
           <TextInput
           placeholder="Add topic"
           placeholderTextColor="black" 
@@ -75,7 +75,7 @@ const CreatePost = () => {
           />
         </View>
         <View style={styles.content}>
-          <Image style={styles.log2}source={require('../picture/AddMoreDetail.png')}/>
+          <Image style={styles.logo2}source={require('../picture/AddMoreDetail.png')}/>
           <TextInput
           placeholder="Add more details"
           placeholderTextColor="black" 
@@ -86,7 +86,7 @@ const CreatePost = () => {
           />
         </View>
         <View style={styles.content}>
-          <Image style={styles.log2}source={require('../picture/map.png')}/>
+          <Image style={styles.logo2}source={require('../picture/map.png')}/>
           <TextInput
           placeholder="Add location"
           placeholderTextColor="black" 
@@ -98,9 +98,9 @@ const CreatePost = () => {
         </View>
         <View style={styles.content}>
           <TouchableOpacity onPress={handleAddPhoto}>
-            <Image style={styles.log2}source={require('../picture/photo.png')}/>
+            <Image style={styles.logo2}source={require('../picture/photo.png')}/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleAddPhoto}>
+          <TouchableOpacity onPress={handleAddPhoto} style={{ flex: 1 }}>
             <Text style={styles.boxx}>Add photos</Text>
           </TouchableOpacity>
         </View>
@@ -114,7 +114,7 @@ const CreatePost = () => {
         </View>
 
       </View>
-      <TouchableOpacity onPress={handleMessageSubmit}>
+      <TouchableOpacity onPress={handleMessageSubmit} >
         <Text style={styles.botsub}>Submit</Text>
       </TouchableOpacity>
     </View>
@@ -138,13 +138,15 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    left: 50,
-    padding: 10,
+    justifyContent: "flex-start",
+    left: "10%" ,
+    paddingTop: 10,
+    paddingBottom: 10,
+    maxWidth: "80%",
   },
   boxx: {
-    width: 280,
-    height: 35,
+    flex: 1,
+    height: 40,
     padding: 10,
     marginLeft: 10,
     borderWidth: 2,
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     height: 60,
     marginTop: 0,
   },
-  log2: {
+  logo2: {
     width: 35,
     height: 35,
   },
@@ -185,12 +187,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fac33d',
     color: 'black',
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 30,
     width:80,
     textAlign: 'center',
     alignSelf: 'flex-end',
-    right:40,
-    
+    right:"10%",
   },
 });
 
