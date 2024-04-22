@@ -1,5 +1,5 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc } from 'firebase/firestore';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 
 const createPost = async (title, detail, location , photo , anonymous, author) => {
@@ -15,6 +15,7 @@ const createPost = async (title, detail, location , photo , anonymous, author) =
             author: author,
             time: new Date().toLocaleString(),
             status: 'in progress',
+            repost: 0,
         });
     } catch (error) {
         console.error('Error creating post:', error);
@@ -55,6 +56,72 @@ const uploadImage = async (image) => {
     }
 };
 
+const repostPost = async (postId) => {
+    const postCollectionRef = collection(firebase_db, 'posts');
+    const postDocRef = doc(postCollectionRef, postId);
+    const postDocSnap = await getDoc(postDocRef);
+    if (postDocSnap.exists()) {
+        if (await isReposted(postId , firebase_auth.currentUser.email)) {
+            await removeReposter(postId , firebase_auth.currentUser.email);
+                const repostCount = postDocSnap.data().repost - 1;
+                await updateDoc(postDocRef, {
+                    repost: repostCount,
+                });
+            return;
+        } else {
+            await addReposter(postId , firebase_auth.currentUser.email);
+                const repostCount = postDocSnap.data().repost + 1;
+                await updateDoc(postDocRef, {
+                    repost: repostCount,
+                });
+        }
+    }
+}
+
+const addReposter = async (postId , user) => {
+    try{
+        const postCollectionRef = collection(firebase_db, 'posts' , postId , 'reposter');
+    await addDoc(postCollectionRef, {
+        user : user,
+    });
+    } catch (error) {
+        console.error('Error adding reposter:', error);
+    }
+}
+
+const removeReposter = async (postId , user) => {
+    try{
+        const postCollectionRef = collection(firebase_db, 'posts' , postId , 'reposter');
+        const postsSnapshot = await getDocs(postCollectionRef);
+        const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].user === user) {
+                const postDocRef = doc(postCollectionRef, posts[i].id);
+                await deleteDoc(postDocRef);
+            }
+        }
+    } catch (error) {
+        console.error('Error removing reposter:', error);
+    }
+}
+
+const isReposted = async (postId , user) => {
+    try {
+        const postCollectionRef = collection(firebase_db, 'posts' , postId , 'reposter');
+        const postsSnapshot = await getDocs(postCollectionRef);
+        const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].user === user) {
+                return true;
+            }
+        }
+        return false;
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        return false;
+    }
+}
+
 
 const editPost = async (postId, newTitle, newContent, newPicUrl) => {
     const postCollectionRef = collection(firebase_db, 'posts');
@@ -84,6 +151,7 @@ const getAllPosts = async () => {
         return [];
     }
 };
+
 
 const createComment = async (postId, content, author) => {
     try {
@@ -130,6 +198,7 @@ const db = {  // code : test
     createPost , // done : pass # Not have comment now
     editPost , // done : none
     getAllPosts , // done : pass
+    repostPost , // done : pass
 
     createComment , // done : none
 

@@ -40,7 +40,7 @@ const Finish = () => {
         </TouchableOpacity>
       </View>
 
-      <Posts />
+      <Posts option={"Finish"} />
     </View>
   );
 };

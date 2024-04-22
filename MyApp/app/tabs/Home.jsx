@@ -21,16 +21,16 @@ const Home = () => {
       lable: "Allpost",
     },
     {
-      value: "2",
-      lable: "A",
+      value: "A-Z",
+      lable: "A-Z",
     },
     {
-      value: "3",
-      lable: "B",
+      value: "Z-A",
+      lable: "Z-A",
     },
     {
-      value: "4",
-      lable: "C",
+      value: "Repost",
+      lable: "Repost",
     },
     {
       value: "5",
@@ -78,7 +78,7 @@ const Home = () => {
         />
       </View>
 
-      <Posts />
+      <Posts option={country} />
     </View>
   );
 };
