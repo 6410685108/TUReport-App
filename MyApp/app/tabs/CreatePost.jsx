@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import { db } from '../system/db';
 import * as ImagePicker from 'expo-image-picker';
 import { firebase_storage } from '../../firebaseConfig';
+import { set } from 'firebase/database';
 
 const CreatePost = () => {
   const [topic, setTopic] = useState('');
@@ -49,6 +50,15 @@ const CreatePost = () => {
       setPhoto(photo);
     }
   };
+
+  const handleLocationSubmit = () => {
+    setLocation(location); 
+    Keyboard.dismiss(); 
+};
+  const handleTopicSubmit = () => {
+    setTopic(topic); 
+    Keyboard.dismiss();
+  }
   
   return (
     <View style={styles.container}>
@@ -58,11 +68,13 @@ const CreatePost = () => {
           <Text style={[{margin: 5, fontSize: 35, fontWeight: 'bold',}]}>CREATE POST</Text>
         </View>
       </View>
-      <View >
+      
+      <View style={styles.containerContent} >
         <View style={styles.content}>
-          <Image style={styles.log2}source={require('../picture/user_profile.png')}/>
-          <Text style={[{margin: 5, fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
-        </View>
+            <Image style={styles.log2}source={require('../picture/user_profile.png')}/>
+            <Text style={[{margin: 5, fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
+          </View>
+       
         <View style={styles.content}>
           <Image style={styles.log2}source={require('../picture/addTopic.png')}/>
           <TextInput
@@ -70,7 +82,7 @@ const CreatePost = () => {
           placeholderTextColor="black" 
           value={topic}
           onChangeText={setTopic}
-          multiline
+          onSubmitEditing={handleTopicSubmit}
           style={styles.boxx}
           />
         </View>
@@ -92,7 +104,7 @@ const CreatePost = () => {
           placeholderTextColor="black" 
           value={location}
           onChangeText={setLocation}
-          multiline
+          onSubmitEditing={handleLocationSubmit}
           style={styles.boxx}
           />
         </View>
@@ -136,10 +148,14 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
   },
+  containerContent: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   content: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    left: 50,
+    alignItems: 'center',
     padding: 10,
   },
   boxx: {
