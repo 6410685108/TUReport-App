@@ -1,23 +1,60 @@
-import { firebase_auth, firebase_db } from '../../firebaseConfig'; // Import firebase_db from your firebaseConfig
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc , setDoc } from 'firebase/firestore/lite';
+import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc } from 'firebase/firestore';
+import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 
-const createPost = async (title, detail, location , picUrl , anonymous, author) => {
-    try {
+const createPost = async (title, detail, location , photo , anonymous, author) => {
+    try { 
+        const photoUrl = await uploadImage(photo);
         const postCollectionRef = collection(firebase_db, 'posts');
         await addDoc(postCollectionRef, {
             title: title,
             detail: detail,
             location: location,
-            picUrl: picUrl,
+            photoUrl: photoUrl,
             anonymous: anonymous,
             author: author,
+            time: new Date().toLocaleString(),
+            status: 'in progress',
         });
     } catch (error) {
         console.error('Error creating post:', error);
         throw error;
     }
-
 };
+
+const uploadImage = async (image) => {
+    try {
+        const response = await fetch(image);
+        const blob = await response.blob();
+        const storageRef = ref(firebase_storage , `images/${Math.random().toString(36).substring(7)}`);
+        const uploadTask = uploadBytesResumable(storageRef, blob);
+        
+        return new Promise((resolve, reject) => {
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                }, 
+                (error) => {
+                    console.error('Error uploading image:', error); 
+                    reject(error);
+                }, 
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref)
+                        .then((downloadURL) => {
+                            resolve(downloadURL);
+                        })
+                        .catch((error) => {
+                            console.error('Error getting download URL:', error);
+                            reject(error);
+                        });
+                }
+            );
+        });
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        throw error;
+    }
+};
+
 
 const editPost = async (postId, newTitle, newContent, newPicUrl) => {
     const postCollectionRef = collection(firebase_db, 'posts');
@@ -97,7 +134,7 @@ const db = {  // code : test
     createComment , // done : none
 
     userBookmark , // done : none
-    getUserEmail ,
+    getUserEmail , // done : done (use ._j to get email)
 
 };
 

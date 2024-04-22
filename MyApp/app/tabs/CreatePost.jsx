@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert } from 'react-native';
 import { db } from '../system/db';
+import * as ImagePicker from 'expo-image-picker';
+import { firebase_storage } from '../../firebaseConfig';
 
 const CreatePost = () => {
   const [topic, setTopic] = useState('');
   const [details, setDetails] = useState('');
   const [location, setLocation] = useState('');
+  const [photo, setPhoto] = useState(null);
   const [anonymous, setAnonymous] = useState(false);
 
   const handleMessageSubmit = async () => {
@@ -14,12 +17,12 @@ const CreatePost = () => {
     }
     try {
       const email = db.getUserEmail()._j;
-      console.log("Email:", email);
-      const response = db.createPost(topic, details, location , "photo" , anonymous , email);
-      console.log("Post created:", response); 
+      db.createPost(topic, details, location , photo , anonymous , email);
       setTopic('');
       setDetails('');
       setLocation('');
+      setPhoto(null);
+      Alert.alert('Success','Post created successfully!');
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -29,12 +32,26 @@ const CreatePost = () => {
     setAnonymous(!anonymous);
   };
 
-  const handleAddPhoto = () => {
-    // Jamesssssssssss
+  const handleAddPhoto = async () => {
+    try{
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+    
+      if (!result.cancelled && result.assets.length > 0) {
+        const selectedImage = result.assets[0];
+        setPhoto(selectedImage.uri); 
+      }
+    } catch (error) {
+      setPhoto(photo);
+    }
   };
-
+  
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.nav}>
         <View style={styles.inNav}>
           <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
@@ -105,10 +122,15 @@ const CreatePost = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFF",
+    height: "100%",
+  },
   nav: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: "10%",
   },
   inNav: {
       flexDirection: 'row',

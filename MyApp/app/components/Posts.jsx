@@ -1,44 +1,70 @@
-import React from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import React , {useState , useEffect} from "react";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView , RefreshControl} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 
 const Posts = () => {
-    const allposts = db.getAllPosts();
+    const [posts, setPosts] = useState([]);
+    const [refreshing, setRefreshing] = useState(false); 
+    const navigation = useNavigation();
 
-    const testInfo = [{
-        username: 'JohnSmith',
-        time: '4h',
-        status: 'Status',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto ullam, quas laborum optio odio doloribus?',
-        image: 'https://files.ejan.co/wp-content/uploads/2023/12/2320_4.jpg',
-    },
-    {
-        username: 'JohnDoe',
-        time: '4h',
-        status: 'Status',
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto ullam, quas laborum optio odio doloribus?',
-        image: 'https://files.ejan.co/wp-content/uploads/2023/12/2320_4.jpg',
+    const getAllPosts = async () => {
+        try {
+            const allposts = await db.getAllPosts();
+            setPosts(allposts);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        } finally {
+            setRefreshing(false);
+        }
+    };
+
+    const handleRefresh = () => {
+        setRefreshing(true); 
+        getAllPosts();
+    };
+
+    useEffect(() => {
+        getAllPosts();
+
+        const unsubscribe = navigation.addListener('focus', () => {
+            getAllPosts();
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, [navigation]); 
+
+
+    if (posts.length === 0) {
+        return <Text>No post now</Text>;
     }
-    ]
+
   return (
-    <ScrollView>
+    <ScrollView
+    refreshControl={
+        <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh} // Call handleRefresh when pull-to-refresh is triggered
+        />
+    }>
         {/* use function map to show all post */}
-        {testInfo.map((info) => (
+        {posts.map((info) => (
             <View style={{margin: 10, padding: 15, backgroundColor: '#ECECEC', borderRadius: 20}} key={info.id}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
                     <Image style={{width: 30, height: 30}}source={require('../picture/user_profile.png')}/>
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.username}</Text>
+                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author}</Text>
                         <Text style={{fontSize: 12}}>{info.time}</Text>
                     </View>
                 </View>
                 <Text>{info.status}</Text>
             </View>
             <Text style={{marginTop: 10}}>
-                {info.content}
+                {info.detail}
             </Text>
-            <Image style={{width: '100%', height: 250, borderRadius: 20, marginTop: 10}} source={{uri: info.image}}/>
+            <Image style={{width: '100%', height: 250, borderRadius: 20, marginTop: 10}} source={{uri: info.photoUrl}}/>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
                 <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {console.log('Repost pressed!')}}>
                     <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon.png')} />

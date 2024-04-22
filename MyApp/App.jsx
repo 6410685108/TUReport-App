@@ -15,6 +15,7 @@ import QandA from './app/tabs/QandA';
 import { Image } from 'react-native';
 
 import Test from './app/screens/Test';
+import TestJsx from './app/screens/TestJsx';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,6 +55,11 @@ export default function App() {
             <Stack.Screen
               name="Test"
               component={Test}
+              options={{ headerShown: true }}
+            />
+            <Stack.Screen
+              name="TestJsx"
+              component={TestJsx}
               options={{ headerShown: true }}
             />
           </>

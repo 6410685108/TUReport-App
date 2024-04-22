@@ -14,7 +14,7 @@ const Login = ({ navigation }) => {
         try {
             const response = await signInWithEmailAndPassword(auth,email, password);
         } catch (error) {
-            alert(error.message);
+            alert("Invalid Email or Password");
             console.log(error);
         } finally {
             setLoading(false);
@@ -32,7 +32,6 @@ const Login = ({ navigation }) => {
             setLoading(false);
         }
     }
-
 
     return (
         <View style={styles.container}>
@@ -59,6 +58,7 @@ const Login = ({ navigation }) => {
                     <Button title="Login" onPress={signIn} />
                     <Button title="Goto Register" onPress={() => navigation.navigate('Register')} />
                     <Button title="Test Page For Backend" onPress={() => navigation.navigate('Test')} />
+                    <Button title="Test Page For Jsx" onPress={() => navigation.navigate('TestJsx')} />
                     <Button title="EZ Login" onPress={easyLogin} />
                 </>
             )}
