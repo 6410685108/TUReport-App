@@ -65,15 +65,16 @@ const CreatePost = () => {
       <View style={styles.nav}>
         <View style={styles.inNav}>
           <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
-          <Text style={[{margin: 5, fontSize: 35, fontWeight: 'bold',}]}>CREATE POST</Text>
+          <Text style={[{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
         </View>
       </View>
       
       <View style={styles.containerContent} >
         <View style={styles.content}>
-          <Image style={styles.log2}source={require('../picture/user_profile.png')}/>
-          <Text style={[{margin: 5, fontSize: 20, fontWeight: 'bold'}]}>User X</Text>
-        </View>
+            <Image style={styles.logo2}source={require('../picture/user_profile.png')}/>
+            <Text style={[{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>User X</Text>
+          </View>
+       
         <View style={styles.content}>
           <Image style={styles.logo2}source={require('../picture/addTopic.png')}/>
           <TextInput
@@ -125,7 +126,7 @@ const CreatePost = () => {
         </View>
 
       </View>
-      <TouchableOpacity onPress={handleMessageSubmit} >
+      <TouchableOpacity onPress={handleMessageSubmit}>
         <Text style={styles.botsub}>Submit</Text>
       </TouchableOpacity>
     </View>
@@ -138,14 +139,17 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   nav: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: "10%",
   },
   inNav: {
-      flexDirection: 'row',
-      justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginHorizontal: 5,
+    marginTop: 5,
   },
   content: {
     flexDirection: 'row',
