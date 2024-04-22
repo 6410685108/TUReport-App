@@ -42,7 +42,6 @@ const Posts = ({option}) => {
                 }
                 return 0; 
             });
-            console.log("A-Z");
         } else if (option === 'Z-A') {
             sortedPosts.sort((a, b) => {
                 const titleA = a.title.toLowerCase();
@@ -56,15 +55,12 @@ const Posts = ({option}) => {
                 }
                 return 0;
             });
-            console.log("Z-A");
         } else if (option === 'Repost'){
             sortedPosts.sort((a, b) => b.repost - a.repost);
             console.log("Repost");
         } else if (option === 'Finish'){
             sortedPosts = posts.filter(post => post.status === 'Finish');
-            console.log("Finish");
         } else {
-            console.log("else");
         }
     
         setSortedPosts(sortedPosts);
