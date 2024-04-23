@@ -11,47 +11,78 @@ import React from "react";
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
-  const comments = [{
-    id: 1,
-    name: "User1",
-    profile: require("../picture/user_profile.png"),
-    comment: "This is a comment",
-  },
-  {
-    id: 2,
-    name: "User2",
-    profile: require("../picture/user_profile.png"),
-    comment: "This is a comment2",
-  },
-  {
-    id: 3,
-    name: "User3",
-    profile: require("../picture/user_profile.png"),
-    comment: "This is a comment3",
-  },
-  {
-    id: 4,
-    name: "User4",
-    profile: require("../picture/user_profile.png"),
-    comment: "This is a comment4",
-  },
-  {
-    id: 5,
-    name: "User5",
-    profile: require("../picture/user_profile.png"),
-    comment: "This is a comment5",
-  },
-  ]
+  const comments = [
+    {
+      id: 1,
+      name: "User1",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment",
+    },
+    {
+      id: 2,
+      name: "User2",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment2",
+    },
+    {
+      id: 3,
+      name: "User3",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment3",
+    },
+    {
+      id: 4,
+      name: "User4",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment4",
+    },
+    {
+      id: 5,
+      name: "User5",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment5",
+    },
+    {
+      id: 5,
+      name: "User5",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment5",
+    },
+    {
+      id: 5,
+      name: "User5",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment5",
+    },
+    {
+      id: 5,
+      name: "User5",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment5",
+    },
+    {
+      id: 5,
+      name: "User5",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment5",
+    },
+    {
+      id: 5,
+      name: "User5",
+      profile: require("../picture/user_profile.png"),
+      comment: "This is a comment5",
+    },
+
+  ];
   console.log(postInfo);
   return (
     <View style={{ flexDirection: "column" }}>
-      <ScrollView style={{ marginTop: "10%", height: '88%' }}>
+      <ScrollView style={{ marginTop: "10%", height: "90%" }}>
         {/* use function map to show all post */}
         <View
           style={{
             margin: 10,
             padding: 5,
-            backgroundColor: "#ECECEC",
             borderRadius: 20,
           }}
         >
@@ -114,7 +145,14 @@ const Inpost = ({ navigation, route }) => {
               />
             </TouchableOpacity>
           </View>
-          <View style={{marginTop: 10}}>
+          <View
+            style={{
+              borderBottomColor: "black",
+              borderBottomWidth: 1,
+              marginTop: 15,
+            }}
+          />
+          <View>
             {comments.map((comment) => (
               <View
                 style={{
@@ -144,8 +182,8 @@ const Inpost = ({ navigation, route }) => {
         style={{
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "flex-end",
-          height: 50,
+          justifyContent: "center",
+          height: 40,
         }}
       >
         <TextInput
