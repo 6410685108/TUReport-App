@@ -9,16 +9,17 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import { db } from "../system/db"
+import { set } from "firebase/database";
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
   const postid = postInfo.id
-  var comments = [];
+  const [comments, setComments] = React.useState([]);
 
   const getComment = async () => {
     try {
         const allcomments = await db.getAllComments(postid);
-        comments = allcomments;
+        setComments(allcomments);
         console.log(comments);
     } catch (error) {
         console.error('Error fetching posts:', error);
