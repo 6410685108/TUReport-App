@@ -9,7 +9,7 @@ export default function HomeNavigator() {
     return (
             <Stack.Navigator initialRouteName='Home'>
                 <Stack.Screen
-                    name="Home"
+                    name="Home2"
                     component={Home}
                     options={{ headerShown: false }}
                 />

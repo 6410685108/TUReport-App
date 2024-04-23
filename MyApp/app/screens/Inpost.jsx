@@ -45,7 +45,7 @@ const Inpost = ({ navigation, route }) => {
   console.log(postInfo);
   return (
     <View style={{ flexDirection: "column" }}>
-      <ScrollView style={{ marginTop: "10%" }}>
+      <ScrollView style={{ marginTop: "10%", height: '88%' }}>
         {/* use function map to show all post */}
         <View
           style={{
@@ -120,7 +120,7 @@ const Inpost = ({ navigation, route }) => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginTop: 10,
+                  marginTop: 15,
                 }}
               >
                 <View style={{ flexDirection: "row" }}>
@@ -142,9 +142,9 @@ const Inpost = ({ navigation, route }) => {
       </ScrollView>
       <View
         style={{
-          backgroundColor: "black",
-          marginButtom: "20",
-          width: 50,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-end",
           height: 50,
         }}
       >
@@ -155,6 +155,7 @@ const Inpost = ({ navigation, route }) => {
             borderColor: "black",
             borderRadius: 10,
             padding: 5,
+            width: "90%",
           }}
         />
       </View>

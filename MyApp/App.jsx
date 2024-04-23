@@ -83,7 +83,7 @@ function AuthenticatedScreens() {
         },
       }}
     >
-      <Tab.Screen name="HomeNavigator" component={HomeNavigator} options={{ 
+      <Tab.Screen name="Home" component={HomeNavigator} options={{ 
         tabBarIcon: ({focused, color, size}) => (
         <Image 
           source={require('./app/picture/home.png')} 

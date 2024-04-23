@@ -15,7 +15,6 @@ const Posts = ({option}) => {
             const allposts = await db.getAllPosts();
             setPosts(allposts);
             setLoading(false);
-            console.log('Posts:', allposts);
         } catch (error) {
             console.error('Error fetching posts:', error);
         } finally {
