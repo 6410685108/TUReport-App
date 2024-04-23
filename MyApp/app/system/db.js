@@ -177,6 +177,17 @@ const createComment = async (postId, comment) => {
     }
 };
 
+const getAllComments = async (postId) => {
+    try{
+        const commentCollectionRef = collection(firebase_db, 'posts' , postId, 'comments');
+        const commentSnapshot = await getDocs(commentCollectionRef);
+        const comment = commentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return comment;
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        return [];
+    }
+}
 
 const userBookmark = async (postId, userId) => {
     try {
@@ -203,6 +214,7 @@ const db = {  // code : test
     repostPost , // done : pass
 
     createComment , // done : none
+    getAllComments,
 
     userBookmark , // done : none
 

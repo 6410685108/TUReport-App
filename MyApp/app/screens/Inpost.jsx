@@ -7,78 +7,48 @@ import {
   ScrollView,
   RefreshControl,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
+import { db } from "../system/db"
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
-  const comments = [
-    {
-      id: 1,
-      name: "User1",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment",
-    },
-    {
-      id: 2,
-      name: "User2",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment2",
-    },
-    {
-      id: 3,
-      name: "User3",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment3",
-    },
-    {
-      id: 4,
-      name: "User4",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment4",
-    },
-    {
-      id: 5,
-      name: "User5",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment5",
-    },
-    {
-      id: 5,
-      name: "User5",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment5",
-    },
-    {
-      id: 5,
-      name: "User5",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment5",
-    },
-    {
-      id: 5,
-      name: "User5",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment5",
-    },
-    {
-      id: 5,
-      name: "User5",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment5",
-    },
-    {
-      id: 5,
-      name: "User5",
-      profile: require("../picture/user_profile.png"),
-      comment: "This is a comment5",
-    },
+  const postid = postInfo.id
+  var comments = [];
 
-  ];
-  console.log(postInfo);
+  const getComment = async () => {
+    try {
+        const allcomments = await db.getAllComments(postid);
+        comments = allcomments;
+        console.log(comments);
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+    }
+  }
+
+  useEffect(() => {
+    getComment();
+
+    const unsubscribe = navigation.addListener('focus', () => {
+      getComment();
+    });
+    return () => {
+        unsubscribe();
+    };
+}, [navigation]);
+
+  const handleRepost = async (postId) => {
+    await db.repostPost(postId);
+  }
+
+  const handleCreateComment = async (comment) => {
+    await db.createComment(postid,comment)
+  }
+
+  console.log("Out" , comments);
+
   return (
     <View style={{ flexDirection: "column" }}>
       <ScrollView style={{ marginTop: "10%", height: "90%" }}>
-        {/* use function map to show all post */}
         <View
           style={{
             margin: 10,
@@ -164,11 +134,11 @@ const Inpost = ({ navigation, route }) => {
                 <View style={{ flexDirection: "row" }}>
                   <Image
                     style={{ width: 30, height: 30 }}
-                    source={comment.profile}
+                    source={comment.author.photoUrl}
                   />
                   <View style={{ flexDirection: "column", paddingLeft: 6 }}>
                     <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-                      {comment.name}
+                      {comment.author.email}
                     </Text>
                     <Text style={{ fontSize: 13 }}>{comment.comment}</Text>
                   </View>
