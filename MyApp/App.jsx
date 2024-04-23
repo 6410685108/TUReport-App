@@ -7,15 +7,16 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { firebase_auth } from './firebaseConfig';
 import Login from './app/screens/Login';
 import Register from './app/screens/Register';
-import Home from './app/tabs/Home';
 import CreatePost from './app/tabs/CreatePost';
 import Finish from './app/tabs/Finish';
 import Profile from './app/tabs/Profile';
+import Inpost from './app/screens/Inpost';
 import QandA from './app/tabs/QandA';
 import { Image } from 'react-native';
 
 import Test from './app/screens/Test';
 import TestJsx from './app/screens/TestJsx';
+import HomeNavigator from './app/navigator/HomeNavigator';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,7 +83,7 @@ function AuthenticatedScreens() {
         },
       }}
     >
-      <Tab.Screen name="Home" component={Home} options={{ 
+      <Tab.Screen name="HomeNavigator" component={HomeNavigator} options={{ 
         tabBarIcon: ({focused, color, size}) => (
         <Image 
           source={require('./app/picture/home.png')} 

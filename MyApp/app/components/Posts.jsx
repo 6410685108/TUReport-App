@@ -15,6 +15,7 @@ const Posts = ({option}) => {
             const allposts = await db.getAllPosts();
             setPosts(allposts);
             setLoading(false);
+            console.log('Posts:', allposts);
         } catch (error) {
             console.error('Error fetching posts:', error);
         } finally {
@@ -120,6 +121,7 @@ const Posts = ({option}) => {
         {/* use function map to show all post */}
         {sortedPosts.map((info) => (
             <View style={{margin: 10, padding: 15, backgroundColor: '#ECECEC', borderRadius: 20}} key={info.id}>
+            <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
                     <Image style={{width: 30, height: 30}}source={require('../picture/user_profile.png')}/>
@@ -137,6 +139,7 @@ const Posts = ({option}) => {
                 {info.detail}
             </Text>
             <Image style={{width: '100%', height: 250, borderRadius: 20, marginTop: 10}} source={{uri: info.photoUrl}}/>
+            </TouchableOpacity>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
                 <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => handleRepost(info.id)}>
                     <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon.png')} />
