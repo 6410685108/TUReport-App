@@ -59,6 +59,11 @@ const CreatePost = () => {
     setTopic(topic); 
     Keyboard.dismiss();
   }
+
+  const test = () => {
+    db.createComment("3P0ZKvOym0tFmkd8dFGV","hello")
+    console.log("test")
+  }
   
   return (
     <View style={styles.container}>
@@ -128,6 +133,9 @@ const CreatePost = () => {
       </View>
       <TouchableOpacity onPress={handleMessageSubmit}>
         <Text style={styles.botsub}>Submit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={test}>
+        <Text style={styles.botsub}>Test Func</Text>
       </TouchableOpacity>
     </View>
   );
