@@ -4,7 +4,7 @@ import {
   Text,
   View,
   TextInput,
-  Button,
+  TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -42,40 +42,55 @@ const RegisterScreen = ({ navigation }) => {
     >
       <View style={styles.container}>
         <Text style={styles.header}>Create Account</Text>
-        <Text style={{ color: "white", marginTop: -5 }}>Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          value={email}
-          onChangeText={setEmail}
-        />
-        <Text style={{ color: "white", marginTop: -5 }}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <Text style={{ color: "white", marginTop: -5 }}>Comfirm Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry
-        />
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <>
-            <Button title="Register" onPress={handleRegister} />
-            <Button
-              title="Go to Login"
-              onPress={() => navigation.navigate("Login")}
+        <View style={styles.formContainer}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={setEmail}
+              placeholderTextColor="white"
             />
-          </>
-        )}
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              placeholderTextColor="white"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Confirm Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              secureTextEntry
+              placeholderTextColor="white"
+            />
+          </View>
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : (
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={handleRegister}>
+                <Text style={styles.buttonText}>Sign Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <Text style={styles.buttonText}>Back to Login</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
       </View>
     </LinearGradient>
   );
@@ -83,13 +98,22 @@ const RegisterScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+  },
+  formContainer: {
+    width: "80%",
+    padding: 20,
+    borderRadius: 15,
+    marginTop: -15,
+  },
+  inputContainer: {
+    marginVertical: 10,
   },
   input: {
-    marginVertical: 4,
-    height: 50,
+    height: 40,
+    width: "100%",
     borderWidth: 3,
     borderRadius: 25,
     padding: 10,
@@ -97,16 +121,36 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
+  label: {
+    color: "white",
+    marginBottom: 5,
+  },
   header: {
-    textAlign: "center",
-    marginBottom: 20,
-    fontSize: 24,
+    fontSize: 32,
     color: "#fff",
+    marginBottom: 20,
   },
   background: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonContainer: {
+    alignItems: "center",
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: "white",
+    paddingVertical: 15,
+    marginVertical: 10,
+    borderRadius: 25,
+    width: "80%",
+    alignItems: "center",
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "black",
+    fontWeight: "700",
   },
 });
 
