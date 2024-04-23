@@ -1,6 +1,7 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
 import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
+import { updateProfile } from 'firebase/auth'
 
 const createPost = async (title, detail, location , photo , anonymous, author) => {
     try { 
@@ -12,7 +13,12 @@ const createPost = async (title, detail, location , photo , anonymous, author) =
             location: location,
             photoUrl: photoUrl,
             anonymous: anonymous,
-            author: author,
+            author: {
+                uid: firebase_auth.currentUser.uid,
+                displayName: firebase_auth.currentUser.displayName,
+                email: firebase_auth.currentUser.email,
+                photo: firebase_auth.currentUser.photoURL,
+            },
             time: new Date().toLocaleString(),
             status: 'in progress',
             repost: 0,
@@ -153,12 +159,18 @@ const getAllPosts = async () => {
 };
 
 
-const createComment = async (postId, content, author) => {
+const createComment = async (postId, comment) => {
     try {
         const commentCollectionRef = collection(firebase_db, 'posts', postId, 'comments');
         await addDoc(commentCollectionRef, {
-            content: content,
-            author , author,
+            comment: comment,
+            author: {
+                uid: firebase_auth.currentUser.uid,
+                displayName: firebase_auth.currentUser.displayName,
+                email: firebase_auth.currentUser.email,
+                photo: firebase_auth.currentUser.photoURL,
+            },
+            time: new Date().toLocaleString(),
         });
     } catch (error) {
         console.error('Error creating comment:', error);
@@ -178,20 +190,10 @@ const userBookmark = async (postId, userId) => {
     }
 };
 
-const getUserEmail = async () => {
-    try {
-        const currentUser = firebase_auth.currentUser;
-        if (currentUser) {
-            return currentUser.email;
-        } else {
-            console.log('No user signed in');
-            return null;
-        }
-    } catch (error) {
-        console.error('Error getting user email:', error);
-        throw error;
-    }
-};
+const uploadUserPhoto = async (photo) => {
+    const photoUrl = uploadImage(photo);
+    updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
+}
 
 
 const db = {  // code : test
@@ -203,7 +205,6 @@ const db = {  // code : test
     createComment , // done : none
 
     userBookmark , // done : none
-    getUserEmail , // done : done (use ._j to get email)
 
 };
 
