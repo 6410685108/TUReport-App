@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 
 const Posts = ({option}) => {
-    const [posts, setPosts] = useState([]);
+    var posts = {} ;
     const [refreshing, setRefreshing] = useState(false); 
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
@@ -13,16 +13,13 @@ const Posts = ({option}) => {
     const getAllPosts = async () => {
         try {
             const allposts = await db.getAllPosts();
-            setPosts(allposts);
+            posts = allposts
             setLoading(false);
         } catch (error) {
             console.error('Error fetching posts:', error);
         } finally {
             setRefreshing(false);
         }
-    };
-
-    const getSortPosts = async () => {
         let sortedPosts = [...posts].sort((a, b) => {
             const timeA = parseThaiDate(a.time);
             const timeB = parseThaiDate(b.time);
@@ -73,7 +70,6 @@ const Posts = ({option}) => {
 
     useEffect(() => {
         getAllPosts();
-        getSortPosts();
     
         const unsubscribe = navigation.addListener('focus', () => {
             getAllPosts();
