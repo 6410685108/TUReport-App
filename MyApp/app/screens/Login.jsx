@@ -8,10 +8,12 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+  ScrollView,
 } from "react-native";
 import { firebase_auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from "expo-linear-gradient";
+import { IconButton, MD3Colors } from "react-native-paper";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -53,15 +55,15 @@ const Login = ({ navigation }) => {
       colors={["#ff7100", "#ffda27"]}
       style={styles.background}
     >
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.titleContainer}>
           <Image
             source={require("../picture/logo.png")}
             style={{
-              width: 200,
-              height: 200,
-              marginTop: 60,
-              marginBottom: -20,
+              width: 280,
+              height: 280,
+              marginTop: -30,
+              marginBottom: -10,
             }}
           />
         </View>
@@ -82,37 +84,66 @@ const Login = ({ navigation }) => {
           onChangeText={(text) => setPassword(text)}
           placeholderTextColor="white"
         />
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <>
-            <TouchableOpacity style={styles.button} onPress={signIn}>
-              <Text style={styles.buttonText}>Sign In</Text>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={signIn}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </TouchableOpacity>
+          <View style={styles.lineContainer}>
+            <View style={styles.line}></View>
+            <Text style={styles.orText}>or</Text>
+            <View style={styles.line}></View>
+          </View>
+          <Text style={{ color: "white", marginTop: 0 }}>Continue with</Text>
+          {/* <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Test")}
+          >
+            <Text style={styles.buttonText}>Test Page For Backend</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={easyLogin}>
+            <Text style={styles.buttonText}>EZ Login</Text>
+          </TouchableOpacity> */}
+          <View style={styles.iconButtonContainer}>
+            <IconButton
+              icon="google"
+              iconColor={MD3Colors.error50}
+              size={30}
+              onPress={() => console.log("Pressed")}
+              mode="contained-tonal"
+              style={styles.iconButton}
+            />
+            <IconButton
+              icon="facebook"
+              iconColor={MD3Colors.error50}
+              size={30}
+              onPress={() => console.log("Pressed")}
+              mode="contained-tonal"
+              style={styles.iconButton}
+            />
+            <IconButton
+              icon="email"
+              iconColor={MD3Colors.error50}
+              size={30}
+              onPress={() => console.log("Pressed")}
+              mode="contained-tonal"
+              style={styles.iconButton}
+            />
+          </View>
+          <Text style={styles.registerText}>
+            Don't have an account?{" "}
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+              <Text style={[styles.signUpText, { marginTop: 0 }]}>Sign Up</Text>
             </TouchableOpacity>
-            <View style={styles.lineContainer}>
-              <View style={styles.line}></View>
-              <Text style={styles.orText}>or</Text>
-              <View style={styles.line}></View>
-            </View>
-            <Text style={{ color: "white", marginTop: -5 }}>Continue with</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Register")}
-            >
-              <Text style={styles.buttonText}>Go to Register</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Test")}
-            >
-              <Text style={styles.buttonText}>Test Page For Backend</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={easyLogin}>
-              <Text style={styles.buttonText}>EZ Login</Text>
-            </TouchableOpacity>
-          </>
+          </Text>
+        </View>
+
+        {loading && (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
         )}
-      </View>
+      </ScrollView>
     </LinearGradient>
   );
 };
@@ -121,9 +152,10 @@ const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    minHeight: height,
   },
   titleContainer: {
     alignItems: "center",
@@ -146,9 +178,13 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "white",
     paddingVertical: 15,
-    marginVertical: 10,
+    marginTop: 20,
+    marginBottom: 8,
     width: width * 0.5,
     borderRadius: 25,
+  },
+  buttonContainer: {
+    alignItems: "center",
   },
   lineContainer: {
     flexDirection: "row",
@@ -177,6 +213,32 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: Dimensions.get("window").height,
+  },
+  iconButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  iconButton: {
+    marginHorizontal: 15,
+  },
+  loadingContainer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: height / 2,
+    zIndex: 999,
+    alignItems: "center",
+  },
+  registerText: {
+    fontSize: 16,
+    color: "white",
+    marginTop: 15,
+  },
+  signUpText: {
+    fontSize: 16,
+    color: "red",
+    fontWeight: "bold",
   },
 });
 

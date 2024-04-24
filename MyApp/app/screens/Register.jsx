@@ -19,6 +19,11 @@ const RegisterScreen = ({ navigation }) => {
   const auth = firebase_auth;
 
   const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await createUserWithEmailAndPassword(
@@ -26,9 +31,11 @@ const RegisterScreen = ({ navigation }) => {
         email,
         password
       );
+      // Handle successful registration, such as navigating to another screen
+      console.log("Registration successful:", response);
     } catch (error) {
-      alert(error.message);
-      console.log(error);
+      alert("Error registering: " + error.message);
+      console.error("Registration error:", error);
     } finally {
       setLoading(false);
     }
@@ -75,21 +82,26 @@ const RegisterScreen = ({ navigation }) => {
               placeholderTextColor="white"
             />
           </View>
-          {loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : (
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={handleRegister}>
-                <Text style={styles.buttonText}>Sign Up</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("Login")}
-              >
-                <Text style={styles.buttonText}>Back to Login</Text>
-              </TouchableOpacity>
-            </View>
-          )}
+          <View style={styles.buttonContainer}>
+            {loading ? (
+              <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
+              <>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleRegister}
+                >
+                  <Text style={styles.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => navigation.navigate("Login")}
+                >
+                  <Text style={styles.buttonText}>Back to Login</Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
         </View>
       </View>
     </LinearGradient>
@@ -126,7 +138,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   header: {
-    fontSize: 32,
+    fontSize: 38,
     color: "#fff",
     marginBottom: 20,
   },
