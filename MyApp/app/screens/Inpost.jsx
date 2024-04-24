@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import { db } from "../system/db"
-import { set } from "firebase/database";
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
@@ -20,7 +19,6 @@ const Inpost = ({ navigation, route }) => {
     try {
         const allcomments = await db.getAllComments(postid);
         setComments(allcomments);
-        console.log(comments);
     } catch (error) {
         console.error('Error fetching posts:', error);
     }
@@ -44,8 +42,6 @@ const Inpost = ({ navigation, route }) => {
   const handleCreateComment = async (comment) => {
     await db.createComment(postid,comment)
   }
-
-  console.log("Out" , comments);
 
   return (
     <View style={{ flexDirection: "column" }}>
@@ -131,6 +127,7 @@ const Inpost = ({ navigation, route }) => {
                   justifyContent: "space-between",
                   marginTop: 15,
                 }}
+                key={comment.id}
               >
                 <View style={{ flexDirection: "row" }}>
                   <Image

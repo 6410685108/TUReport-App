@@ -1,5 +1,5 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc } from 'firebase/firestore';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
 
@@ -67,67 +67,74 @@ const repostPost = async (postId) => {
     const postDocRef = doc(postCollectionRef, postId);
     const postDocSnap = await getDoc(postDocRef);
     if (postDocSnap.exists()) {
-        if (await isReposted(postId , firebase_auth.currentUser.email)) {
-            await removeReposter(postId , firebase_auth.currentUser.email);
-                const repostCount = postDocSnap.data().repost - 1;
-                await updateDoc(postDocRef, {
-                    repost: repostCount,
-                });
+        if (await isReposted(postId)) {
+            await removeReposter(postId);
+            const repostCount = postDocSnap.data().repost - 1;
+            await updateDoc(postDocRef, {
+                repost: repostCount,
+            });
             return;
         } else {
-            await addReposter(postId , firebase_auth.currentUser.email);
-                const repostCount = postDocSnap.data().repost + 1;
-                await updateDoc(postDocRef, {
-                    repost: repostCount,
-                });
+            await addReposter(postId);
+            const repostCount = postDocSnap.data().repost + 1; // Corrected here
+            await updateDoc(postDocRef, {
+                repost: repostCount,
+            });
         }
     }
 }
 
-const addReposter = async (postId , user) => {
-    try{
-        const postCollectionRef = collection(firebase_db, 'posts' , postId , 'reposter');
-    await addDoc(postCollectionRef, {
-        user : user,
-    });
+const addReposter = async (postId) => {
+    try {
+        const postCollectionRef = collection(firebase_db, 'posts', postId, 'reposter');
+        await addDoc(postCollectionRef, {
+            user: {
+                uid: firebase_auth.currentUser.uid,
+                displayName: firebase_auth.currentUser.displayName,
+                email: firebase_auth.currentUser.email,
+                photo: firebase_auth.currentUser.photoURL,
+            },
+        });
     } catch (error) {
         console.error('Error adding reposter:', error);
     }
 }
 
-const removeReposter = async (postId , user) => {
-    try{
-        const postCollectionRef = collection(firebase_db, 'posts' , postId , 'reposter');
-        const postsSnapshot = await getDocs(postCollectionRef);
-        const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        for (let i = 0; i < posts.length; i++) {
-            if (posts[i].user === user) {
-                const postDocRef = doc(postCollectionRef, posts[i].id);
-                await deleteDoc(postDocRef);
-            }
-        }
+const removeReposter = async (postId) => {
+    const userEmail = firebase_auth.currentUser.email;
+    try {
+        const postCollectionRef = collection(firebase_db, 'posts', postId, 'reposter');
+        const q = query(postCollectionRef, where("user.email", "==", userEmail));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
     } catch (error) {
         console.error('Error removing reposter:', error);
     }
 }
 
-const isReposted = async (postId , user) => {
+const isReposted = async (postId) => {
+    const userEmail = firebase_auth.currentUser.email;
     try {
-        const postCollectionRef = collection(firebase_db, 'posts' , postId , 'reposter');
-        const postsSnapshot = await getDocs(postCollectionRef);
-        const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        for (let i = 0; i < posts.length; i++) {
-            if (posts[i].user === user) {
-                return true;
-            }
-        }
-        return false;
+        const postCollectionRef = collection(firebase_db, 'posts', postId, 'reposter');
+        const q = query(postCollectionRef, where("user.email", "==", userEmail));
+        const querySnapshot = await getDocs(q);
+        return !querySnapshot.empty;
     } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error('Error checking repost:', error);
         return false;
     }
 }
-
+// const postsSnapshot = await getDocs(postCollectionRef);
+        // const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        // for (let i = 0; i < posts.length; i++) {
+        //     if (posts[i].user === user) {
+        //         return true;
+        //     }
+        // }
+        // return false;
 
 const editPost = async (postId, newTitle, newContent, newPicUrl) => {
     const postCollectionRef = collection(firebase_db, 'posts');
@@ -195,7 +202,7 @@ const userBookmark = async (postId, userId) => {
         const postCollectionRef = collection(userRef, 'postids'); 
         await addDoc(postCollectionRef, {
             postId: postId,
-        });
+        });``
     } catch (error) {
         console.error('Error adding post ID:', error);
     }
@@ -204,6 +211,16 @@ const userBookmark = async (postId, userId) => {
 const uploadUserPhoto = async (photo) => {
     const photoUrl = uploadImage(photo);
     updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
+}
+
+const showCurrentUserInfo = async (info) => {
+    const user = firebase_auth.currentUser;
+    if(info){
+        console.log(user[info]);
+    }
+    else {
+        console.log(user);
+    }
 }
 
 
@@ -217,7 +234,7 @@ const db = {  // code : test
     getAllComments,
 
     userBookmark , // done : none
-
+    showCurrentUserInfo,
 };
 
 export { db };

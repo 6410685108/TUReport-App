@@ -61,7 +61,7 @@ const CreatePost = () => {
   }
 
   const test = () => {
-    db.createComment("3P0ZKvOym0tFmkd8dFGV","hello")
+    // db.showCurrentUserInfo("email");
     console.log("test")
   }
   
