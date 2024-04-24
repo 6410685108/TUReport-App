@@ -12,7 +12,7 @@ import Finish from "./app/tabs/Finish";
 import Profile from "./app/tabs/Profile";
 import Inpost from "./app/screens/Inpost";
 import QandA from "./app/tabs/QandA";
-import { Image } from "react-native";
+import { Image,StyleSheet } from "react-native";
 
 import Test from "./app/screens/Test";
 import TestJsx from "./app/screens/TestJsx";
@@ -75,14 +75,15 @@ function AuthenticatedScreens() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "blue",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: styles.tabBarActiveTintColor,
+        tabBarInactiveTintColor: styles.tabBarInactiveTintColor,
+        tabBarActiveBackgroundColor: styles.tabBarActiveBackgroundColor,
         tabBarStyle: {
           display: "flex",
         },
       }}
     >
-      <Tab.Screen
+      <Tab.Screen 
         name="Home"
         component={HomeNavigator}
         options={{
@@ -93,6 +94,7 @@ function AuthenticatedScreens() {
             />
           ),
           headerShown: false,
+          tabBarStyle: styles.tabBarStyle,
         }}
       />
       <Tab.Screen
@@ -106,6 +108,7 @@ function AuthenticatedScreens() {
             />
           ),
           headerShown: false,
+          tabBarStyle: styles.tabBarStyle,
         }}
       />
       <Tab.Screen
@@ -119,6 +122,7 @@ function AuthenticatedScreens() {
             />
           ),
           headerShown: false,
+          tabBarStyle: styles.tabBarStyle,
         }}
       />
       <Tab.Screen
@@ -132,6 +136,7 @@ function AuthenticatedScreens() {
             />
           ),
           headerShown: false,
+          tabBarStyle: styles.tabBarStyle,
         }}
       />
       <Tab.Screen
@@ -145,8 +150,31 @@ function AuthenticatedScreens() {
             />
           ),
           headerShown: false,
+          tabBarStyle: styles.tabBarStyle,
         }}
       />
     </Tab.Navigator>
   );
+}
+
+let styles ;
+let theme = 'dark'
+if (theme == 'dark'){
+  styles = StyleSheet.create({
+    tabBarStyle: {
+      backgroundColor: 'white',
+    },
+    tabBarActiveBackgroundColor: 'black',
+    tabBarActiveTintColor: "white",
+    tabBarInactiveTintColor: "black"
+  });
+}else if(theme == "light"){
+  styles = StyleSheet.create({
+    tabBarStyle: {
+      backgroundColor: 'black',
+    },
+    tabBarActiveBackgroundColor: 'white',
+    tabBarActiveTintColor: "black",
+    tabBarInactiveTintColor: "white"
+  });
 }
