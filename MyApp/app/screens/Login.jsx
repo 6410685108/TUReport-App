@@ -24,18 +24,7 @@ const Login = ({ navigation }) => {
   const signIn = async () => {
     setLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      alert(error.message);
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const easyLogin = async () => {
-    setLoading(true);
-    try {
+      // const response = await signInWithEmailAndPassword(auth, email, password);
       const response = await signInWithEmailAndPassword(
         auth,
         "t@t.com",
@@ -49,13 +38,14 @@ const Login = ({ navigation }) => {
     }
   };
 
+
   return (
     <LinearGradient
-      // Gradient colors
       colors={["#ff7100", "#ffda27"]}
       style={styles.background}
     >
-      <ScrollView contentContainerStyle={styles.container}>
+      {/* Why use Scrool View ??? */}
+      <ScrollView contentContainerStyle={styles.container}> 
         <View style={styles.titleContainer}>
           <Image
             source={require("../picture/logo.png")}

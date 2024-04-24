@@ -114,7 +114,7 @@ const Posts = ({option}) => {
             <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
-                    <Image style={{width: 30, height: 30}}source={require('../picture/user_profile.png')}/>
+                    <Image style={{width: 30, height: 30}}source={{uri: info.author.photo}}/>
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
                         <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.email}</Text>
                         <Text style={{fontSize: 12}}>{info.time}</Text>

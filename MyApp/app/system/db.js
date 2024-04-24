@@ -1,9 +1,10 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query } from 'firebase/firestore';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
+import { get } from 'firebase/database';
 
-const createPost = async (title, detail, location , photo , anonymous, author) => {
+const createPost = async (title, detail, location , photo , anonymous) => {
     try { 
         const photoUrl = await uploadImage(photo);
         const postCollectionRef = collection(firebase_db, 'posts');
@@ -127,14 +128,6 @@ const isReposted = async (postId) => {
         return false;
     }
 }
-// const postsSnapshot = await getDocs(postCollectionRef);
-        // const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        // for (let i = 0; i < posts.length; i++) {
-        //     if (posts[i].user === user) {
-        //         return true;
-        //     }
-        // }
-        // return false;
 
 const editPost = async (postId, newTitle, newContent, newPicUrl) => {
     const postCollectionRef = collection(firebase_db, 'posts');
@@ -165,6 +158,52 @@ const getAllPosts = async () => {
     }
 };
 
+const getPost = async (postId) => {
+    try {
+        const postDocRef = doc(firebase_db, 'posts', postId);
+        const postDocSnap = await getDoc(postDocRef);
+        if (postDocSnap.exists()) {
+            return postDocSnap.data();
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching post:', error);
+        return null;
+    }
+
+}
+
+const userBookmark = async (postId) => {
+    const userId = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'userbookmark', userId); 
+        const postCollectionRef = collection(userRef, 'postIds'); 
+        await addDoc(postCollectionRef, {
+            postId: postId,
+        });
+    } catch (error) {
+        console.error('Error adding post ID:', error);
+    }
+};
+
+const getBookmarkedPosts = async () => {
+    const posts = [];
+    const userId = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'userbookmark', userId); 
+        const postCollectionRef = collection(userRef, 'postIds'); 
+        const postSnapshot = await getDocs(postCollectionRef);
+        const postIds = postSnapshot.docs.map(doc => doc.data().postId);
+        for (let i = 0; i < postIds.length; i++) {
+                posts.push(await getPost(postIds[i]));
+        }
+        return posts;
+    } catch (error) {
+        console.error('Error fetching bookmarked posts:', error);
+        return [];
+    }
+}
 
 const createComment = async (postId, comment) => {
     try {
@@ -196,21 +235,14 @@ const getAllComments = async (postId) => {
     }
 }
 
-const userBookmark = async (postId, userId) => {
-    try {
-        const userRef = doc(firebase_db, 'users', userId); 
-        const postCollectionRef = collection(userRef, 'postids'); 
-        await addDoc(postCollectionRef, {
-            postId: postId,
-        });``
-    } catch (error) {
-        console.error('Error adding post ID:', error);
-    }
-};
-
 const uploadUserPhoto = async (photo) => {
-    const photoUrl = uploadImage(photo);
+    const photoUrl = await uploadImage(photo);
     updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
+}
+
+const getUserPhoto = async () => {
+    const res = firebase_auth.currentUser.photoURL;
+    return res;
 }
 
 const showCurrentUserInfo = async (info) => {
@@ -224,17 +256,20 @@ const showCurrentUserInfo = async (info) => {
 }
 
 
-const db = {  // code : test
-    createPost , // done : pass # Not have comment now
-    editPost , // done : none
-    getAllPosts , // done : pass
-    repostPost , // done : pass
+const db = {
+    createPost ,
+    editPost ,
+    getAllPosts ,
+    repostPost ,
 
-    createComment , // done : none
+    createComment ,
     getAllComments,
 
-    userBookmark , // done : none
+    userBookmark ,
+    getBookmarkedPosts,
     showCurrentUserInfo,
+    uploadUserPhoto,
+    getUserPhoto,
 };
 
 export { db };

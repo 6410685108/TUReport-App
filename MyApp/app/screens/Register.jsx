@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
 import { firebase_auth } from "../../firebaseConfig";
 import { LinearGradient } from "expo-linear-gradient";
+import { db } from "../system/db";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -31,8 +32,8 @@ const RegisterScreen = ({ navigation }) => {
         email,
         password
       );
-      // Handle successful registration, such as navigating to another screen
-      console.log("Registration successful:", response);
+      await signInWithEmailAndPassword(auth, email, password)
+      await db.uploadUserPhoto("https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c");
     } catch (error) {
       alert("Error registering: " + error.message);
       console.error("Registration error:", error);
@@ -43,7 +44,6 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <LinearGradient
-      // Gradient colors
       colors={["#ff7100", "#ffda27"]}
       style={styles.background}
     >
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: "100%",
+    minWidth: "100%",
     borderWidth: 3,
     borderRadius: 25,
     padding: 10,
