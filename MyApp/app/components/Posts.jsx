@@ -93,8 +93,6 @@ const Posts = ({option}) => {
         await getAllPosts();
     }
 
- 
-    
     function parseThaiDate(timeString) {
         const [datePart, timePart] = timeString.split(', ');
         const [day, month, year] = datePart.split('/').map(part => parseInt(part));
@@ -102,8 +100,6 @@ const Posts = ({option}) => {
         const yearAD = year - 543;
         return new Date(yearAD, month - 1, day, hour, minute, second);
     }
-
-    
 
   return (
     <ScrollView
@@ -113,7 +109,6 @@ const Posts = ({option}) => {
             onRefresh={handleRefresh}
         />
     }>
-        {/* use function map to show all post */}
         {sortedPosts.map((info) => (
             <View style={{margin: 10, padding: 15, backgroundColor: '#ECECEC', borderRadius: 20}} key={info.id}>
             <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
@@ -121,7 +116,7 @@ const Posts = ({option}) => {
                 <View style={{flexDirection: 'row'}}>
                     <Image style={{width: 30, height: 30}}source={require('../picture/user_profile.png')}/>
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author}</Text>
+                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.email}</Text>
                         <Text style={{fontSize: 12}}>{info.time}</Text>
                     </View>
                 </View>
