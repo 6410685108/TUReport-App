@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ff7fe785-5cd1-4b1f-a122-a5715738d41c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/screens/ExOfCollectData.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/screens/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/screens/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/screens/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/screens/Register.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/screens/Test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/screens/Test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/app/screens/Inpost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/screens/Inpost.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/app/system/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/system/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/app/tabs/CreatePost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/tabs/CreatePost.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
