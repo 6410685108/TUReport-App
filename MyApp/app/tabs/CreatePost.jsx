@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import { db } from '../system/db';
 import * as ImagePicker from 'expo-image-picker';
-import { firebase_storage } from '../../firebaseConfig';
-import { set } from 'firebase/database';
 
 const CreatePost = () => {
   const [topic, setTopic] = useState('');
@@ -18,8 +16,7 @@ const CreatePost = () => {
       return;
     }
     try {
-      const email = db.getUserEmail()._j;
-      db.createPost(topic, details, location , photo , anonymous , email);
+      db.createPost(topic, details, location , photo , anonymous );
       setTopic('');
       setDetails('');
       setLocation('');
@@ -61,9 +58,13 @@ const CreatePost = () => {
     Keyboard.dismiss();
   }
 
-  const test = () => {
+  const test = async () => {
     // db.showCurrentUserInfo("email");
-    console.log("test")
+    // const posts = await db.getBookmarkedPosts();
+    // await db.uploadUserPhoto("https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c");
+
+    // console.log(await db.getUserPhoto())
+    console.log("=====================================")
   }
   
   if (language == "EN") {
@@ -220,7 +221,7 @@ const CreatePost = () => {
   }
 };
 
-let theme = "dark";
+let theme = "light";
 let styles ;
 if (theme == 'light'){
   styles = StyleSheet.create({

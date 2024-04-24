@@ -8,15 +8,12 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { firebase_auth } from "../../firebaseConfig";
 import Posts from "../components/Posts";
-import { SelectCountry } from "react-native-element-dropdown";
 
 // import { TextInput } from "react-native-gesture-handler";
 
 const Finish = () => {
   const [country, setCountry] = useState("1");
-
 
   return (
     <View style={styles.container}>

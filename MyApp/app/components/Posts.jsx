@@ -79,17 +79,21 @@ const Posts = ({option}) => {
         };
     }, [navigation, option]);
     
-
     if (loading) {
         return <Text>Loading...</Text>;
     }
 
-    if (posts.length === 0) {
+    if (sortedPosts.length === 0) {
         return <Text>No Post Available</Text>;
     }
 
     const handleRepost = async (postId) => {
         await db.repostPost(postId);
+        await getAllPosts();
+    }
+
+    const handleBookmark = async (postId) => {
+        await db.userBookmark(postId);
         await getAllPosts();
     }
 
@@ -135,7 +139,7 @@ const Posts = ({option}) => {
                     <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon.png')} />
                     <Text style={{paddingLeft: 5}}>{info.repost}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {console.log('Bookmark pressed!')}}>
+                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
                     <Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />
                 </TouchableOpacity>
             </View>

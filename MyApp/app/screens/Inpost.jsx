@@ -39,6 +39,10 @@ const Inpost = ({ navigation, route }) => {
     await db.repostPost(postId);
   }
 
+  const handleBookmark = async (postId) => {
+    await db.userBookmark(postId);
+}
+
   const handleCreateComment = async (comment) => {
     await db.createComment(postid,comment)
   }
@@ -103,7 +107,7 @@ const Inpost = ({ navigation, route }) => {
             <TouchableOpacity
               style={{ flexDirection: "row", alignItems: "center" }}
               onPress={() => {
-                console.log("Bookmark pressed!");
+                handleBookmark(postInfo.id);
               }}
             >
               <Image

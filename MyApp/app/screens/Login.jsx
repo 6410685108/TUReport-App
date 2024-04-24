@@ -25,11 +25,7 @@ const Login = ({ navigation }) => {
     setLoading(true);
     try {
       // const response = await signInWithEmailAndPassword(auth, email, password);
-      const response = await signInWithEmailAndPassword(
-        auth,
-        "t@t.com",
-        "111111"
-      );
+      await signInWithEmailAndPassword(auth,"t@t.com","111111");
     } catch (error) {
       alert(error.message);
       console.log(error);
