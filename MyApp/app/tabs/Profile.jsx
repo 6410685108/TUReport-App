@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import { firebase_auth } from "../../firebaseConfig";
 import Posts from "../components/Posts";
@@ -6,6 +6,12 @@ import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
   const [sw , setSw] = useState(true);
+  const [reloadKey, setReloadKey] = useState(0);
+
+  useEffect(() => {
+    setReloadKey(prevKey => prevKey + 1);
+  }, [sw]);
+
 
   const user = firebase_auth.currentUser;
   const navigation = useNavigation();
@@ -14,7 +20,6 @@ const Profile = () => {
   const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_profile_w.png');
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const exitImage = theme === 'light' ? require('../picture/exit.png') : require('../picture/exit_w.png');
-  const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
   if (language == "EN") {
     return (
       <View style={styles.container}>
@@ -69,9 +74,9 @@ const Profile = () => {
           </View>
         </View>
         {sw ? (
-          <Posts option={"MyPost"} />
+          <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
         ) : (
-          <Posts option={"Bookmark"} />
+          <Posts key={`${reloadKey}-MyPost`} option={"Bookmark"} />
         )
         }
       </View>
