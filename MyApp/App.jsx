@@ -12,6 +12,7 @@ import Finish from "./app/tabs/Finish";
 import Profile from "./app/tabs/Profile";
 import QandA from "./app/tabs/QandA";
 import { Image,StyleSheet } from "react-native";
+import { SettingProvider } from "./app/system/SettingContext";
 
 import HomeNavigator from "./app/navigator/HomeNavigator";
 
@@ -29,31 +30,33 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {user ? (
-          <Stack.Screen
-            name="Authenticated"
-            component={AuthenticatedScreens}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <>
+    <SettingProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {user ? (
             <Stack.Screen
-              name="Login"
-              component={Login}
+              name="Authenticated"
+              component={AuthenticatedScreens}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="Register"
-              component={Register}
-              options={{ headerShown: false }}
-            />
-          </>
-        )}
-      </Stack.Navigator>
-      <StatusBar hidden />
-    </NavigationContainer>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Register"
+                component={Register}
+                options={{ headerShown: false }}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+        <StatusBar hidden />
+      </NavigationContainer>
+    </SettingProvider>
   );
 }
 
