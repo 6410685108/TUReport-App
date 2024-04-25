@@ -15,6 +15,7 @@ import { SettingProvider } from "./app/system/setting";
 
 import HomeNavigator from "./app/navigator/HomeNavigator";
 import ProfileNavigator from "./app/navigator/ProfileNavigator";
+import FinishNavigator from "./app/navigator/FinishNavigator";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -89,7 +90,7 @@ function AuthenticatedScreens() {
       />
       <Tab.Screen
         name="Finish"
-        component={Finish}
+        component={FinishNavigator}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
