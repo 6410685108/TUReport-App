@@ -1,8 +1,7 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where } from 'firebase/firestore';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where , setDoc} from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
-import { get } from 'firebase/database';
 
 const createPost = async (title, detail, location , photo , anonymous) => {
     try { 
@@ -18,7 +17,6 @@ const createPost = async (title, detail, location , photo , anonymous) => {
                 uid: firebase_auth.currentUser.uid,
                 displayName: firebase_auth.currentUser.displayName,
                 email: firebase_auth.currentUser.email,
-                photo: firebase_auth.currentUser.photoURL,
             },
             time: new Date().toLocaleString(),
             status: 'in progress',
@@ -181,8 +179,7 @@ const userBookmark = async (postId) => {
             await removeBookmark(postId);
         }
         else{
-            console.log("Bookmarking post");
-            const userRef = doc(firebase_db, 'userbookmark', userId); 
+            const userRef = doc(firebase_db, 'user', userId , "bookmark"); 
             const postCollectionRef = collection(userRef, 'postIds'); 
             await addDoc(postCollectionRef, {
                 postId: postId,
@@ -250,7 +247,6 @@ const createComment = async (postId, comment) => {
                 uid: firebase_auth.currentUser.uid,
                 displayName: firebase_auth.currentUser.displayName,
                 email: firebase_auth.currentUser.email,
-                photo: firebase_auth.currentUser.photoURL,
             },
             time: new Date().toLocaleString(),
         });
@@ -272,13 +268,34 @@ const getAllComments = async (postId) => {
 }
 
 const uploadUserPhoto = async (photo) => {
-    const photoUrl = await uploadImage(photo);
-    updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
+    try{
+        const photoUrl = await uploadImage(photo);
+        const userId = firebase_auth.currentUser.uid;
+        const userRef = doc(firebase_db, 'users', userId);
+        await setDoc(userRef, {
+            photo: photoUrl,
+        }, { merge: true });
+        updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
+    }
+    catch{
+        console.error('Error uploading user photo:', error);
+    }
+  
 }
 
-const getUserPhoto = async () => {
+const getThisUserPhoto = async () => {
     const res = firebase_auth.currentUser.photoURL;
     return res;
+}
+
+const getUserPhoto = async (userId) => {
+    try{
+        const userRef = doc(firebase_db, 'users', userId);
+        const userDoc = await getDoc(userRef);
+        return userDoc.data().photo;
+    } catch{
+        console.error('Error fetching user photo:', error);
+    }
 }
 
 const showCurrentUserInfo = async (info) => {
@@ -310,6 +327,7 @@ const db = {
     
     showCurrentUserInfo,
     uploadUserPhoto,
+    getThisUserPhoto,
     getUserPhoto,
     setDisplayName,
 };
