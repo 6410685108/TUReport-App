@@ -66,25 +66,30 @@ const CreatePost = () => {
     // console.log(await db.getUserPhoto())
     console.log("=====================================")
   }
-  
+  const createpostImage = theme === 'light' ? require('../picture/createpost.png') : require('../picture/AddMoreDetail_w.png');
+  const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
+  const addTopicImage = theme === 'light' ? require('../picture/addTopic.png') : require('../picture/addTopic_w.png');
+  const AddMoreDetailImage = theme === 'light' ? require('../picture/AddMoreDetail.png') : require('../picture/AddMoreDetail_w.png');
+  const mapImage = theme === 'light' ? require('../picture/map.png') : require('../picture/map_w.png');
+  const photoImage = theme === 'light' ? require('../picture/photo.png') : require('../picture/photo_w.png');
   if (language == "EN") {
     return (
       <View style={styles.container}>
         <View style={styles.nav}>
           <View style={styles.inNav}>
-            <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
+            <Image style={[styles.logo, {margin: 5}]} source={createpostImage} />
             <Text style={[styles.fcolor,{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
           </View>
         </View>
         
         <View style={styles.containerContent} >
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/user_profile.png')}/>
+            <Image style={styles.logo2}source={user_profileImage}/>
             <Text style={[styles.fcolor,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>User X</Text>
           </View>
          
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/addTopic.png')}/>
+            <Image style={styles.logo2}source={addTopicImage}/>
             <TextInput
             placeholder="Add topic"
             placeholderTextColor={styles.placeholderStyle.color}
@@ -95,7 +100,7 @@ const CreatePost = () => {
             />
           </View>
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/AddMoreDetail.png')}/>
+            <Image style={styles.logo2}source={AddMoreDetailImage}/>
             <TextInput
             placeholder="Add more details"
             placeholderTextColor={styles.placeholderStyle.color}
@@ -106,7 +111,7 @@ const CreatePost = () => {
             />
           </View>
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/map.png')}/>
+            <Image style={styles.logo2}source={mapImage}/>
             <TextInput
             placeholder="Add location"
             placeholderTextColor={styles.placeholderStyle.color}
@@ -118,7 +123,7 @@ const CreatePost = () => {
           </View>
           <View style={styles.content}>
             <TouchableOpacity onPress={handleAddPhoto}>
-              <Image style={styles.logo2}source={require('../picture/photo.png')}/>
+              <Image style={styles.logo2}source={photoImage}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleAddPhoto} style={{ flex: 1 }}>
               <Text style={styles.boxx}>Add photos</Text>
@@ -221,7 +226,7 @@ const CreatePost = () => {
   }
 };
 
-let theme = "light";
+let theme = "dark";
 let styles ;
 if (theme == 'light'){
   styles = StyleSheet.create({
@@ -310,7 +315,7 @@ if (theme == 'light'){
 }else if(theme == "dark"){
   styles = StyleSheet.create({
     container: {
-      backgroundColor: "#000000",
+      backgroundColor: "#1c1c1c",
       height: "100%",
     },
     nav: {
@@ -375,13 +380,11 @@ if (theme == 'light'){
       height: 60,
       marginTop: 0,
       borderColor: 'white',
-      backgroundColor: "#FFF",
       borderRadius: 30,
     },
     logo2: {
       width: 35,
       height: 35,
-      backgroundColor: "#FFF",
       borderRadius: 30,
     },
     botsub: {

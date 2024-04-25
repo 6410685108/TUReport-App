@@ -171,7 +171,7 @@ if (theme == 'light'){
 }else if(theme == "dark"){
   styles = StyleSheet.create({
     tabBarStyle: {
-      backgroundColor: 'black',
+      backgroundColor: '#111111',
     },
     tabBarActiveBackgroundColor: 'white',
     tabBarActiveTintColor: "black",
