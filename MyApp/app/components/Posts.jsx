@@ -18,9 +18,10 @@ const Posts = ({option}) => {
         setLoading(false);
     }
 
-    const handleRefresh = () => {
+    const handleRefresh = async () => {
         setRefreshing(true); 
-        fetchData();
+        await fetchData();
+        setRefreshing(false); 
     };
 
     useEffect(() => {
