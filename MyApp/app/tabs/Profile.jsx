@@ -8,7 +8,6 @@ const Profile = () => {
   const [sw , setSw] = useState(true);
 
   const user = firebase_auth.currentUser;
-  console.log(user.photoURL);
   const navigation = useNavigation();
   let language = "EN";
              
@@ -16,10 +15,6 @@ const Profile = () => {
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const exitImage = theme === 'light' ? require('../picture/exit.png') : require('../picture/exit_w.png');
   const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
-  const addTopicImage = theme === 'light' ? require('../picture/addTopic.png') : require('../picture/addTopic_w.png');
-  const AddMoreDetailImage = theme === 'light' ? require('../picture/AddMoreDetail.png') : require('../picture/AddMoreDetail_w.png');
-  const mapImage = theme === 'light' ? require('../picture/map.png') : require('../picture/map_w.png');
-  const photoImage = theme === 'light' ? require('../picture/photo.png') : require('../picture/photo_w.png');
   if (language == "EN") {
     return (
       <View style={styles.container}>
@@ -121,7 +116,7 @@ if (theme == 'light'){
       left: "auto",
       justifyContent: "center",
       alignItems: "center",
-      flex: 0.5,
+      width: "50%",
     },
     boxx: {
       justifyContent: "center",
@@ -133,13 +128,13 @@ if (theme == 'light'){
       color: 'white',
       maxWidth: "80%",
       left: "10%" ,
-      backgroundColor: "#aaaaaa",
+      backgroundColor: "#ECECEC",
       borderRadius: 20,
     },
     boxx2: {
       flexDirection: "row",
       justifyContent: "space-between",
-      backgroundColor: "#aaaaaa",
+      backgroundColor: "#ECECEC",
       height: 'auto',
       padding: 10,
       marginTop: 20,
@@ -189,7 +184,7 @@ if (theme == 'light'){
       left: "auto",
       justifyContent: "center",
       alignItems: "center",
-      flex: 0.5,
+      width: "50%",
     },
     boxx: {
       justifyContent: "center",
