@@ -89,7 +89,7 @@ const register = async (email , password) => {
         await createUserWithEmailAndPassword(auth,email,password);
         await signInWithEmailAndPassword(auth,email, password)
         await db.uploadUserPhoto(
-            "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c"
+            "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9"
         );
         const displayname = email.split("@")[0];
         await db.setDisplayName(displayname)
@@ -111,7 +111,7 @@ const getUserPhotoURL = async (userId) => {
     try {
         const photoUrl = await db.getUserPhoto(userId);
         if (!photoUrl) {
-            return "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c";
+            return "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9";
         }
         return photoUrl;
     } catch (error) {
