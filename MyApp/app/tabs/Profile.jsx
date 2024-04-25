@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import { firebase_auth } from "../../firebaseConfig";
+import Posts from "../components/Posts";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
-  const [topic, setTopic] = useState('');
-  const [details, setDetails] = useState('');
-  const [location, setLocation] = useState('');
-  const [photo, setPhoto] = useState(null);
-  const [anonymous, setAnonymous] = useState(false);
+  const [sw , setSw] = useState(true);
+
+  const user = firebase_auth.currentUser;
+  console.log(user.photoURL);
+  const navigation = useNavigation();
   let language = "EN";
              
   const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_profile_w.png');
@@ -28,9 +30,7 @@ const Profile = () => {
           </View>
           <View style={styles.inNav}>
             <TouchableOpacity
-              onPress={() => {
-                console.log("move to setting page!");
-              }}
+              onPress={() => navigation.navigate('Setting')}
             >
               <Image
                 style={{ width: 40, height: 40, marginRight: 5 }}
@@ -50,17 +50,15 @@ const Profile = () => {
         
         <View style={styles.containerContent} >
           <View style={styles.boxx}>
-            <Image style={styles.logo2}source={user_profileImage}/>
-            <Text style={[styles.text]}>User X</Text>
-            <Text style={[styles.text]}>6XX</Text>
-            <Text style={[styles.text]}>XX@dome</Text>
+            <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
+            <Text style={[styles.text]}>{user.displayName}</Text>
+            <Text style={[styles.text]}>{user.displayName}</Text>
+            <Text style={[styles.text]}>{user.email}</Text>
           </View>
           <View style={styles.boxx2}>
             <View style={styles.center}>
               <TouchableOpacity
-                onPress={() => {
-                  console.log("move to Your Posts page!");
-                }}
+                onPress={() => {setSw(true)}}
               >
                 <Text style={[styles.text]}>Your Posts</Text>
               </TouchableOpacity>
@@ -68,15 +66,19 @@ const Profile = () => {
             <Text style={[styles.text]}>|</Text>
             <View style={styles.center}>
               <TouchableOpacity
-                onPress={() => {
-                    console.log("move to Saved page!");
-                }}
+                onPress={() => {setSw(false)}}
               >
                 <Text style={[styles.text]}>Saved</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
+        {sw ? (
+          <Posts option={"MyPost"} />
+        ) : (
+          <Posts option={"Bookmark"} />
+        )
+        }
       </View>
     );
   }
@@ -116,7 +118,7 @@ if (theme == 'light'){
       fontSize: 16,
     },
     center: {
-      left: "center",
+      left: "auto",
       justifyContent: "center",
       alignItems: "center",
       flex: 0.5,
@@ -184,7 +186,7 @@ if (theme == 'light'){
       fontSize: 16,
     },
     center: {
-      left: "center",
+      left: "auto",
       justifyContent: "center",
       alignItems: "center",
       flex: 0.5,
