@@ -6,7 +6,12 @@ const SettingInput = () => {
   let language = "EN";
   const [englishChecked, setEnglishChecked] = useState(false);
   const [thaiChecked, setThaiChecked] = useState(false);
+  const [lightChecked, setLightChecked] = useState(false);
+  const [darkChecked, setDarkChecked] = useState(false);
 
+  const handleEditPress = () => {
+    console.log("Edit Profile");
+  };
   const handleEnglishPress = () => {
     setEnglishChecked(true);
     setThaiChecked(false);
@@ -18,6 +23,17 @@ const SettingInput = () => {
     setThaiChecked(true);
     console.log("Move to Thai page!");
   };
+  const handleLightPress = () => {
+    setLightChecked(true);
+    setDarkChecked(false);
+    console.log("Move to Light theme!");
+  };
+  const handleDarkPress = () => {
+    setLightChecked(false);
+    setDarkChecked(true);
+    console.log("Move to Dark theme!");
+  };
+
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -25,6 +41,10 @@ const SettingInput = () => {
   const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
   const eng_langImage = require('../picture/eng_lang.png');
   const thai_langImage = require('../picture/thai_lang.png');
+  const theme1Image = require('../picture/theme1.png');
+  const theme2Image = require('../picture/theme2.png');
+  const theme3Image = require('../picture/theme3.png');
+  const theme4Image = require('../picture/theme4.png');
   if (language == "EN") {
     return (
       <View style={styles.container}>
@@ -44,7 +64,14 @@ const SettingInput = () => {
         
         <View style={[styles.containerContent,styles.center]} >
              <View style={styles.boxx}>
+                <View style={[styles.inNav,{left:40}]}>
                 <Image style={styles.logo2}source={user_profileImage}/>
+                <TouchableOpacity onPress={handleEditPress}>
+                    <View style={styles.boxx3}>
+                        <Text style={[styles.text,{fontSize:12}]}>Edit Profile</Text>
+                    </View>
+                </TouchableOpacity>
+                </View>
                 <Text style={[styles.text]}>User X</Text>
                 <Text style={[styles.text]}>6XX</Text>
                 <Text style={[styles.text]}>XX@dome</Text>
@@ -81,6 +108,39 @@ const SettingInput = () => {
                         value={isEnabled}
                     />
                 </View>
+            </View>
+            <Text style={[styles.text2]}>{'>Apptheme'}</Text>
+            <View style={styles.nav2}>
+                <TouchableOpacity onPress={handleLightPress}>
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme1Image} />
+                        {lightChecked && <Text style={[styles.checkmark,{top:5}]}>✓</Text>}
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleDarkPress}>
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme2Image} />
+                        {darkChecked && <Text style={[styles.checkmark,{top:5}]}>✓</Text>}
+                    </View>         
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log("Theme 3 is nothing!");
+                    }}
+                >
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme3Image} />
+                    </View>         
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log("Theme 4 is nothing!");
+                    }}
+                >
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme4Image} />
+                    </View>         
+                </TouchableOpacity>
             </View>
         </View>
       </View>
@@ -156,6 +216,20 @@ if (theme == 'light'){
         backgroundColor: "#ECECEC",
         borderRadius: 20,
     },
+    boxx3: {
+        height: 'auto',
+        alignItems: "center",
+        width: 80,
+        backgroundColor: "#aacbff",
+        borderRadius: 20,
+        padding:0,
+        margin: 0,
+        top: -25,
+    },
+    boxx4: {
+        height: 80,
+        alignItems: "center",
+    },
     logo: {
         width: 40,
         height: 40,
@@ -171,6 +245,11 @@ if (theme == 'light'){
     logo3: {
         width: 40,
         height: 40,
+        borderRadius: 30,
+    },
+    logo4: {
+        width: 80,
+        height: 80,
         borderRadius: 30,
     },
     checkmark: {
@@ -242,6 +321,20 @@ if (theme == 'light'){
             backgroundColor: "#606060",
             borderRadius: 20,
         },
+        boxx3: {
+            height: 'auto',
+            alignItems: "center",
+            width: 80,
+            backgroundColor: "#81b0ff",
+            borderRadius: 20,
+            padding:0,
+            margin: 0,
+            top: -25,
+        },
+        boxx4: {
+            height: 80,
+            alignItems: "center",
+        },
         logo: {
             width: 40,
             height: 40,
@@ -259,9 +352,14 @@ if (theme == 'light'){
             height: 40,
             borderRadius: 30,
         },
+        logo4: {
+            width: 80,
+            height: 80,
+            borderRadius: 30,
+        },
         checkmark: {
             fontSize: 20,
-            color: 'black',
+            color: 'white',
             textAlign: 'center',
             lineHeight: 25,
         },
