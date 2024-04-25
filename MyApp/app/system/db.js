@@ -5,7 +5,7 @@ import { updateProfile } from 'firebase/auth'
 
 const createPost = async (title, detail, location , photo , anonymous) => {
     try { 
-        const photoUrl = await uploadImage(photo);
+        const photoUrl = await uploadImage(photo, 'posts');
         const postCollectionRef = collection(firebase_db, 'posts');
         await addDoc(postCollectionRef, {
             title: title,
@@ -28,11 +28,11 @@ const createPost = async (title, detail, location , photo , anonymous) => {
     }
 };
 
-const uploadImage = async (image) => {
+const uploadImage = async (image , path) => {
     try {
         const response = await fetch(image);
         const blob = await response.blob();
-        const storageRef = ref(firebase_storage , `images/${Math.random().toString(36).substring(7)}`);
+        const storageRef = ref(firebase_storage , `${path}/${Math.random().toString(36).substring(7)}`);
         const uploadTask = uploadBytesResumable(storageRef, blob);
         
         return new Promise((resolve, reject) => {
@@ -67,12 +67,14 @@ const repostPost = async (postId,isReposted) => {
     const postDocSnap = await getDoc(postDocRef);
     if (postDocSnap.exists()) {
         if(isReposted){
+            console.log('unrepost');
             const repostCount = postDocSnap.data().repost - 1;
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
             return true;
         } else {
+            console.log('repost');
             const repostCount = postDocSnap.data().repost + 1;
             await updateDoc(postDocRef, {
                 repost: repostCount,
@@ -171,8 +173,10 @@ const userBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
         if (await isBookmarked(postId)) {
+            console.log('remove bookmark');
             await removeBookmark(postId);
         } else {
+            console.log('add bookmark');
             const userRef = doc(firebase_db, 'users', userId);
             const bookmarkRef = collection(userRef, 'bookmark');
             await addDoc(bookmarkRef, {
@@ -268,7 +272,7 @@ const getAllComments = async (postId) => {
 
 const uploadUserPhoto = async (photo) => {
     try{
-        const photoUrl = await uploadImage(photo);
+        const photoUrl = await uploadImage(photo, 'users');
         const userId = firebase_auth.currentUser.uid;
         const userRef = doc(firebase_db, 'users', userId);
         await setDoc(userRef, {
