@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
+import { View, Text, Switch } from 'react-native';
 
 const SettingContext = createContext();
-
 
 const SettingProvider = ({ children }) => {
   const [theme, setTheme] = useState('light');
@@ -13,7 +13,7 @@ const SettingProvider = ({ children }) => {
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'th' : 'en');
-  }
+  };
 
   const setting = {
     toggleLanguage,
@@ -29,8 +29,9 @@ const SettingProvider = ({ children }) => {
   );
 };
 
-const SettingThemt = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+const SettingTheme = () => {
+  const { setting } = useContext(SettingContext);
+  const { theme, toggleTheme } = setting;
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -40,4 +41,6 @@ const SettingThemt = () => {
   );
 };
 
-export default {SettingThemt , SettingProvider , SettingContext};
+export { SettingTheme, SettingProvider, SettingContext };
+
+
