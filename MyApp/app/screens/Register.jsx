@@ -29,7 +29,11 @@ const RegisterScreen = ({ navigation }) => {
     try {
       await createUserWithEmailAndPassword(auth,email,password);
       await signInWithEmailAndPassword(auth, email, password)
-      await db.uploadUserPhoto("https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c");
+      await db.uploadUserPhoto(
+        "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c"
+      );
+      const displayname = email.split("@")[0];
+      await db.setDisplayName(displayname)
     } catch (error) {
       alert("Error registering: " + error.message);
       console.error("Registration error:", error);

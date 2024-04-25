@@ -120,7 +120,7 @@ const Posts = ({option}) => {
                 <View style={{flexDirection: 'row'}}>
                     <Image style={{width: 30, height: 30}}source={{uri: info.author.photo}}/>
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.email}</Text>
+                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.displayName}</Text>
                         <Text style={{fontSize: 12}}>{info.time}</Text>
                     </View>
                 </View>

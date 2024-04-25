@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,13 @@ import {
 } from "react-native";
 import Posts from "../components/Posts";
 import { SelectCountry } from "react-native-element-dropdown";
+import { SettingContext } from "../system/setting";
 
 // import { TextInput } from "react-native-gesture-handler";
+
+// const { setting } = useContext(SettingContext);
+// let theme = setting.theme;
+
 
 const Home = () => {
   const [country, setCountry] = useState("1");
@@ -31,10 +36,6 @@ const Home = () => {
     {
       value: "Repost",
       lable: "Repost",
-    },
-    {
-      value: "5",
-      lable: "D",
     },
   ];
   const homeImage = theme === 'light' ? require('../picture/home.png') : require('../picture/home_w.png');
