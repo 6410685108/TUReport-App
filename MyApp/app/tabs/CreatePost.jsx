@@ -137,17 +137,17 @@ const CreatePost = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.content}>
-          <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
-            {anonymous ? (
-              <Text style={styles.checkmark}>✓</Text>
-            ) : null}
-          </TouchableOpacity>
+            <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
+              {anonymous ? (
+                <Text style={styles.checkmark}>✓</Text>
+              ) : null}
+            </TouchableOpacity>
             <Text style={styles.boxx}>Anonymous</Text>
           </View>
   
         </View>
-        <TouchableOpacity onPress={handleMessageSubmit}>
-          <Text style={styles.botsub}>Submit</Text>
+        <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
+          <Text style={styles.text2}>Submit</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={test}>
           <Text style={styles.botsub}>Test Func</Text>
@@ -222,8 +222,8 @@ const CreatePost = () => {
           </View>
   
         </View>
-        <TouchableOpacity onPress={handleMessageSubmit}>
-          <Text style={styles.botsub}>ส่ง</Text>
+        <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
+          <Text style={styles.text2}>ส่ง</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={test}>
           <Text style={styles.botsub}>Test Func</Text>
@@ -254,6 +254,11 @@ const lightstyles = StyleSheet.create({
     },
     text:{
       color: 'black',
+    },
+    text2:{
+      color: 'black',
+      textAlign: 'center',
+      
     },
     content: {
       flexDirection: 'row',
@@ -338,6 +343,10 @@ const darkstyles = StyleSheet.create({
     },
     text:{
       color: 'white',
+    },
+    text2:{
+      color: 'white',
+      textAlign: 'center',
     },
     content: {
       flexDirection: 'row',
