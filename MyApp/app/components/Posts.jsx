@@ -10,6 +10,7 @@ const Posts = ({option}) => {
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
+    const [userPhotoKey, setUserPhotoKey] = useState(0);
 
     const getAllPosts = async () => {
         try {
@@ -70,8 +71,7 @@ const Posts = ({option}) => {
     };
 
     useEffect(() => {
-        getAllPosts();
-    
+        getAllPosts();     
         const unsubscribe = navigation.addListener('focus', () => {
             getAllPosts();
         });
@@ -79,6 +79,7 @@ const Posts = ({option}) => {
             unsubscribe();
         };
     }, [navigation, option]);
+
     
     if (loading) {
         return <Text>Loading...</Text>;
@@ -119,7 +120,7 @@ const Posts = ({option}) => {
             <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
-                    <UserPhoto userId={info.author.uid} />
+                    <UserPhoto key={userPhotoKey} userId={info.author.uid} />
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
                         <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.displayName}</Text>
                         <Text style={{fontSize: 12}}>{info.time}</Text>

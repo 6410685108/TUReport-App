@@ -7,14 +7,15 @@ import {
   ScrollView,
   RefreshControl,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect , useState } from "react";
 import { db } from "../system/db"
 import UserPhoto from "../components/UserPhoto";
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
-  const postid = postInfo.id
-  const [comments, setComments] = React.useState([]);
+  const postid = postInfo.id;
+  const [repost, setRepost] = useState(postInfo.repost);
+  const [comments, setComments] = useState([]);
 
   const getComment = async () => {
     try {
@@ -34,10 +35,15 @@ const Inpost = ({ navigation, route }) => {
     return () => {
         unsubscribe();
     };
-}, [navigation]);
+}, [navigation,repost]);
 
   const handleRepost = async (postId) => {
-    await db.repostPost(postId);
+    const isRepost = await db.repostPost(postId);
+    if (isRepost){
+      setRepost(repost - 1);
+    } else {
+      setRepost(repost + 1);
+    }
   }
 
   const handleBookmark = async (postId) => {
@@ -100,7 +106,7 @@ const Inpost = ({ navigation, route }) => {
                 style={{ width: 30, height: 30 }}
                 source={require("../picture/repost_icon.png")}
               />
-              <Text style={{ paddingLeft: 5 }}>{postInfo.repost}</Text>
+              <Text style={{ paddingLeft: 5 }}>{repost}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{ flexDirection: "row", alignItems: "center" }}

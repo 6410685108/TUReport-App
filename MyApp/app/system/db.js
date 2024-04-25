@@ -72,13 +72,14 @@ const repostPost = async (postId) => {
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
-            return;
+            return true;
         } else {
             await addReposter(postId);
             const repostCount = postDocSnap.data().repost + 1; // Corrected here
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
+            return false;
         }
     }
 }
