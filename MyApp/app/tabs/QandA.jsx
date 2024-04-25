@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 
-const Finish = () => {
+const Q_A = () => {
   const [questions, setQuestions] = useState([
     {
       question: "LoremxD",
       answer:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra, mi nec elementum tincidunt, est ex efficitur ligula, id pretium nisi dui quis quam. Cras felis urna, tempus id pulvinar sit amet, dignissim sed nisl. Aenean eu ornare mauris. Nunc velit lorem, molestie at lacus non, blandit porttitor mauris. Donec facilisis risus eros, eu sagittis justo porttitor ac. Phasellus mauris ex, iaculis vel elementum vitae, rhoncus vitae erat. Morbi maximus diam at malesuada vestibulum. Fusce a ultricies magna. Vestibulum consequat id diam quis vestibulum.",
+    },
+    {
+      question: "BBBBB",
+      answer:
+        "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+    },
+    {
+      question: "BBBBB",
+      answer:
+        "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
     },
     {
       question: "BBBBB",
@@ -21,6 +31,11 @@ const Finish = () => {
       <View style={styles.header}>
         <Image style={styles.logo} source={require("../picture/qa_icon.png")} />
         <Text style={styles.headerText}>Q&A</Text>
+      </View>
+      <View style={styles.adminContainer}>
+        <Text style={styles.adminTitle}>Contact Admin</Text>
+        <Text style={styles.adminInfo}>Tel: 00000000</Text>
+        <Text style={styles.adminInfo}>Line: BBBBBB</Text>
       </View>
 
       <ScrollView style={styles.content}>
@@ -76,6 +91,25 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
+  adminContainer: {
+    margin: 20,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: "#f9f9f9",
+  },
+  adminTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#333",
+  },
+  adminInfo: {
+    fontSize: 16,
+    marginBottom: 5,
+    color: "#555",
+  },
 });
 
-export default Finish;
+export default Q_A;

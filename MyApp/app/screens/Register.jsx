@@ -7,10 +7,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
 import { firebase_auth } from "../../firebaseConfig";
 import { LinearGradient } from "expo-linear-gradient";
-import { db } from "../system/db";
 import { data } from "../system/fetchData";
 
 const RegisterScreen = ({ navigation }) => {

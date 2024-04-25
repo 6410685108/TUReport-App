@@ -11,9 +11,8 @@ import {
   ScrollView,
 } from "react-native";
 import { data } from "../system/fetchData";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from "expo-linear-gradient";
-import { IconButton, MD3Colors } from "react-native-paper";
+
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");

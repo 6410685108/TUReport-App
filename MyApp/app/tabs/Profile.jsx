@@ -1,9 +1,9 @@
 import React, { useState , useEffect } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import Posts from "../components/Posts";
-import { useNavigation } from "@react-navigation/native";
 import { data } from '../system/fetchData';
 import { db } from '../system/db';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
   const [sw , setSw] = useState(true);
@@ -11,13 +11,12 @@ const Profile = () => {
 
   useEffect(() => {
     setReloadKey(prevKey => prevKey + 1);
-  }, [sw]);
+  }, [sw , navigation]);
 
   const handleSw = (bool) => {
     setSw(bool);
     setReloadKey(prevKey => prevKey + 1);
   }
-
 
   const user = db.getCurrentUser();
   const navigation = useNavigation();
@@ -26,7 +25,7 @@ const Profile = () => {
   const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_w.png');
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const exitImage = theme === 'light' ? require('../picture/exit.png') : require('../picture/exit_w.png');
-
+  
   if (language == "EN") {
     return (
       <View style={styles.container}>
@@ -103,6 +102,9 @@ let theme = "light";
 let styles ;
 if (theme == 'light'){
   styles = StyleSheet.create({
+    containerContent: {
+      marginBottom: 10,
+    },
     container: {
       backgroundColor: "#FFF",
       height: "100%",
