@@ -52,8 +52,6 @@ const Posts = ({option}) => {
             db.addReposter(postId);
         }
         await fetchData();
-        
-        
     }
 
     const handleBookmark = async (postId) => {

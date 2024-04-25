@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect , useState } from "react";
 import { db } from "../system/db"
+import { data } from "../system/fetchData";
 import UserPhoto from "../components/UserPhoto";
 
 const Inpost = ({ navigation, route }) => {
@@ -17,20 +18,16 @@ const Inpost = ({ navigation, route }) => {
   const [repost, setRepost] = useState(postInfo.repost);
   const [comments, setComments] = useState([]);
 
-  const getComment = async () => {
-    try {
-        const allcomments = await db.getAllComments(postid);
-        setComments(allcomments);
-    } catch (error) {
-        console.error('Error fetching posts:', error);
-    }
+  const fetchComment = async () => {
+    const comment = await data.getComments(postid);
+    setComments(comment);
   }
 
   useEffect(() => {
-    getComment();
+    fetchComment();
 
     const unsubscribe = navigation.addListener('focus', () => {
-      getComment();
+      fetchComment();
     });
     return () => {
         unsubscribe();
@@ -52,7 +49,7 @@ const Inpost = ({ navigation, route }) => {
 
   const handleCreateComment = async (comment) => {
     await db.createComment(postid,comment)
-    await getComment();
+    await fetchComment();
   }
 
   return (
