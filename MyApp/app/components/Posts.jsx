@@ -56,7 +56,6 @@ const Posts = ({option}) => {
             });
         } else if (option === 'Repost'){
             sortedPosts.sort((a, b) => b.repost - a.repost);
-            console.log("Repost");
         } else if (option === 'Finish'){
             sortedPosts = posts.filter(post => post.status === 'Finish');
         } else if (option == 'MyPost') {

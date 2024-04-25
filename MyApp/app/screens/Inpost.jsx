@@ -52,6 +52,7 @@ const Inpost = ({ navigation, route }) => {
 
   const handleCreateComment = async (comment) => {
     await db.createComment(postid,comment)
+    await getComment();
   }
 
   return (
@@ -127,6 +128,8 @@ const Inpost = ({ navigation, route }) => {
               marginTop: 15,
             }}
           />
+
+
           <View>
             {comments.map((comment) => (
               <View
@@ -149,6 +152,8 @@ const Inpost = ({ navigation, route }) => {
               </View>
             ))}
           </View>
+
+
         </View>
       </ScrollView>
       <View
