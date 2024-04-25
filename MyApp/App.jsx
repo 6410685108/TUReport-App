@@ -8,10 +8,9 @@ import { firebase_auth } from "./firebaseConfig";
 import Login from "./app/screens/Login";
 import Register from "./app/screens/Register";
 import CreatePost from "./app/tabs/CreatePost";
-import Finish from "./app/tabs/Finish";
 import QandA from "./app/tabs/QandA";
 import { Image,StyleSheet } from "react-native";
-import { SettingProvider } from "./app/system/setting";
+import { SettingProvider , SettingContext } from "./app/system/setting";
 
 import HomeNavigator from "./app/navigator/HomeNavigator";
 import ProfileNavigator from "./app/navigator/ProfileNavigator";
@@ -63,6 +62,9 @@ export default function App() {
 
 // Add more tap here
 function AuthenticatedScreens() {
+  const { setting } = useContext(SettingContext);
+  const { theme , language } = setting;
+  const styles = theme == 'light' ? lightStyle : darkStyle;
   return (
     <Tab.Navigator
       screenOptions={{
@@ -148,19 +150,15 @@ function AuthenticatedScreens() {
   );
 }
 
-let styles ;
-let theme = 'dark'
-if (theme == 'light'){
-  styles = StyleSheet.create({
+const lightStyle = StyleSheet.create({
     tabBarStyle: {
       backgroundColor: 'white',
     },
-    tabBarActiveBackgroundColor: 'black',
+    tabBarActiveBackgroundColor: 'gray',
     tabBarActiveTintColor: "white",
     tabBarInactiveTintColor: "black"
-  });
-}else if(theme == "dark"){
-  styles = StyleSheet.create({
+});
+const darkStyle = StyleSheet.create({
     tabBarStyle: {
       backgroundColor: '#111111',
     },
@@ -168,4 +166,4 @@ if (theme == 'light'){
     tabBarActiveTintColor: "black",
     tabBarInactiveTintColor: "white"
   });
-}
+

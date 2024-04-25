@@ -29,18 +29,8 @@ const SettingProvider = ({ children }) => {
   );
 };
 
-const SettingTheme = () => {
-  const { setting } = useContext(SettingContext);
-  const { theme, toggleTheme } = setting;
 
-  return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-      <Text>Theme</Text>
-      <Switch value={theme === 'dark'} onValueChange={toggleTheme} />
-    </View>
-  );
-};
 
-export { SettingTheme, SettingProvider, SettingContext };
+export {  SettingProvider, SettingContext };
 
 
