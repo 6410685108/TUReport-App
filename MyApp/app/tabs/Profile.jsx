@@ -23,7 +23,7 @@ const Profile = () => {
   const navigation = useNavigation();
   let language = "EN";
              
-  const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_profile_w.png');
+  const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_w.png');
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const exitImage = theme === 'light' ? require('../picture/exit.png') : require('../picture/exit_w.png');
 
@@ -161,7 +161,6 @@ if (theme == 'light'){
       height: 40,
       marginTop: 0,
       borderColor: 'white',
-      borderRadius: 30,
     },
     logo2: {
       width: 100,
@@ -228,8 +227,7 @@ if (theme == 'light'){
       width: 40,
       height: 40,
       marginTop: 0,
-      borderColor: 'white',
-      borderRadius: 30,
+      borderColor: 'black',
     },
     logo2: {
       width: 100,
