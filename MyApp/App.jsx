@@ -10,12 +10,9 @@ import Register from "./app/screens/Register";
 import CreatePost from "./app/tabs/CreatePost";
 import Finish from "./app/tabs/Finish";
 import Profile from "./app/tabs/Profile";
-import Inpost from "./app/screens/Inpost";
 import QandA from "./app/tabs/QandA";
 import { Image,StyleSheet } from "react-native";
 
-import Test from "./app/screens/Test";
-import TestJsx from "./app/screens/TestJsx";
 import HomeNavigator from "./app/navigator/HomeNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -51,16 +48,6 @@ export default function App() {
               name="Register"
               component={Register}
               options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Test"
-              component={Test}
-              options={{ headerShown: true }}
-            />
-            <Stack.Screen
-              name="TestJsx"
-              component={TestJsx}
-              options={{ headerShown: true }}
             />
           </>
         )}
