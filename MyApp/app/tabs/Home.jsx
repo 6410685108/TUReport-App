@@ -12,7 +12,7 @@ import Posts from "../components/Posts";
 import { SelectCountry } from "react-native-element-dropdown";
 import { SettingContext } from "../system/setting";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [country, setCountry] = useState("1");
   const local_data = [
     {
@@ -47,7 +47,7 @@ const Home = () => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            console.log("move to notification page!");
+            navigation.navigate("Notification");
           }}
         >
           <Image
