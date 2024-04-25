@@ -119,7 +119,7 @@ if (theme == 'light'){
       left: "center",
       justifyContent: "center",
       alignItems: "center",
-      width: "50%",
+      flex: 0.5,
     },
     boxx: {
       justifyContent: "center",
@@ -187,7 +187,7 @@ if (theme == 'light'){
       left: "center",
       justifyContent: "center",
       alignItems: "center",
-      width: "50%",
+      flex: 0.5,
     },
     boxx: {
       justifyContent: "center",
