@@ -12,12 +12,6 @@ import Posts from "../components/Posts";
 import { SelectCountry } from "react-native-element-dropdown";
 import { SettingContext } from "../system/setting";
 
-// import { TextInput } from "react-native-gesture-handler";
-
-// const { setting } = useContext(SettingContext);
-// let theme = setting.theme;
-
-
 const Home = () => {
   const [country, setCountry] = useState("1");
   const local_data = [
@@ -87,7 +81,7 @@ const Home = () => {
 };
 
 let styles ;
-let theme = 'dark'
+let theme = 'light'
 if (theme == 'dark'){
   styles = StyleSheet.create({
     container: {
