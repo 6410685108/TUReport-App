@@ -34,7 +34,6 @@ const Login = ({ navigation }) => {
     }
   };
 
-
   return (
     <LinearGradient
       colors={["#ff7100", "#ffda27"]}
@@ -80,33 +79,7 @@ const Login = ({ navigation }) => {
             <Text style={styles.orText}>or</Text>
             <View style={styles.line}></View>
           </View>
-          <Text style={{ color: "white", marginTop: 0 }}>Continue with</Text>
-          <View style={styles.iconButtonContainer}>
-            <IconButton
-              icon="google"
-              iconColor={MD3Colors.error50}
-              size={30}
-              onPress={() => console.log("Pressed")}
-              mode="contained-tonal"
-              style={styles.iconButton}
-            />
-            <IconButton
-              icon="facebook"
-              iconColor={MD3Colors.error50}
-              size={30}
-              onPress={() => console.log("Pressed")}
-              mode="contained-tonal"
-              style={styles.iconButton}
-            />
-            <IconButton
-              icon="email"
-              iconColor={MD3Colors.error50}
-              size={30}
-              onPress={() => console.log("Pressed")}
-              mode="contained-tonal"
-              style={styles.iconButton}
-            />
-          </View>
+         
           <Text style={styles.registerText}>
             Don't have an account?{" "}
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
