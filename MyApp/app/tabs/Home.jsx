@@ -65,6 +65,7 @@ const Home = () => {
       <View style={styles.nav2}>
         <SelectCountry
           style={styles.dropdown}
+          containerStyle={styles.containerStyle}
           selectedTextStyle={styles.selectedTextStyle}
           placeholderStyle={styles.placeholderStyle}
           imageStyle={styles.imageStyle}
@@ -128,6 +129,9 @@ if (theme == 'dark'){
       borderColor: "white",
       borderRadius: 10,
     },
+    containerStyle: {
+      backgroundColor: "black",
+    },
     logo: {
       width: 40,
       height: 40,
@@ -139,8 +143,7 @@ if (theme == 'dark'){
       color: 'white',
     },
     selectedTextStyle: {
-      color: 'white',
-      backgroundColor: 'black',
+      color: 'grey',
     },
   });
 }else if(theme == "light"){
