@@ -87,11 +87,11 @@ const Home = () => {
 };
 
 let styles ;
-let theme = 'dark'
+let theme = 'light'
 if (theme == 'dark'){
   styles = StyleSheet.create({
     container: {
-      backgroundColor: "black",
+      backgroundColor: "#1c1c1c",
       height: "100%",
     },
     nav: {
@@ -130,7 +130,7 @@ if (theme == 'dark'){
       borderRadius: 10,
     },
     containerStyle: {
-      backgroundColor: "black",
+      backgroundColor: "#1c1c1c",
     },
     logo: {
       width: 40,
@@ -143,7 +143,11 @@ if (theme == 'dark'){
       color: 'white',
     },
     selectedTextStyle: {
-      color: 'grey',
+      color: 'white',
+      textShadowColor: 'black',
+      textShadowOffset: {width: 1, height: 1}, 
+      textShadowRadius: 10,
+      fontWeight: 'bold'
     },
   });
 }else if(theme == "light"){
@@ -199,7 +203,10 @@ if (theme == 'dark'){
     },
     selectedTextStyle: {
       color: 'black',
-      backgroundColor: 'white',
+      textShadowColor: 'white',
+      textShadowOffset: {width: 1, height: 1}, 
+      textShadowRadius: 10,
+      fontWeight: 'bold'
     },
   });
 }
