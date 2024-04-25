@@ -81,15 +81,6 @@ const Login = ({ navigation }) => {
             <View style={styles.line}></View>
           </View>
           <Text style={{ color: "white", marginTop: 0 }}>Continue with</Text>
-          {/* <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Test")}
-          >
-            <Text style={styles.buttonText}>Test Page For Backend</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={easyLogin}>
-            <Text style={styles.buttonText}>EZ Login</Text>
-          </TouchableOpacity> */}
           <View style={styles.iconButtonContainer}>
             <IconButton
               icon="google"
