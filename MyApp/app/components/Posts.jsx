@@ -3,85 +3,36 @@ import { View, Text, Image, TextInput, TouchableOpacity, ScrollView , RefreshCon
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 import UserPhoto from "./UserPhoto";
+import { data } from "../system/fetchData";
 
 const Posts = ({option}) => {
-    var posts = {} ;
     const [refreshing, setRefreshing] = useState(false); 
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
     const [userPhotoKey, setUserPhotoKey] = useState(0);
 
-    const getAllPosts = async () => {
-        try {
-            const allposts = await db.getAllPosts();
-            posts = allposts
-            setLoading(false);
-        } catch (error) {
-            console.error('Error fetching posts:', error);
-        } finally {
-            setRefreshing(false);
-        }
-        let sortedPosts = [...posts].sort((a, b) => {
-            const timeA = parseThaiDate(a.time);
-            const timeB = parseThaiDate(b.time);
-            return timeB - timeA;
-        });
-    
-        if (option === 'A-Z') {
-            sortedPosts.sort((a, b) => {
-                const titleA = a.title.toLowerCase();
-                const titleB = b.title.toLowerCase();
-                
-                if (titleA < titleB) {
-                    return -1;
-                }
-                if (titleA > titleB) {
-                    return 1; 
-                }
-                return 0; 
-            });
-        } else if (option === 'Z-A') {
-            sortedPosts.sort((a, b) => {
-                const titleA = a.title.toLowerCase();
-                const titleB = b.title.toLowerCase();
-                
-                if (titleA < titleB) {
-                    return 1; 
-                }
-                if (titleA > titleB) {
-                    return -1;
-                }
-                return 0;
-            });
-        } else if (option === 'Repost'){
-            sortedPosts.sort((a, b) => b.repost - a.repost);
-            console.log("Repost");
-        } else if (option === 'Finish'){
-            sortedPosts = posts.filter(post => post.status === 'Finish');
-        } else if (option == 'MyPost') {
-            sortedPosts = posts.filter(post => post.author.uid === db.getCurrentUser().uid);
-        } else if (option == 'Bookmark') {
-            sortedPosts = await db.getBookmarkPosts();
-        }
-    
-        setSortedPosts(sortedPosts);
-    };
+    const fetchData = async () => {
+        const posts = await data.getSortPosts();
+        setSortedPosts(posts);
+        setLoading(false);
+    }
 
     const handleRefresh = () => {
         setRefreshing(true); 
-        getAllPosts();
+        fetchData();
     };
 
     useEffect(() => {
-        getAllPosts();     
+        fetchData();  
         const unsubscribe = navigation.addListener('focus', () => {
-            getAllPosts();
+            fetchData();
         });
+
         return () => {
             unsubscribe();
         };
-    }, [navigation, option]);
+    }, [option]);
 
     
     if (loading) {
@@ -94,20 +45,12 @@ const Posts = ({option}) => {
 
     const handleRepost = async (postId) => {
         await db.repostPost(postId);
-        await getAllPosts();
+        await fetchData();
     }
 
     const handleBookmark = async (postId) => {
         await db.userBookmark(postId);
-        await getAllPosts();
-    }
-
-    function parseThaiDate(timeString) {
-        const [datePart, timePart] = timeString.split(', ');
-        const [day, month, year] = datePart.split('/').map(part => parseInt(part));
-        const [hour, minute, second] = timePart.split(':').map(part => parseInt(part));
-        const yearAD = year - 543;
-        return new Date(yearAD, month - 1, day, hour, minute, second);
+        await fetchData();
     }
 
   return (
