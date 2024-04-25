@@ -159,7 +159,7 @@ function AuthenticatedScreens() {
 
 let styles ;
 let theme = 'dark'
-if (theme == 'dark'){
+if (theme == 'light'){
   styles = StyleSheet.create({
     tabBarStyle: {
       backgroundColor: 'white',
@@ -168,7 +168,7 @@ if (theme == 'dark'){
     tabBarActiveTintColor: "white",
     tabBarInactiveTintColor: "black"
   });
-}else if(theme == "light"){
+}else if(theme == "dark"){
   styles = StyleSheet.create({
     tabBarStyle: {
       backgroundColor: 'black',
