@@ -1,8 +1,9 @@
 import React, { useState , useEffect } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
-import { firebase_auth } from "../../firebaseConfig";
 import Posts from "../components/Posts";
 import { useNavigation } from "@react-navigation/native";
+import { data } from '../system/fetchData';
+import { db } from '../system/db';
 
 const Profile = () => {
   const [sw , setSw] = useState(true);
@@ -12,14 +13,20 @@ const Profile = () => {
     setReloadKey(prevKey => prevKey + 1);
   }, [sw]);
 
+  const handleSw = (bool) => {
+    setSw(bool);
+    setReloadKey(prevKey => prevKey + 1);
+  }
 
-  const user = firebase_auth.currentUser;
+
+  const user = db.getCurrentUser();
   const navigation = useNavigation();
   let language = "EN";
              
   const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_profile_w.png');
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const exitImage = theme === 'light' ? require('../picture/exit.png') : require('../picture/exit_w.png');
+
   if (language == "EN") {
     return (
       <View style={styles.container}>
@@ -38,7 +45,7 @@ const Profile = () => {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => firebase_auth.signOut()}
+              onPress={() => data.logout()}
             >
               <Image
                 style={{ width: 40, height: 40, marginRight: 5 }}
@@ -58,7 +65,7 @@ const Profile = () => {
           <View style={styles.boxx2}>
             <View style={styles.center}>
               <TouchableOpacity
-                onPress={() => {setSw(true)}}
+                onPress={() => handleSw(true)}
               >
                 <Text style={[styles.text]}>Your Posts</Text>
               </TouchableOpacity>
@@ -66,7 +73,7 @@ const Profile = () => {
             <Text style={[styles.text]}>|</Text>
             <View style={styles.center}>
               <TouchableOpacity
-                onPress={() => {setSw(false)}}
+                onPress={() => handleSw(false)}
               >
                 <Text style={[styles.text]}>Saved</Text>
               </TouchableOpacity>
@@ -86,7 +93,7 @@ const Profile = () => {
     return (
       <View style={styles.test}>
         <Text>Profile</Text>
-        <Button title="Sign Out" onPress={() => firebase_auth.signOut()} />
+        <Button title="Sign Out" onPress={() => data.logout()} />
       </View>
     );
   }
