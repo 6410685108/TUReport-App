@@ -2,6 +2,7 @@ import React , {useState , useEffect} from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView , RefreshControl} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
+import UserPhoto from "./UserPhoto";
 
 const Posts = ({option}) => {
     var posts = {} ;
@@ -118,7 +119,7 @@ const Posts = ({option}) => {
             <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
-                    <Image style={{width: 30, height: 30}}source={{uri: info.author.photo}}/>
+                    <UserPhoto userId={info.author.uid} />
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
                         <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.displayName}</Text>
                         <Text style={{fontSize: 12}}>{info.time}</Text>

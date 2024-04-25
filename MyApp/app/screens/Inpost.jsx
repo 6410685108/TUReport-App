@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import { db } from "../system/db"
+import UserPhoto from "../components/UserPhoto";
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
@@ -61,10 +62,7 @@ const Inpost = ({ navigation, route }) => {
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <View style={{ flexDirection: "row" }}>
-              <Image
-                style={{ width: 30, height: 30 }}
-                source={require("../picture/user_profile.png")}
-              />
+            <UserPhoto userId={postInfo.author.uid} />
               <View style={{ flexDirection: "column", paddingLeft: 5 }}>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
                   {postInfo.author.displayName}
@@ -134,10 +132,7 @@ const Inpost = ({ navigation, route }) => {
                 key={comment.id}
               >
                 <View style={{ flexDirection: "row" }}>
-                  <Image
-                    style={{ width: 30, height: 30 }}
-                    source={comment.author.photoUrl}
-                  />
+                  <UserPhoto userId={comment.author.uid} />
                   <View style={{ flexDirection: "column", paddingLeft: 6 }}>
                     <Text style={{ fontWeight: "bold", fontSize: 15 }}>
                       {comment.author.email}
