@@ -12,7 +12,7 @@ import Finish from "./app/tabs/Finish";
 import Profile from "./app/tabs/Profile";
 import QandA from "./app/tabs/QandA";
 import { Image,StyleSheet } from "react-native";
-import { SettingProvider } from "./app/system/SettingContext";
+//import { SettingProvider } from "./app/system/setting";
 
 import HomeNavigator from "./app/navigator/HomeNavigator";
 
@@ -30,7 +30,7 @@ export default function App() {
   }, []);
 
   return (
-    <SettingProvider>
+
       <NavigationContainer>
         <Stack.Navigator>
           {user ? (
@@ -56,7 +56,6 @@ export default function App() {
         </Stack.Navigator>
         <StatusBar hidden />
       </NavigationContainer>
-    </SettingProvider>
   );
 }
 
