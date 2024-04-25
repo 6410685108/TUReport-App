@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Posts from '../components/Posts';
 import Profile from '../tabs/Profile';
 import Inpost from '../screens/Inpost';
+import SettingInput from '../screens/SettingInput';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,11 @@ export default function ProfileNavigator() {
                 <Stack.Screen
                     name="Posts"
                     component={Posts}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Setting"
+                    component={SettingInput}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
