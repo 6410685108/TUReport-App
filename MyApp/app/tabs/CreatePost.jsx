@@ -78,14 +78,14 @@ const CreatePost = () => {
         <View style={styles.nav}>
           <View style={styles.inNav}>
             <Image style={[styles.logo, {margin: 5}]} source={createpostImage} />
-            <Text style={[styles.fcolor,{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
+            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
           </View>
         </View>
         
         <View style={styles.containerContent} >
           <View style={styles.content}>
             <Image style={styles.logo2}source={user_profileImage}/>
-            <Text style={[styles.fcolor,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>User X</Text>
+            <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>User X</Text>
           </View>
          
           <View style={styles.content}>
@@ -154,14 +154,14 @@ const CreatePost = () => {
         <View style={styles.nav}>
           <View style={styles.inNav}>
             <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
-            <Text style={[styles.fcolor,{margin: 5, fontSize: 25,}]}>สร้างโพสต์</Text>
+            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>สร้างโพสต์</Text>
           </View>
         </View>
         
         <View style={styles.containerContent} >
           <View style={styles.content}>
               <Image style={styles.logo2}source={require('../picture/user_profile.png')}/>
-              <Text style={[styles.fcolor,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ผู้ใช้ X</Text>
+              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ผู้ใช้ X</Text>
             </View>
          
           <View style={styles.content}>
@@ -247,7 +247,7 @@ if (theme == 'light'){
       marginHorizontal: 5,
       marginTop: 5,
     },
-    fcolor:{
+    text:{
       color: 'black',
     },
     content: {
@@ -331,7 +331,7 @@ if (theme == 'light'){
       marginHorizontal: 5,
       marginTop: 5,
     },
-    fcolor:{
+    text:{
       color: 'white',
     },
     content: {
