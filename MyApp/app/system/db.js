@@ -291,6 +291,10 @@ const showCurrentUserInfo = async (info) => {
     }
 }
 
+const setDisplayName = async (name) => {
+    updateProfile(firebase_auth.currentUser, { displayName: name });
+}
+
 
 const db = {
     createPost ,
@@ -303,9 +307,11 @@ const db = {
 
     userBookmark ,
     getBookmarkedPosts,
+    
     showCurrentUserInfo,
     uploadUserPhoto,
     getUserPhoto,
+    setDisplayName,
 };
 
 export { db };
