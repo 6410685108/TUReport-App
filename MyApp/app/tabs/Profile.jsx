@@ -102,6 +102,9 @@ let theme = "light";
 let styles ;
 if (theme == 'light'){
   styles = StyleSheet.create({
+    containerContent: {
+      marginBottom: 10,
+    },
     container: {
       backgroundColor: "#FFF",
       height: "100%",
