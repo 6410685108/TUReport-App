@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   RefreshControl,
+  StyleSheet,
 } from "react-native";
 import React, { useEffect , useState } from "react";
 import { db } from "../system/db"
@@ -17,6 +18,7 @@ const Inpost = ({ navigation, route }) => {
   const postid = postInfo.id;
   const [repost, setRepost] = useState(postInfo.repost);
   const [comments, setComments] = useState([]);
+  const [sendButton, setSendButton] = useState(false);
 
   const fetchComment = async () => {
     const comment = await data.getComments(postid);
@@ -155,7 +157,7 @@ const Inpost = ({ navigation, route }) => {
       </ScrollView>
       <View
         style={{
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
           height: 40,
@@ -168,12 +170,43 @@ const Inpost = ({ navigation, route }) => {
             borderColor: "black",
             borderRadius: 10,
             padding: 5,
-            width: "90%",
+            width: "80%",
+            flex: 0.7,
           }}
         />
+        <TouchableOpacity
+        style={sendButton ? styles.sendButtonhover : styles.sendButton}
+        onPress={() => console.log("Hello")}
+        onMouseEnter={() => setSendButton(true)}
+        onMouseLeave={() => setSendButton(false)}
+        >
+        <Text style={{color: "black"}}>Send</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 export default Inpost;
+
+const styles = StyleSheet.create({
+  sendButton: { 
+    marginLeft: 10, 
+    flex: 0.15, 
+    alignItems: "center", 
+    justifyContent: "center", 
+    backgroundColor: "lightgrey", 
+    borderRadius: 10, 
+    height: 30,
+    trasition: "all 0.5s"
+  },
+  sendButtonhover: {
+    marginLeft: 10, 
+    flex: 0.15, 
+    alignItems: "center", 
+    justifyContent: "center", 
+    backgroundColor: "grey", 
+    borderRadius: 10, 
+    height: 30,
+  }
+});
