@@ -176,13 +176,12 @@ const getPost = async (postId) => {
 const userBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
-        if(await isBookmarked(postId)) {
+        if (await isBookmarked(postId)) {
             await removeBookmark(postId);
-        }
-        else{
-            const userRef = doc(firebase_db, 'user', userId , "bookmark"); 
-            const postCollectionRef = collection(userRef, 'postIds'); 
-            await addDoc(postCollectionRef, {
+        } else {
+            const userRef = doc(firebase_db, 'users', userId);
+            const bookmarkRef = collection(userRef, 'bookmark');
+            await addDoc(bookmarkRef, {
                 postId: postId,
             });
         }
@@ -191,11 +190,12 @@ const userBookmark = async (postId) => {
     }
 };
 
+
 const isBookmarked = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
-        const userRef = doc(firebase_db, 'userbookmark', userId); 
-        const postCollectionRef = collection(userRef, 'postIds'); 
+        const userRef = doc(firebase_db, 'users', userId); 
+        const postCollectionRef = collection(userRef, 'bookmark'); 
         const q = query(postCollectionRef, where("postId", "==", postId));
         const querySnapshot = await getDocs(q);
         return !querySnapshot.empty;
@@ -209,8 +209,8 @@ const isBookmarked = async (postId) => {
 const removeBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
-        const userRef = doc(firebase_db, 'userbookmark', userId); 
-        const postCollectionRef = collection(userRef, 'postIds'); 
+        const userRef = doc(firebase_db, 'users', userId); 
+        const postCollectionRef = collection(userRef, 'bookmark'); 
         const q = query(postCollectionRef, where("postId", "==", postId));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(async (doc) => {
@@ -221,18 +221,22 @@ const removeBookmark = async (postId) => {
     }
 }
 
-const getBookmarkedPosts = async () => {
-    const posts = [];
+const getBookmarkPosts = async () => {
+    const bookmarkedPosts = [];
     const userId = firebase_auth.currentUser.uid;
     try {
-        const userRef = doc(firebase_db, 'userbookmark', userId); 
-        const postCollectionRef = collection(userRef, 'postIds'); 
+        const userRef = doc(firebase_db, 'users', userId ); 
+        const postCollectionRef = collection(userRef, 'bookmark' ); 
         const postSnapshot = await getDocs(postCollectionRef);
+        
         const postIds = postSnapshot.docs.map(doc => doc.data().postId);
         for (let i = 0; i < postIds.length; i++) {
-                posts.push(await getPost(postIds[i]));
+            const postId = postIds[i];
+            const post = await getPost(postId);
+            bookmarkedPosts.push(post);
         }
-        return posts;
+        
+        return bookmarkedPosts;
     } catch (error) {
         console.error('Error fetching bookmarked posts:', error);
         return [];
@@ -313,6 +317,10 @@ const setDisplayName = async (name) => {
     updateProfile(firebase_auth.currentUser, { displayName: name });
 }
 
+const getCurrentUser = () => {
+    return firebase_auth.currentUser;
+}
+
 
 const db = {
     createPost ,
@@ -324,13 +332,14 @@ const db = {
     getAllComments,
 
     userBookmark ,
-    getBookmarkedPosts,
+    getBookmarkPosts,
     
     showCurrentUserInfo,
     uploadUserPhoto,
     getThisUserPhoto,
     getUserPhoto,
     setDisplayName,
+    getCurrentUser,
 };
 
 export { db };

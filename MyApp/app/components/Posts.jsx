@@ -59,7 +59,10 @@ const Posts = ({option}) => {
             console.log("Repost");
         } else if (option === 'Finish'){
             sortedPosts = posts.filter(post => post.status === 'Finish');
-        } else {
+        } else if (option == 'MyPost') {
+            sortedPosts = posts.filter(post => post.author.uid === db.getCurrentUser().uid);
+        } else if (option == 'Bookmark') {
+            sortedPosts = await db.getBookmarkPosts();
         }
     
         setSortedPosts(sortedPosts);
