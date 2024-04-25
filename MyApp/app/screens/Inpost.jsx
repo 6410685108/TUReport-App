@@ -67,7 +67,7 @@ const Inpost = ({ navigation, route }) => {
               />
               <View style={{ flexDirection: "column", paddingLeft: 5 }}>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                  {postInfo.author.email}
+                  {postInfo.author.displayName}
                 </Text>
                 <Text style={{ fontSize: 12 }}>{postInfo.time}</Text>
               </View>
