@@ -7,48 +7,56 @@ const data = [
     user: "User1",
     message: "commented on your post",
     date: "2021-09-01",
+    profile: require("../picture/user.png"),
   },
   {
     id: 2,
     user: "User2",
     message: "commented on your post",
     date: "2021-09-01",
+    profile: require("../picture/user.png"),
   },
   {
     id: 3,
     user: "User3",
     message: "commented on your post",
     date: "2021-09-01",
+    profile: require("../picture/user.png"),
   },
   {
     id: 4,
     user: "User4",
     message: "commented on your post",
     date: "2021-09-02",
+    profile: require("../picture/user.png"),
   },
   {
     id: 5,
     user: "User5",
     message: "commented on your post",
     date: "2021-09-02",
+    profile: require("../picture/user.png"),
   },
   {
     id: 6,
     user: "User6",
     message: "commented on your post",
     date: "2021-09-02",
+    profile: require("../picture/user.png"),
   },
   {
     id: 7,
     user: "User7",
     message: "commented on your post",
     date: "2021-09-03",
+    profile: require("../picture/user.png"),
   },
   {
     id: 8,
     user: "User8",
     message: "commented on your post",
     date: "2021-09-03",
+    profile: require("../picture/user.png"),
   },
 ];
 
@@ -66,11 +74,16 @@ const Notification = () => {
       <View style={{ margin: 20 }}>
         {data.map((info) => (
           <View style={{ marginVertical: 10 }} key={info.id}>
-            <TouchableOpacity onPress={console.log("hello")}>
-              <Text style={{ fontSize: 16 }}>
-                {info.user} {info.message}
-              </Text>
-              <Text style={{ fontSize: 12 }}>{info.date}</Text>
+            <TouchableOpacity onPress={console.log("hello")} style={{ flexDirection: 'row' }}>
+              <View style={styles.profile}>
+                <Image style={styles.profileImg} source={info.profile} />
+              </View>
+              <View>
+                <Text style={{ fontSize: 16 }}>
+                  {info.user} {info.message}
+                </Text>
+                <Text style={{ fontSize: 12 }}>{info.date}</Text>
+              </View>
             </TouchableOpacity>
             <View
               style={{
@@ -114,5 +127,18 @@ const styles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
+  },
+  profile: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightgrey",
+    marginRight: 10,
+  },
+  profileImg: {
+    width: 32,
+    height: 32,
   },
 });
