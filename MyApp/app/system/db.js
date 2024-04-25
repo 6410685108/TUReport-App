@@ -88,9 +88,6 @@ const addReposter = async (postId) => {
         await addDoc(postCollectionRef, {
             user: {
                 uid: firebase_auth.currentUser.uid,
-                displayName: firebase_auth.currentUser.displayName,
-                email: firebase_auth.currentUser.email,
-                photo: firebase_auth.currentUser.photoURL,
             },
         });
     } catch (error) {
@@ -99,11 +96,10 @@ const addReposter = async (postId) => {
 }
 
 const removeReposter = async (postId) => {
-    const userEmail = firebase_auth.currentUser.email;
+    const uid = firebase_auth.currentUser.uid;
     try {
         const postCollectionRef = collection(firebase_db, 'posts', postId, 'reposter');
-        const q = query(postCollectionRef, where("user.email", "==", userEmail));
-
+        const q = query(postCollectionRef, where("user.uid", "==", uid));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(async (doc) => {
             await deleteDoc(doc.ref);
@@ -114,10 +110,10 @@ const removeReposter = async (postId) => {
 }
 
 const isReposted = async (postId) => {
-    const userEmail = firebase_auth.currentUser.email;
+    const uid = firebase_auth.currentUser.uid;
     try {
         const postCollectionRef = collection(firebase_db, 'posts', postId, 'reposter');
-        const q = query(postCollectionRef, where("user.email", "==", userEmail));
+        const q = query(postCollectionRef, where("user.uid", "==", uid));
         const querySnapshot = await getDocs(q);
         return !querySnapshot.empty;
     } catch (error) {
