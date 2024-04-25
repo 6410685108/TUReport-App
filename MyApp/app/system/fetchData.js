@@ -99,12 +99,35 @@ const register = async (email , password) => {
     }
 }
 
+const logout = async () => {
+    try {
+        await auth.signOut();
+    } catch (error) {
+        console.error('Error signing out:', error);
+    }
+}
+
+const getUserPhotoURL = async (userId) => {
+    try {
+        const photoUrl = await db.getUserPhoto(userId);
+        if (!photoUrl) {
+            return "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c";
+        }
+        return photoUrl;
+    } catch (error) {
+        console.error('Error fetching user photo:', error);
+        return null;
+    }
+};
 
 const data = {
     getSortPosts,
     getComments,
     login,
+    logout,
     register,
+
+    getUserPhotoURL,
 };
 
 export { data };
