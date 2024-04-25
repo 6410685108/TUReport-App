@@ -10,7 +10,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { firebase_auth } from "../../firebaseConfig";
+import { data } from "../system/fetchData";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from "expo-linear-gradient";
 import { IconButton, MD3Colors } from "react-native-paper";
@@ -19,20 +19,14 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const auth = firebase_auth;
 
   const signIn = async () => {
     setLoading(true);
-    try {
-      // const response = await signInWithEmailAndPassword(auth, email, password);
-      await signInWithEmailAndPassword(auth,"t@t.com","111111");
-    } catch (error) {
-      alert(error.message);
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    await data.login(email, password);
+    setLoading(false);
+  }
+
+  
 
   return (
     <LinearGradient
