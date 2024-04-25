@@ -9,12 +9,12 @@ import Login from "./app/screens/Login";
 import Register from "./app/screens/Register";
 import CreatePost from "./app/tabs/CreatePost";
 import Finish from "./app/tabs/Finish";
-import Profile from "./app/tabs/Profile";
 import QandA from "./app/tabs/QandA";
 import { Image,StyleSheet } from "react-native";
 import { SettingProvider } from "./app/system/setting";
 
 import HomeNavigator from "./app/navigator/HomeNavigator";
+import ProfileNavigator from "./app/navigator/ProfileNavigator";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -131,7 +131,7 @@ function AuthenticatedScreens() {
       />
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
