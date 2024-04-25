@@ -83,7 +83,7 @@ const Profile = () => {
         {sw ? (
           <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
         ) : (
-          <Posts key={`${reloadKey}-MyPost`} option={"Bookmark"} />
+          <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
         )
         }
       </View>
