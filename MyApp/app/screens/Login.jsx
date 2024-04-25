@@ -24,17 +24,12 @@ const Login = ({ navigation }) => {
     setLoading(true);
     await data.login(email, password);
     setLoading(false);
-  }
-
-  
+  };
 
   return (
-    <LinearGradient
-      colors={["#ff7100", "#ffda27"]}
-      style={styles.background}
-    >
+    <LinearGradient colors={["#ff7100", "#ffda27"]} style={styles.background}>
       {/* Why use Scrool View ??? */}
-      <ScrollView contentContainerStyle={styles.container}> 
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.titleContainer}>
           <Image
             source={require("../picture/logo.png")}
@@ -73,7 +68,7 @@ const Login = ({ navigation }) => {
             <Text style={styles.orText}>or</Text>
             <View style={styles.line}></View>
           </View>
-         
+
           <Text style={styles.registerText}>
             Don't have an account?{" "}
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>

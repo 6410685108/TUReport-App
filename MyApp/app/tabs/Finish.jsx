@@ -21,7 +21,7 @@ const Finish = () => {
         <View style={styles.inNav}>
           <Image
             style={styles.logo}
-            source={require('../picture/finish.png')}
+            source={require("../picture/finish.png")}
           />
           <Text style={{ marginLeft: 5, fontSize: 25 }}>FINISHED</Text>
         </View>
