@@ -4,7 +4,7 @@ import { View, Text, Switch } from 'react-native';
 const SettingContext = createContext();
 
 const SettingProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [language, setLanguage] = useState('EN');
 
   const toggleTheme = () => {
@@ -28,7 +28,6 @@ const SettingProvider = ({ children }) => {
     </SettingContext.Provider>
   );
 };
-
 
 
 export {  SettingProvider, SettingContext };

@@ -13,6 +13,10 @@ import { SelectCountry } from "react-native-element-dropdown";
 import { SettingContext } from "../system/setting";
 
 const Home = ({ navigation }) => {
+  const { setting } = useContext(SettingContext);
+  const { theme, language } = setting;
+  const styles = theme === 'light' ? lightstyles : darkstyles;
+
   const [country, setCountry] = useState("1");
   const local_data = [
     {
@@ -80,129 +84,126 @@ const Home = ({ navigation }) => {
   );
 };
 
-let styles ;
-let theme = 'light'
-if (theme == 'dark'){
-  styles = StyleSheet.create({
-    container: {
-      backgroundColor: "#1c1c1c",
-      height: "100%",
-    },
-    nav: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginTop: "10%",
-    },
-    inNav: {
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      alignItems: "center",
-      marginHorizontal: 5,
-      marginTop: 5,
-    },
-    nav2: {
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      height: 50,
-    },
-    search: {
-      flex: 0.5,
-      paddingLeft: 10,
-      padding: 2,
-      margin: 10,
-      borderWidth: 1,
-      borderColor: "white",
-      borderRadius: 10,
-    },
-    dropdown: {
-      flex: 0.5,
-      padding: 10,
-      margin: 10,
-      borderWidth: 1,
-      borderColor: "white",
-      borderRadius: 10,
-    },
-    containerStyle: {
-      backgroundColor: "#1c1c1c",
-    },
-    logo: {
-      width: 40,
-      height: 40,
-    },
-    text: {
-      color: "white",
-    },
-    placeholderStyle: {
-      color: 'white',
-    },
-    selectedTextStyle: {
-      color: 'white',
-      textShadowColor: 'black',
-      textShadowOffset: {width: 1, height: 1}, 
-      textShadowRadius: 10,
-      fontWeight: 'bold'
-    },
-  });
-}else if(theme == "light"){
-  styles = StyleSheet.create({
-    container: {
-      backgroundColor: "#FFF",
-      height: "100%",
-    },
-    nav: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginTop: "10%",
-    },
-    inNav: {
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      alignItems: "center",
-      marginHorizontal: 5,
-      marginTop: 5,
-    },
-    nav2: {
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      height: 50,
-    },
-    search: {
-      flex: 0.5,
-      paddingLeft: 10,
-      padding: 2,
-      margin: 10,
-      borderWidth: 1,
-      borderColor: "black",
-      borderRadius: 10,
-    },
-    dropdown: {
-      flex: 0.5,
-      padding: 10,
-      margin: 10,
-      borderWidth: 1,
-      borderColor: "black",
-      borderRadius: 10,
-    },
-    logo: {
-      width: 40,
-      height: 40,
-    },
-    text: {
-      color: "black",
-    },
-    placeholderStyle: {
-      color: 'black',
-    },
-    selectedTextStyle: {
-      color: 'black',
-      textShadowColor: 'white',
-      textShadowOffset: {width: 1, height: 1}, 
-      textShadowRadius: 10,
-      fontWeight: 'bold'
-    },
-  });
-}
+const darkstyles = StyleSheet.create({
+  container: {
+    backgroundColor: "#1c1c1c",
+    height: "100%",
+  },
+  nav: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: "10%",
+  },
+  inNav: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginHorizontal: 5,
+    marginTop: 5,
+  },
+  nav2: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    height: 50,
+  },
+  search: {
+    flex: 0.5,
+    paddingLeft: 10,
+    padding: 2,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 10,
+  },
+  dropdown: {
+    flex: 0.5,
+    padding: 10,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 10,
+  },
+  containerStyle: {
+    backgroundColor: "#1c1c1c",
+  },
+  logo: {
+    width: 40,
+    height: 40,
+  },
+  text: {
+    color: "white",
+  },
+  placeholderStyle: {
+    color: 'white',
+  },
+  selectedTextStyle: {
+    color: 'white',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 1, height: 1}, 
+    textShadowRadius: 10,
+    fontWeight: 'bold'
+  },
+});
+
+const lightstyles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFF",
+    height: "100%",
+  },
+  nav: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: "10%",
+  },
+  inNav: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginHorizontal: 5,
+    marginTop: 5,
+  },
+  nav2: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    height: 50,
+  },
+  search: {
+    flex: 0.5,
+    paddingLeft: 10,
+    padding: 2,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 10,
+  },
+  dropdown: {
+    flex: 0.5,
+    padding: 10,
+    margin: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 10,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+  },
+  text: {
+    color: "black",
+  },
+  placeholderStyle: {
+    color: 'black',
+  },
+  selectedTextStyle: {
+    color: 'black',
+    textShadowColor: 'white',
+    textShadowOffset: {width: 1, height: 1}, 
+    textShadowRadius: 10,
+    fontWeight: 'bold'
+  },
+});
+
 
 export default Home;

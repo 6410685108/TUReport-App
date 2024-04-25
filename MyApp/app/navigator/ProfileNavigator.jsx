@@ -3,6 +3,8 @@ import Posts from '../components/Posts';
 import Profile from '../tabs/Profile';
 import Inpost from '../screens/Inpost';
 import SettingInput from '../screens/SettingInput';
+import EditInput from '../screens/EditInput';
+import PinInput from '../screens/PinInput';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +29,16 @@ export default function ProfileNavigator() {
                 <Stack.Screen
                     name="Setting"
                     component={SettingInput}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Edit"
+                    component={EditInput}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Pin"
+                    component={PinInput}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
