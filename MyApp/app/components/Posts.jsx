@@ -13,7 +13,7 @@ const Posts = ({option}) => {
     const [userPhotoKey, setUserPhotoKey] = useState(0);
 
     const fetchData = async () => {
-        const posts = await data.getSortPosts();
+        const posts = await data.getSortPosts(option);
         setSortedPosts(posts);
         setLoading(false);
     }
@@ -44,8 +44,16 @@ const Posts = ({option}) => {
     }
 
     const handleRepost = async (postId) => {
-        await db.repostPost(postId);
+        const isReposted = await db.isReposted(postId);
+        await db.repostPost(postId,isReposted);
+        if (isReposted){
+            db.removeReposter(postId);
+        }else{
+            db.addReposter(postId);
+        }
         await fetchData();
+        
+        
     }
 
     const handleBookmark = async (postId) => {

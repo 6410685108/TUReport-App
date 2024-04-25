@@ -61,21 +61,19 @@ const uploadImage = async (image) => {
     }
 };
 
-const repostPost = async (postId) => {
+const repostPost = async (postId,isReposted) => {
     const postCollectionRef = collection(firebase_db, 'posts');
     const postDocRef = doc(postCollectionRef, postId);
     const postDocSnap = await getDoc(postDocRef);
     if (postDocSnap.exists()) {
-        if (await isReposted(postId)) {
-            await removeReposter(postId);
+        if(isReposted){
             const repostCount = postDocSnap.data().repost - 1;
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
             return true;
         } else {
-            await addReposter(postId);
-            const repostCount = postDocSnap.data().repost + 1; // Corrected here
+            const repostCount = postDocSnap.data().repost + 1;
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
@@ -327,6 +325,9 @@ const db = {
     editPost ,
     getAllPosts ,
     repostPost ,
+    isReposted,
+    addReposter,
+    removeReposter,
 
     createComment ,
     getAllComments,
