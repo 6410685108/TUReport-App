@@ -1,7 +1,15 @@
-import React, { useState } from "react";
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
+import React, { useState , useEffect , useContext} from 'react'
+import { SettingContext } from '../system/setting';
 
-const Q_A = () => {
+import { View, Button ,StyleSheet, Image, Text, ScrollView,} from 'react-native';
+import { data } from '../system/fetchData';
+import { db } from '../system/db';
+import { useNavigation } from '@react-navigation/native';
+
+const Profile = () => {
+  const { setting } = useContext(SettingContext);
+  const { theme, language } = setting;
+  const styles = theme === 'light' ? lightstyles : darkstyles;
   const [questions, setQuestions] = useState([
     {
       question: "LoremxD",
@@ -25,91 +33,220 @@ const Q_A = () => {
     },
     // Add more Q&A here
   ]);
+  const [sw , setSw] = useState(true);
+  const [reloadKey, setReloadKey] = useState(0);
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image style={styles.logo} source={require("../picture/qa_icon.png")} />
-        <Text style={styles.headerText}>Q&A</Text>
-      </View>
-      <View style={styles.adminContainer}>
-        <Text style={styles.adminTitle}>Contact Admin</Text>
-        <Text style={styles.adminInfo}>Tel: 00000000</Text>
-        <Text style={styles.adminInfo}>Line: BBBBBB</Text>
-      </View>
+  useEffect(() => {
+    setReloadKey(prevKey => prevKey + 1);
+  }, [sw , navigation]);
 
-      <ScrollView style={styles.content}>
-        {questions.map((item, index) => (
-          <View key={index} style={styles.questionContainer}>
-            <Text style={styles.question}>{item.question}</Text>
-            <Text style={styles.answer}>{item.answer}</Text>
+  const handleSw = (bool) => {
+    setSw(bool);
+    setReloadKey(prevKey => prevKey + 1);
+  }
+
+  const user = db.getCurrentUser();
+  const navigation = useNavigation();
+             
+  const qa_iconImage = theme === 'light' ? require('../picture/qa_icon.png') : require('../picture/qa_icon_w.png');
+  const qaImage = theme === 'light' ? require('../picture/qa.png') : require('../picture/qa_w.png');
+  
+  if (language == "EN") {
+    return (
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <Image style={[styles.logo]} source={qa_iconImage} />
+            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>Q & A</Text>
           </View>
-        ))}
-      </ScrollView>
-    </View>
-  );
+        </View>
+        
+        <View style={styles.containerContent} >
+          <View style={styles.boxx}>
+            <View style={styles.nav2}>
+              <Image style={styles.logo2} source={ qaImage }/>
+              <View style={{left: '20%'}}>
+                <Text style={[styles.text]}>Contact Admin</Text>
+                <Text style={[styles.text]}>Tel: 00000000</Text>
+                <Text style={[styles.text]}>Line: BBBBBB</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <ScrollView style={[styles.center,{marginLeft:0}]}>
+          {questions.map((item, index) => (
+            <View key={index} style={styles.qa}>
+              <Text style={styles.text2}>Q:{item.question}</Text>
+              <Text style={styles.text2}>A:{item.answer}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+    );
+  }
+  else{
+    return (
+      <View style={styles.test}>
+        <Text>Profile</Text>
+        <Button title="Sign Out" onPress={() => data.logout()} />
+      </View>
+    );
+  }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
+
+const lightstyles = StyleSheet.create({
+    containerContent: {
+      marginBottom: 10,
+    },
+    container: {
+      backgroundColor: "#FFF",
+      height: "100%",
+    },
+    nav: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: "10%",
+    },
+    nav2: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 0,
+      left: "-60%",
+    },
+    inNav: {
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      marginHorizontal: 5,
+      marginTop: 5,
+    },
+    text:{
+      color: 'black',
+      fontSize: 16,
+    },
+    text2:{
+      color: 'black',
+      fontSize: 16,
+      marginLeft:'5%',
+      marginRight:'5%',
+    },
+    center: {
+      left: "auto",
+      width: "80%",
+      left: "10%" ,
+      borderRadius: 20,
+    },
+    boxx: {
+      justifyContent: "flex-start",
+      alignItems: "center",
+      height: 'auto',
+      padding: 10,
+      marginTop: 20,
+      margin: 0,
+      color: 'white',
+      maxWidth: "80%",
+      left: "10%" ,
+      backgroundColor: "#ECECEC",
+      borderRadius: 20,
+    },
+    logo: {
+      width: 40,
+      height: 40,
+      marginTop: 0,
+      borderColor: 'white',
+    },
+    logo2: {
+      width: 100,
+      height: 100,
+      borderRadius: 30,
+    },
+    qa: {
+      marginBottom: 20,
+      borderWidth: 1,
+      borderColor: "#ddd",
+      padding: 10,
+      borderRadius: 20,
+    },
+  });
+
+const darkstyles = StyleSheet.create({
+  containerContent: {
+    marginBottom: 10,
   },
-  header: {
-    paddingVertical: 15,
+  container: {
+    backgroundColor: "#1c1c1c",
+    height: "100%",
+  },
+  nav: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+    marginTop: "10%",
+  },
+  nav2: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 0,
+    left: "-60%",
+  },
+  inNav: {
     flexDirection: "row",
     justifyContent: "flex-start",
+    alignItems: "center",
     marginHorizontal: 5,
     marginTop: 5,
   },
-  headerText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "black",
-  },
-  content: {
-    flex: 1,
-    padding: 20,
-  },
-  questionContainer: {
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
-    padding: 10,
-  },
-  question: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  answer: {
+  text:{
+    color: 'white',
     fontSize: 16,
+  },
+  text2:{
+    color: 'white',
+    fontSize: 16,
+    marginLeft:'5%',
+    marginRight:'5%',
+  },
+  center: {
+    left: "auto",
+    width: "80%",
+    left: "10%" ,
+    borderRadius: 20,
+  },
+  boxx: {
+    justifyContent: "flex-start",
+    alignItems: "center",
+    height: 'auto',
+    padding: 10,
+    marginTop: 20,
+    margin: 0,
+    color: 'white',
+    maxWidth: "80%",
+    left: "10%" ,
+    backgroundColor: "#606060",
+    borderRadius: 20,
   },
   logo: {
     width: 40,
     height: 40,
+    marginTop: 0,
+    borderColor: 'white',
   },
-  adminContainer: {
-    margin: 20,
+  logo2: {
+    width: 100,
+    height: 100,
+    borderRadius: 30,
+  },
+  qa: {
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    borderColor: "#ddd",
     padding: 10,
-    backgroundColor: "#f9f9f9",
-  },
-  adminTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#333",
-  },
-  adminInfo: {
-    fontSize: 16,
-    marginBottom: 5,
-    color: "#555",
+    borderRadius: 20,
   },
 });
 
-export default Q_A;
+export default Profile;

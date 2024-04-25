@@ -1,4 +1,6 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect , useContext} from 'react'
+import { SettingContext } from '../system/setting';
+
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import Posts from "../components/Posts";
 import { data } from '../system/fetchData';
@@ -6,6 +8,10 @@ import { db } from '../system/db';
 import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
+  const { setting } = useContext(SettingContext);
+  const { theme, language } = setting;
+  const styles = theme === 'light' ? lightstyles : darkstyles;
+
   const [sw , setSw] = useState(true);
   const [reloadKey, setReloadKey] = useState(0);
 
@@ -20,7 +26,6 @@ const Profile = () => {
 
   const user = db.getCurrentUser();
   const navigation = useNavigation();
-  let language = "EN";
              
   const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_w.png');
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
@@ -79,12 +84,14 @@ const Profile = () => {
             </View>
           </View>
         </View>
-        {sw ? (
-          <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
-        ) : (
-          <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-        )
-        }
+          <View style={[styles.center2,{marginLeft:0}]}>
+          {sw ? (
+            <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
+          ) : (
+            <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
+          )
+          }
+          </View>
       </View>
     );
   }
@@ -98,10 +105,8 @@ const Profile = () => {
   }
 };
 
-let theme = "light";
-let styles ;
-if (theme == 'light'){
-  styles = StyleSheet.create({
+
+const lightstyles = StyleSheet.create({
     containerContent: {
       marginBottom: 10,
     },
@@ -132,6 +137,15 @@ if (theme == 'light'){
       alignItems: "center",
       width: "50%",
     },
+    center2: {
+      justifyContent: "center",
+      alignItems: "center",
+      width: "80%",
+      left: "10%" ,
+      paddingTop: 2,
+      backgroundColor: '#ECECEC',
+      borderRadius: 20,
+    },
     boxx: {
       justifyContent: "center",
       alignItems: "center",
@@ -152,6 +166,7 @@ if (theme == 'light'){
       height: 'auto',
       padding: 10,
       marginTop: 20,
+      marginBottom:10,
       margin: 0,
       color: 'white',
       maxWidth: "80%",
@@ -170,8 +185,8 @@ if (theme == 'light'){
       borderRadius: 30,
     },
   });
-}else if(theme == "dark"){
-  styles = StyleSheet.create({
+
+const darkstyles = StyleSheet.create({
     container: {
       backgroundColor: "#1c1c1c",
       height: "100%",
@@ -199,6 +214,15 @@ if (theme == 'light'){
       alignItems: "center",
       width: "50%",
     },
+    center2: {
+      justifyContent: "center",
+      alignItems: "center",
+      width: "80%",
+      left: "10%" ,
+      paddingTop: 2,
+      backgroundColor: '#ECECEC',
+      borderRadius: 20,
+    },
     boxx: {
       justifyContent: "center",
       alignItems: "center",
@@ -219,6 +243,7 @@ if (theme == 'light'){
       height: 'auto',
       padding: 10,
       marginTop: 20,
+      marginBottom:20,
       margin: 0,
       color: 'white',
       maxWidth: "80%",
@@ -237,6 +262,5 @@ if (theme == 'light'){
       borderRadius: 30,
     },
   });
-}
 
 export default Profile;
