@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
 import { db } from '../system/db';
 import * as ImagePicker from 'expo-image-picker';
+import { SettingContext } from '../system/setting';
 
 const CreatePost = () => {
   const [topic, setTopic] = useState('');
@@ -9,7 +10,8 @@ const CreatePost = () => {
   const [location, setLocation] = useState('');
   const [photo, setPhoto] = useState(null);
   const [anonymous, setAnonymous] = useState(false);
-  let language = "EN";
+  const { setting } = useContext(SettingContext);
+  const { theme, language } = setting;
 
   const handleMessageSubmit = async () => {
     if (!topic || !details || !location) {
@@ -59,12 +61,16 @@ const CreatePost = () => {
   }
 
   const test = async () => {
+    console.log("ST=====================================")
     // db.showCurrentUserInfo("email");
     // const posts = await db.getBookmarkedPosts();
-    // await db.uploadUserPhoto("https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/images%2Fuser_profile.png?alt=media&token=2b93fb80-17f8-45a6-bdca-7af2a6c9cb0c");
+    console.log(theme)
+    console.log(language)
+    //await db.uploadUserPhoto("https://i.pinimg.com/736x/cc/ed/9d/cced9d4575e75981a21176773a9758a8.jpg");
+    //await db.uploadUserPhoto("https://i.pinimg.com/736x/c6/f2/a1/c6f2a1a4dcc80e3a95d93a6613b5a325.jpg");
 
     // console.log(await db.getUserPhoto())
-    console.log("=====================================")
+    console.log("ED=====================================")
   }
   const createpostImage = theme === 'light' ? require('../picture/createpost.png') : require('../picture/AddMoreDetail_w.png');
   const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
@@ -72,6 +78,7 @@ const CreatePost = () => {
   const AddMoreDetailImage = theme === 'light' ? require('../picture/AddMoreDetail.png') : require('../picture/AddMoreDetail_w.png');
   const mapImage = theme === 'light' ? require('../picture/map.png') : require('../picture/map_w.png');
   const photoImage = theme === 'light' ? require('../picture/photo.png') : require('../picture/photo_w.png');
+  const styles = theme === 'light' ? lightstyles : darkstyles;
   if (language == "EN") {
     return (
       <View style={styles.container}>
@@ -226,10 +233,8 @@ const CreatePost = () => {
   }
 };
 
-let theme = "dark";
 let styles ;
-if (theme == 'light'){
-  styles = StyleSheet.create({
+const lightstyles = StyleSheet.create({
     container: {
       backgroundColor: "#FFF",
       height: "100%",
@@ -312,8 +317,8 @@ if (theme == 'light'){
       right:"10%",
     },
   });
-}else if(theme == "dark"){
-  styles = StyleSheet.create({
+
+const darkstyles = StyleSheet.create({
     container: {
       backgroundColor: "#1c1c1c",
       height: "100%",
@@ -399,7 +404,7 @@ if (theme == 'light'){
       right:"10%",
     },
   });
-}
+
 
 
 export default CreatePost;

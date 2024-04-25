@@ -5,14 +5,14 @@ const SettingContext = createContext();
 
 const SettingProvider = ({ children }) => {
   const [theme, setTheme] = useState('light');
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('EN');
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'th' : 'en');
+    setLanguage(language === 'en' ? 'TH' : 'EN');
   };
 
   const setting = {
