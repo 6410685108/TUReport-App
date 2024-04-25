@@ -6,7 +6,7 @@ import { data } from '../system/fetchData';
 import { db } from '../system/db';
 import { useNavigation } from '@react-navigation/native';
 
-const Profile = () => {
+const QandA = () => {
   const { setting } = useContext(SettingContext);
   const { theme, language } = setting;
   const styles = theme === 'light' ? lightstyles : darkstyles;
@@ -249,4 +249,4 @@ const darkstyles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default QandA;
