@@ -1,5 +1,5 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where , setDoc} from 'firebase/firestore';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
 
@@ -124,7 +124,7 @@ const isReposted = async (postId) => {
     }
 }
 
-const editPost = async (postId, newTitle, newContent, newPicUrl) => {
+const editPost = async (postId, newTitle, newContent, newPicUrl) => { // it old function if want to use tell James
     const postCollectionRef = collection(firebase_db, 'posts');
     const postDocRef = doc(postCollectionRef, postId);
 
@@ -135,6 +135,34 @@ const editPost = async (postId, newTitle, newContent, newPicUrl) => {
             title: newTitle,
             content: newContent,
             picUrl: newPicUrl,
+        });
+    } else {
+        console.log('Post not found');
+    }
+};
+
+const deletePost = async (postId) => {
+    const postCollectionRef = collection(firebase_db, 'posts');
+    const postDocRef = doc(postCollectionRef, postId);
+
+    const postDocSnap = await getDoc(postDocRef);
+
+    if (postDocSnap.exists()) {
+        await deleteDoc(postDocRef);
+    } else {
+        console.log('Post not found');
+    }
+}
+
+const changeStatusPost = async (postId, status) => {
+    const postCollectionRef = collection(firebase_db, 'posts');
+    const postDocRef = doc(postCollectionRef, postId);
+
+    const postDocSnap = await getDoc(postDocRef);
+
+    if (postDocSnap.exists()) {
+        await updateDoc(postDocRef, {
+            status: status,
         });
     } else {
         console.log('Post not found');
@@ -187,7 +215,6 @@ const userBookmark = async (postId) => {
         console.error('Error adding post ID:', error);
     }
 };
-
 
 const isBookmarked = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
@@ -275,15 +302,14 @@ const uploadUserPhoto = async (photo) => {
         const photoUrl = await uploadImage(photo, 'users');
         const userId = firebase_auth.currentUser.uid;
         const userRef = doc(firebase_db, 'users', userId);
-        await setDoc(userRef, {
+        await updateDoc(userRef, {
             photo: photoUrl,
-        }, { merge: true });
+        });
         updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
     }
     catch{
         console.error('Error uploading user photo:', error);
     }
-  
 }
 
 const getThisUserPhoto = async () => {
@@ -320,6 +346,8 @@ const getCurrentUser = () => {
 }
 
 
+
+
 const db = {
     createPost ,
     editPost ,
@@ -328,6 +356,8 @@ const db = {
     isReposted,
     addReposter,
     removeReposter,
+    deletePost,
+    changeStatusPost,
 
     createComment ,
     getAllComments,
