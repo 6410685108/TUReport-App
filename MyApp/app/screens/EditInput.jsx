@@ -5,38 +5,42 @@ import * as ImagePicker from 'expo-image-picker';
 import { SettingContext } from '../system/setting';
 
 const Edit = () => {
-    const [topic, setTopic] = useState('');
-    const [details, setDetails] = useState('');
-    const [location, setLocation] = useState('');
     const [photo, setPhoto] = useState(null);
-    const [anonymous, setAnonymous] = useState(false);
     const { setting } = useContext(SettingContext);
     const { theme, language } = setting;
 
-    const user = db.getCurrentUser();
     const [displayname, setDisplayname] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+
+    const user = db.getCurrentUser();
     useEffect (()=>{
         setDisplayname(user.displayName)
-    })
+        setEmail(user.email)
+        setPhoneNumber(user.phoneNumber)
+    } ,[])
+
   const handleMessageSubmit = async () => {
-    if (!topic || !details || !location) {
+    if (displayname==('' || null) || email==('' || null)|| phoneNumber==('' || null)){
+      console.log('con1');
+      console.log(displayname);
+      console.log(email);
+      console.log(phoneNumber);
       return;
     }
     try {
-      db.createPost(topic, details, location , photo , anonymous );
-      setTopic('');
-      setDetails('');
-      setLocation('');
-      setPhoto(null);
-      Alert.alert('Success','Post created successfully!');
+      console.log('con2');
+      console.log(displayname);
+      console.log(email);
+      console.log(phoneNumber);
+
+      Alert.alert('Profile updated successfully');
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
 
-  const handleAcceptToggle = () => {
-    setAnonymous(!anonymous);
-  };
 
   const handleAddPhoto = async () => {
     try{
@@ -56,33 +60,21 @@ const Edit = () => {
     }
   };
 
-  const handleLocationSubmit = () => {
-    setLocation(location); 
-    Keyboard.dismiss(); 
-};
-  const handleTopicSubmit = () => {
-    setTopic(topic); 
+  const handleNameSubmit = () => {
     Keyboard.dismiss();
-  }
+    setDisplayname(displayname);
+  };
 
-  const test = async () => {
-    console.log("ST=====================================")
-    db.showCurrentUserInfo("");
-    // const posts = await db.getBookmarkedPosts();
-    // console.log(theme)
-    // console.log(language)
-    //await db.uploadUserPhoto("https://i.pinimg.com/736x/cc/ed/9d/cced9d4575e75981a21176773a9758a8.jpg");
-    //await db.uploadUserPhoto("https://i.pinimg.com/736x/c6/f2/a1/c6f2a1a4dcc80e3a95d93a6613b5a325.jpg");
+  const handleEmailSubmit = () => {
+    Keyboard.dismiss();
+    setEmail(email);
+  };
 
-    // console.log(await db.getUserPhoto())
-    console.log("ED=====================================")
-  }
-  const createpostImage = theme === 'light' ? require('../picture/createpost.png') : require('../picture/AddMoreDetail_w.png');
-  const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
-  const addTopicImage = theme === 'light' ? require('../picture/addTopic.png') : require('../picture/addTopic_w.png');
-  const AddMoreDetailImage = theme === 'light' ? require('../picture/AddMoreDetail.png') : require('../picture/AddMoreDetail_w.png');
-  const mapImage = theme === 'light' ? require('../picture/map.png') : require('../picture/map_w.png');
-  const photoImage = theme === 'light' ? require('../picture/photo.png') : require('../picture/photo_w.png');
+  const handlePhoneSubmit = () => {
+    Keyboard.dismiss();
+    setPhoneNumber(phoneNumber);
+  };
+
   const styles = theme === 'light' ? lightstyles : darkstyles;
 
   
@@ -106,29 +98,27 @@ const Edit = () => {
                 placeholderTextColor={styles.placeholderStyle.color}
                 value={displayname}
                 onChangeText={setDisplayname}
-                onSubmitEditing={handleTopicSubmit}
+                onSubmitEditing={handleNameSubmit}
                 style={styles.boxx}
                 />
             </View>
             <Text style={[styles.text2]}>{'Email'}</Text>
             <View style={styles.content}>
                 <TextInput
-                placeholder="Add more details"
                 placeholderTextColor={styles.placeholderStyle.color}
-                value={user.email}
-                onChangeText={setDetails}
-                multiline
+                value={email}
+                onChangeText={setEmail}
+                onSubmitEditing={handleEmailSubmit}
                 style={[styles.boxx]}
                 />
             </View>
             <Text style={[styles.text2]}>{'Phone'}</Text>
             <View style={styles.content}>
                 <TextInput
-                placeholder="Add location"
                 placeholderTextColor={styles.placeholderStyle.color}
-                value={user.phoneNumber}
-                onChangeText={setLocation}
-                onSubmitEditing={handleLocationSubmit}
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
+                onSubmitEditing={handlePhoneSubmit}
                 style={styles.boxx}
                 />
             </View>
@@ -137,87 +127,11 @@ const Edit = () => {
         <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
           <Text style={styles.text3}>Submit</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={test}>
-          <Text style={styles.botsub}>Test Func</Text>
-        </TouchableOpacity>
       </View>
     );
   }
   else{
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
-            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>สร้างโพสต์</Text>
-          </View>
-        </View>
-        
-        <View style={styles.containerContent} >
-          <View style={styles.content}>
-              <Image style={styles.logo2}source={require('../picture/user_profile.png')}/>
-              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ผู้ใช้ X</Text>
-            </View>
-         
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/addTopic.png')}/>
-            <TextInput
-            placeholder="เพิ่มหัวข้อ"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={topic}
-            onChangeText={setTopic}
-            onSubmitEditing={handleTopicSubmit}
-            style={styles.boxx}
-            />
-          </View>
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/AddMoreDetail.png')}/>
-            <TextInput
-            placeholder="เพิ่มรายละเอียดเพิ่มเติม"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={details}
-            onChangeText={setDetails}
-            multiline
-            style={[styles.boxx,{height:100, textAlignVertical: 'top',}]}
-            />
-          </View>
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/map.png')}/>
-            <TextInput
-            placeholder="เพิ่มสถานที่"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={location}
-            onChangeText={setLocation}
-            onSubmitEditing={handleLocationSubmit}
-            style={styles.boxx}
-            />
-          </View>
-          <View style={styles.content}>
-            <TouchableOpacity onPress={handleAddPhoto}>
-              <Image style={styles.logo2}source={require('../picture/photo.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleAddPhoto} style={{ flex: 1 }}>
-              <Text style={styles.boxx}>เพิ่มรูปถ่าย</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.content}>
-          <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
-            {anonymous ? (
-              <Text style={styles.checkmark}>✓</Text>
-            ) : null}
-          </TouchableOpacity>
-            <Text style={styles.boxx}>ไม่ระบุชื่อ</Text>
-          </View>
-  
-        </View>
-        <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
-          <Text style={styles.text2}>ส่ง</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={test}>
-          <Text style={styles.botsub}>Test Func</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return true;
   }
 };
 
