@@ -18,6 +18,7 @@ const Inpost = ({ navigation, route }) => {
   const postid = postInfo.id;
   const [repost, setRepost] = useState(postInfo.repost);
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
   const [sendButton, setSendButton] = useState(false);
 
   const fetchComment = async () => {
@@ -49,9 +50,11 @@ const Inpost = ({ navigation, route }) => {
     await db.userBookmark(postId);
 }
 
-  const handleCreateComment = async (comment) => {
-    await db.createComment(postid,comment)
-    await fetchComment();
+  const handleCreateComment = async () => {
+    await Promise.all([
+      db.createComment(postid,comment),
+      fetchComment()
+    ])
   }
 
   return (
@@ -165,6 +168,8 @@ const Inpost = ({ navigation, route }) => {
       >
         <TextInput
           placeholder="Comment"
+          value={comment}
+          onChangeText={(text) => setComment(text)}
           style={{
             borderWidth: 1,
             borderColor: "black",
@@ -176,7 +181,7 @@ const Inpost = ({ navigation, route }) => {
         />
         <TouchableOpacity
         style={sendButton ? styles.sendButtonhover : styles.sendButton}
-        onPress={() => console.log("Hello")}
+        onPress={() => handleCreateComment()}
         onMouseEnter={() => setSendButton(true)}
         onMouseLeave={() => setSendButton(false)}
         >
