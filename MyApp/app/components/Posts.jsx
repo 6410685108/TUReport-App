@@ -56,8 +56,10 @@ const Posts = ({option}) => {
     }
 
     const handleBookmark = async (postId) => {
-        await db.userBookmark(postId);
-        await fetchData();
+        await Promise.all([
+            db.userBookmark(postId),
+            fetchData()
+        ]);
     }
 
   return (
