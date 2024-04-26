@@ -4,14 +4,15 @@ import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Ale
 import { firebase_auth } from "../../firebaseConfig";
 import { useNavigation } from '@react-navigation/native';
 
+
 const SettingInput = () => {
     const { setting } = useContext(SettingContext);
     const { theme, language } = setting;
     const styles = theme === 'light' ? lightstyles : darkstyles;
-  const [englishChecked, setEnglishChecked] = useState(false);
-  const [thaiChecked, setThaiChecked] = useState(false);
-  const [lightChecked, setLightChecked] = useState(false);
-  const [darkChecked, setDarkChecked] = useState(false);
+    const [englishChecked, setEnglishChecked] = useState(true);
+    const [thaiChecked, setThaiChecked] = useState(false);
+    const [lightChecked, setLightChecked] = useState(true);
+    const [darkChecked, setDarkChecked] = useState(false);
 
   const handleEditPress = () => {
     console.log("Edit Profile");
@@ -19,23 +20,23 @@ const SettingInput = () => {
   const handleEnglishPress = () => {
     setEnglishChecked(true);
     setThaiChecked(false);
-    console.log("Move to English page!");
+    setting.setLanguage('EN')
   };
 
   const handleThaiPress = () => {
     setEnglishChecked(false);
     setThaiChecked(true);
-    console.log("Move to Thai page!");
+    setting.setLanguage('TH')
   };
   const handleLightPress = () => {
     setLightChecked(true);
     setDarkChecked(false);
-    console.log("Move to Light theme!");
+    setting.setTheme('light')
   };
   const handleDarkPress = () => {
     setLightChecked(false);
     setDarkChecked(true);
-    console.log("Move to Dark theme!");
+    setting.setTheme('dark')
   };
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -57,7 +58,7 @@ const SettingInput = () => {
           <View style={styles.inNav}>
             <TouchableOpacity
                 onPress={() => {
-                  console.log("back to Profile page!");
+                  navigation.navigate('Profile');
                 }}
               >
                 <Text style={[styles.text,{fontSize: 25}]}>{'<'}</Text>
@@ -154,11 +155,204 @@ const SettingInput = () => {
   }
   else{
     return (
-      <View style={styles.test}>
-        <Text>Profile</Text>
-        <Button title="Sign Out" onPress={() => firebase_auth.signOut()} />
+        <View style={styles.container}>
+            <View style={styles.nav}>
+            <View style={styles.inNav}>
+                <TouchableOpacity
+                    onPress={() => {
+                    return (
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Profile');
+                }}
+              >
+                <Text style={[styles.text,{fontSize: 25}]}>{'<'}</Text>
+            </TouchableOpacity>
+            <Image style={[styles.logo]} source={settingImage} />
+            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>Settings</Text>
+          </View>
+        </View>
+        
+        <View style={[styles.containerContent,styles.center]} >
+             <View style={styles.boxx}>
+                <View style={[styles.inNav,{left:40}]}>
+                <Image style={styles.logo2}source={user_profileImage}/>
+                <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+                    <View style={styles.boxx3}>
+                        <Text style={[styles.text,{fontSize:12}]}>Edit Profile</Text>
+                    </View>
+                </TouchableOpacity>
+                </View>
+                <Text style={[styles.text]}>User X</Text>
+                <Text style={[styles.text]}>6XX</Text>
+                <Text style={[styles.text]}>XX@dome</Text>
+            </View>
+            <Text style={[styles.text2]}>{'> Language'}</Text>
+            <View style={styles.boxx2}>
+                <TouchableOpacity onPress={handleEnglishPress}>
+                    <View style={styles.nav2}>
+                        <View style={styles.inNav}>
+                            <Image style={styles.logo3} source={eng_langImage} />
+                            <Text style={styles.text}>English</Text>
+                        </View>
+                        {englishChecked && <Text style={styles.checkmark}>✓</Text>}
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleThaiPress}>
+                    <View style={styles.nav2}>
+                        <View style={styles.inNav}>
+                            <Image style={styles.logo3} source={thai_langImage} />
+                            <Text style={styles.text}>Thai</Text>
+                        </View>
+                        {thaiChecked && <Text style={styles.checkmark}>✓</Text>}
+                    </View>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.boxx2}>
+                <View style={styles.nav2} >
+                    <Text style={[styles.text2]}>{'> PIN CODE'}</Text>
+                    <Switch
+                        trackColor={{false: styles.thumbColorFalse, true: styles.thumbColorTrue}}
+                        thumbColor={isEnabled ? styles.cycleColor : styles.cycleColor}
+                        ios_backgroundColor={styles.iosBackgroundColor}
+                        // onValueChange={toggleSwitch}
+                        onValueChange={() => navigation.navigate('Pin')}
+                        value={isEnabled}
+                    />
+                </View>
+            </View>
+            <Text style={[styles.text2]}>{'> Apptheme'}</Text>
+            <View style={styles.nav2}>
+                <TouchableOpacity onPress={handleLightPress}>
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme1Image} />
+                        {lightChecked && <Text style={[styles.checkmark,{top:5}]}>✓</Text>}
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleDarkPress}>
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme2Image} />
+                        {darkChecked && <Text style={[styles.checkmark,{top:5}]}>✓</Text>}
+                    </View>         
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log("Theme 3 is nothing!");
+                    }}
+                >
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme3Image} />
+                    </View>         
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log("Theme 4 is nothing!");
+                    }}
+                >
+                    <View style={styles.boxx4}>
+                        <Image style={styles.logo4} source={theme4Image} />
+                    </View>         
+                </TouchableOpacity>
+            </View>
+        </View>
       </View>
     );
+                    }}
+                >
+                    <Text style={[styles.text,{fontSize: 25}]}>{'<'}</Text>
+                </TouchableOpacity>
+                <Image style={[styles.logo]} source={settingImage} />
+                <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>Settings</Text>
+            </View>
+            </View>
+            
+            <View style={[styles.containerContent,styles.center]} >
+                <View style={styles.boxx}>
+                    <View style={[styles.inNav,{left:40}]}>
+                    <Image style={styles.logo2}source={user_profileImage}/>
+                    <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+                        <View style={styles.boxx3}>
+                            <Text style={[styles.text,{fontSize:12}]}>Edit Profile</Text>
+                        </View>
+                    </TouchableOpacity>
+                    </View>
+                    <Text style={[styles.text]}>User X</Text>
+                    <Text style={[styles.text]}>6XX</Text>
+                    <Text style={[styles.text]}>XX@dome</Text>
+                </View>
+                <Text style={[styles.text2]}>{'> Language'}</Text>
+                <View style={styles.boxx2}>
+                    <TouchableOpacity onPress={handleEnglishPress}>
+                        <View style={styles.nav2}>
+                            <View style={styles.inNav}>
+                                <Image style={styles.logo3} source={eng_langImage} />
+                                <Text style={styles.text}>English</Text>
+                            </View>
+                            {englishChecked && <Text style={styles.checkmark}>✓</Text>}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleThaiPress}>
+                        <View style={styles.nav2}>
+                            <View style={styles.inNav}>
+                                <Image style={styles.logo3} source={thai_langImage} />
+                                <Text style={styles.text}>Thai</Text>
+                            </View>
+                            {thaiChecked && <Text style={styles.checkmark}>✓</Text>}
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.boxx2}>
+                    <View style={styles.nav2} >
+                        <Text style={[styles.text2]}>{'> PIN CODE'}</Text>
+                        <Switch
+                            trackColor={{false: styles.thumbColorFalse, true: styles.thumbColorTrue}}
+                            thumbColor={isEnabled ? styles.cycleColor : styles.cycleColor}
+                            ios_backgroundColor={styles.iosBackgroundColor}
+                            // onValueChange={toggleSwitch}
+                            onValueChange={() => navigation.navigate('Pin')}
+                            value={isEnabled}
+                        />
+                    </View>
+                </View>
+                <Text style={[styles.text2]}>{'> Apptheme'}</Text>
+                <View style={styles.nav2}>
+                    <TouchableOpacity onPress={handleLightPress}>
+                        <View style={styles.boxx4}>
+                            <Image style={styles.logo4} source={theme1Image} />
+                            {lightChecked && <Text style={[styles.checkmark,{top:5}]}>✓</Text>}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleDarkPress}>
+                        <View style={styles.boxx4}>
+                            <Image style={styles.logo4} source={theme2Image} />
+                            {darkChecked && <Text style={[styles.checkmark,{top:5}]}>✓</Text>}
+                        </View>         
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            console.log("Theme 3 is nothing!");
+                        }}
+                    >
+                        <View style={styles.boxx4}>
+                            <Image style={styles.logo4} source={theme3Image} />
+                        </View>         
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            console.log("Theme 4 is nothing!");
+                        }}
+                    >
+                        <View style={styles.boxx4}>
+                            <Image style={styles.logo4} source={theme4Image} />
+                        </View>         
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+        );
   }
 };
 
