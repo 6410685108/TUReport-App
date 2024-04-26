@@ -97,9 +97,65 @@ const Profile = () => {
   }
   else{
     return (
-      <View style={styles.test}>
-        <Text>Profile</Text>
-        <Button title="Sign Out" onPress={() => data.logout()} />
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <Image style={[styles.logo]} source={userImage} />
+            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>PROFILE</Text>
+          </View>
+          <View style={styles.inNav}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Setting')}
+            >
+              <Image
+                style={{ width: 40, height: 40, marginRight: 5 }}
+                source={settingImage}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => data.logout()}
+            >
+              <Image
+                style={{ width: 40, height: 40, marginRight: 5 }}
+                source={exitImage}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        
+        <View style={styles.containerContent} >
+          <View style={styles.boxx}>
+            <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
+            <Text style={[styles.text]}>{user.displayName}</Text>
+            <Text style={[styles.text]}>{user.displayName}</Text>
+            <Text style={[styles.text]}>{user.email}</Text>
+          </View>
+          <View style={styles.boxx2}>
+            <View style={styles.center}>
+              <TouchableOpacity
+                onPress={() => handleSw(true)}
+              >
+                <Text style={[styles.text]}>Your Posts</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={[styles.text]}>|</Text>
+            <View style={styles.center}>
+              <TouchableOpacity
+                onPress={() => handleSw(false)}
+              >
+                <Text style={[styles.text]}>Saved</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+          <View style={[styles.center2,{marginLeft:0}]}>
+          {sw ? (
+            <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
+          ) : (
+            <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
+          )
+          }
+          </View>
       </View>
     );
   }
