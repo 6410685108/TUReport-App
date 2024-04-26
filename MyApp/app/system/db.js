@@ -352,12 +352,13 @@ const db = {
     createPost ,
     editPost ,
     getAllPosts ,
+    deletePost,
+    changeStatusPost,
+    
     repostPost ,
     isReposted,
     addReposter,
     removeReposter,
-    deletePost,
-    changeStatusPost,
 
     createComment ,
     getAllComments,

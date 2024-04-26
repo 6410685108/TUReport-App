@@ -146,7 +146,7 @@ const Inpost = ({ navigation, route }) => {
                   <UserPhoto userId={comment.author.uid} />
                   <View style={{ flexDirection: "column", paddingLeft: 6 }}>
                     <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-                      {comment.author.email}
+                      {comment.author.displayName}
                     </Text>
                     <Text style={{ fontSize: 13 }}>{comment.comment}</Text>
                   </View>
