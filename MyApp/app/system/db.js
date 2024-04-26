@@ -79,6 +79,7 @@ const repostPost = async (postId,isReposted) => {
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
+            notify(postId , firebase_auth.currentUser.displayName , firebase_auth.currentUser.photoURL , `${firebase_auth.currentUser.displayName} repost your post`);
             return false;
         }
     }
@@ -197,6 +198,21 @@ const getPost = async (postId) => {
 
 }
 
+const getPostAuthorUID = async (postId) => {
+    try {
+        const postDocRef = doc(firebase_db, 'posts', postId);
+        const postDocSnap = await getDoc(postDocRef);
+        if (postDocSnap.exists()) {
+            return postDocSnap.data().author.uid;
+        } else {
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching post author:', error);
+        return null;
+    }
+};
+
 const userBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
@@ -267,6 +283,40 @@ const getBookmarkPosts = async () => {
         return [];
     }
 }
+
+const notify = async (postid , userCreateDisplayName , userCreatePhotoURL , title) => {
+    try { 
+        console.log("Create Notify")
+        const uid = await getPostAuthorUID(postid);
+        const notifyCollectionRef = collection(firebase_db, 'users' , uid , 'notification');
+        await addDoc(notifyCollectionRef, {
+            title: title,
+            userCreate:{
+                displayName: userCreateDisplayName,
+                photo: userCreatePhotoURL,
+            },
+            time: new Date().toLocaleString(),
+        });
+    } catch (error) {
+        console.error('Error creating post:', error);
+        throw error;
+    }
+}
+
+const getNotification = async () => {
+    const userId = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'users', userId);
+        const notificationCollectionRef = collection(userRef, 'notification');
+        const notificationSnapshot = await getDocs(notificationCollectionRef);
+        const notification = notificationSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return notification;
+    } catch (error) {
+        console.error('Error fetching notification:', error);
+        return [];
+    }
+};
+
 
 const createComment = async (postId, comment) => {
     try {
@@ -347,14 +397,13 @@ const getCurrentUser = () => {
 
 
 
-
 const db = {
     createPost ,
     editPost ,
     getAllPosts ,
     deletePost,
     changeStatusPost,
-    
+
     repostPost ,
     isReposted,
     addReposter,
@@ -365,6 +414,8 @@ const db = {
 
     userBookmark ,
     getBookmarkPosts,
+
+    getNotification,
     
     showCurrentUserInfo,
     uploadUserPhoto,
