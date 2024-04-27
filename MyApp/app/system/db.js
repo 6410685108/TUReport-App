@@ -246,26 +246,19 @@ const removeBookmark = async (postId) => {
     }
 }
 
-const getBookmarkPosts = async () => {
-    const bookmarkedPosts = [];
+const getBookmarkPostsID = async () => {
     const userId = firebase_auth.currentUser.uid;
     try {
         const userRef = doc(firebase_db, 'users', userId ); 
         const postCollectionRef = collection(userRef, 'bookmark' ); 
-        const postSnapshot = await getDocs(postCollectionRef);
-        
+        const postSnapshot = await getDocs(postCollectionRef);    
         const postIds = postSnapshot.docs.map(doc => doc.data().postId);
-        for (let i = 0; i < postIds.length; i++) {
-            const postId = postIds[i];
-            const post = await getPost(postId);
-            bookmarkedPosts.push(post);
-        }
-        
-        return bookmarkedPosts;
+        return postIds;
     } catch (error) {
         console.error('Error fetching bookmarked posts:', error);
         return [];
     }
+
 }
 
 const notify = async (postid , uid , title) => {
@@ -433,7 +426,7 @@ const db = {
     getAllComments,
 
     userBookmark ,
-    getBookmarkPosts,
+    getBookmarkPostsID,
 
     getNotification,
     deleteAllNotifications,
