@@ -88,9 +88,14 @@ const register = async (email , password) => {
     try {
         await createUserWithEmailAndPassword(auth,email,password);
         await signInWithEmailAndPassword(auth,email, password)
-        await db.uploadUserPhoto(
-            "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9"
-        );
+        try{
+            await db.uploadUserPhoto(
+                "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9"
+            );
+        } catch (error) {
+            console.error('Error uploading user photo:', error);
+        }
+      
         const displayname = email.split("@")[0];
         await db.setDisplayName(displayname)
     } catch (error) {

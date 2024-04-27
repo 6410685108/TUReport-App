@@ -1,5 +1,5 @@
 import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConfig';
-import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where } from 'firebase/firestore';
+import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where, setDoc } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
 
@@ -341,9 +341,11 @@ const uploadUserPhoto = async (photo) => {
         const photoUrl = await uploadImage(photo, 'users');
         const userId = firebase_auth.currentUser.uid;
         const userRef = doc(firebase_db, 'users', userId);
-        await updateDoc(userRef, {
+        
+        await setDoc(userRef, {
             photo: photoUrl,
-        });
+        }, { merge: true });
+        
         updateProfile(firebase_auth.currentUser, { photoURL: photoUrl });
     }
     catch{
@@ -388,9 +390,9 @@ const getCurrentUser = () => {
 const setUserDisplayName = async (userId, name) => {
     try{
         const userRef = doc(firebase_db, 'users', userId);
-        await updateDoc(userRef, {
+        await setDoc(userRef, {
             displayName: name,
-        });
+        }, { merge: true });
     } catch (error) {
         console.error('Error setting user displayname:', error);
     }
