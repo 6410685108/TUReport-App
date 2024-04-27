@@ -10,29 +10,40 @@ const QandA = () => {
   const { setting } = useContext(SettingContext);
   const { theme, language } = setting;
   const styles = theme === 'light' ? lightstyles : darkstyles;
-  const [questions, setQuestions] = useState([
-    {
-      question: "LoremxD",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra, mi nec elementum tincidunt, est ex efficitur ligula, id pretium nisi dui quis quam. Cras felis urna, tempus id pulvinar sit amet, dignissim sed nisl. Aenean eu ornare mauris. Nunc velit lorem, molestie at lacus non, blandit porttitor mauris. Donec facilisis risus eros, eu sagittis justo porttitor ac. Phasellus mauris ex, iaculis vel elementum vitae, rhoncus vitae erat. Morbi maximus diam at malesuada vestibulum. Fusce a ultricies magna. Vestibulum consequat id diam quis vestibulum.",
-    },
-    {
-      question: "BBBBB",
-      answer:
-        "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
-    },
-    {
-      question: "BBBBB",
-      answer:
-        "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
-    },
-    {
-      question: "BBBBB",
-      answer:
-        "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
-    },
-    // Add more Q&A here
-  ]);
+  const [questions, setQuestions] = useState(() => {
+    if (language === 'EN') {
+      return [
+        {
+          question: "LoremxD",
+          answer:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra, mi nec elementum tincidunt, est ex efficitur ligula, id pretium nisi dui quis quam. Cras felis urna, tempus id pulvinar sit amet, dignissim sed nisl. Aenean eu ornare mauris. Nunc velit lorem, molestie at lacus non, blandit porttitor mauris. Donec facilisis risus eros, eu sagittis justo porttitor ac. Phasellus mauris ex, iaculis vel elementum vitae, rhoncus vitae erat. Morbi maximus diam at malesuada vestibulum. Fusce a ultricies magna. Vestibulum consequat id diam quis vestibulum.",
+        },
+        {
+          question: "BBBBB",
+          answer:
+            "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+        },
+        {
+          question: "BBBBB",
+          answer:
+            "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+        },
+        {
+          question: "BBBBB",
+          answer:
+            "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+        },
+        // Add more Q&A here
+      ];
+    } else {
+      return [
+        {
+          question: "เทสๆ",
+          answer: "ตอบๆเว้ย",
+        }
+      ];
+    }
+  });
   const [sw , setSw] = useState(true);
   const [reloadKey, setReloadKey] = useState(0);
 
@@ -86,9 +97,34 @@ const QandA = () => {
   }
   else{
     return (
-      <View style={styles.test}>
-        <Text>Profile</Text>
-        <Button title="Sign Out" onPress={() => data.logout()} />
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <Image style={[styles.logo]} source={qa_iconImage} />
+            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>ช่วยเหลือ</Text>
+          </View>
+        </View>
+        
+        <View style={styles.containerContent} >
+          <View style={styles.boxx}>
+            <View style={styles.nav2}>
+              <Image style={styles.logo2} source={ qaImage }/>
+              <View style={{left: '20%'}}>
+                <Text style={[styles.text]}>ติดต่อ ผู้ดูแล</Text>
+                <Text style={[styles.text]}>โทร: 00000000</Text>
+                <Text style={[styles.text]}>ไลน์: BBBBBB</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <ScrollView style={[styles.center,{marginLeft:0}]}>
+          {questions.map((item, index) => (
+            <View key={index} style={styles.qa}>
+              <Text style={styles.text2}>Q:{item.question}</Text>
+              <Text style={styles.text2}>A:{item.answer}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     );
   }

@@ -101,7 +101,7 @@ const Profile = () => {
         <View style={styles.nav}>
           <View style={styles.inNav}>
             <Image style={[styles.logo]} source={userImage} />
-            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>PROFILE</Text>
+            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>โปรไฟล์</Text>
           </View>
           <View style={styles.inNav}>
             <TouchableOpacity
@@ -135,7 +135,7 @@ const Profile = () => {
               <TouchableOpacity
                 onPress={() => handleSw(true)}
               >
-                <Text style={[styles.text]}>Your Posts</Text>
+                <Text style={[styles.text]}>โพสของคุณ</Text>
               </TouchableOpacity>
             </View>
             <Text style={[styles.text]}>|</Text>
@@ -143,18 +143,18 @@ const Profile = () => {
               <TouchableOpacity
                 onPress={() => handleSw(false)}
               >
-                <Text style={[styles.text]}>Saved</Text>
+                <Text style={[styles.text]}>บันทึก</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
-          <View style={[styles.center2,{justifyContent: 'flex-start',marginLeft:0}]}>
-                {sw ? (
-                <ScrollView key={`${reloadKey}-MyPost`} option={"MyPost"} />
-              ) : (
-                <ScrollView key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-              )
-              }
+          <View style={[styles.center2,{marginLeft:0}]}>
+          {sw ? (
+            <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
+          ) : (
+            <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
+          )
+          }
           </View>
       </View>
     );
