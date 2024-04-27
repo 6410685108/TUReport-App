@@ -20,6 +20,8 @@ import FinishNavigator from "./app/navigator/FinishNavigator";
 import InProgress from "./app/tabsAdmin/InProgress";
 import Waiting from "./app/tabsAdmin/Waiting";
 
+import { db } from "./app/system/db";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -68,9 +70,19 @@ export default function App() {
 function AuthenticatedScreens() {
   const { setting } = useContext(SettingContext);
   const { theme , language } = setting;
+  const [role, setRole] = useState("user");
   const styles = theme == 'light' ? lightStyle : darkStyle;
-  const [isStaff, setIsStaff] = useState(false);
-  if (isStaff) {
+  const getRole = async () => {
+    const role = await db.getUserRole();
+    return role;
+  }
+  useEffect(() => {
+    getRole().then((role) => {
+      setRole(role);
+    });
+  }, [role]);
+  
+  if (role == "admin") {
     return (
       <Tab.Navigator
         screenOptions={{
