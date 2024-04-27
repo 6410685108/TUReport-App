@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <LinearGradient colors={["#ff7100", "#ffda27"]} style={styles.background}>
+    <LinearGradient colors={["#b50d2e", "#ffd13e"]} style={styles.background}>
       {/* Why use Scrool View ??? */}
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.titleContainer}>
@@ -68,12 +68,14 @@ const Login = ({ navigation }) => {
             <View style={styles.line}></View>
           </View>
 
-          <Text style={styles.registerText}>
-            Don't have an account?{" "}
+          <View style={{    flexDirection: "row",justifyContent: "space-between",alignItems: "center",}}>
+            <Text style={styles.registerText}>
+              Don't have an account?{" "}
+            </Text>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text style={[styles.signUpText, { marginTop: 0 }]}>Sign Up</Text>
+              <Text style={[styles.signUpText]}>Sign Up</Text>
             </TouchableOpacity>
-          </Text>
+          </View>
         </View>
 
         {loading && (
@@ -175,8 +177,9 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontSize: 16,
-    color: "red",
+    color: "black",
     fontWeight: "bold",
+    marginTop: 15,
   },
 });
 

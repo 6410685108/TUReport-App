@@ -64,6 +64,7 @@ const Posts = ({option}) => {
 
   return (
     <ScrollView
+    style={{width: '100%', height: '100%', fontSize: '100%'}}
     refreshControl={
         <RefreshControl
             refreshing={refreshing}

@@ -1,7 +1,7 @@
 import React, { useState , useEffect , useContext} from 'react'
 import { SettingContext } from '../system/setting';
 
-import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
+import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard ,ScrollView} from 'react-native';
 import Posts from "../components/Posts";
 import { data } from '../system/fetchData';
 import { db } from '../system/db';
@@ -101,7 +101,7 @@ const Profile = () => {
         <View style={styles.nav}>
           <View style={styles.inNav}>
             <Image style={[styles.logo]} source={userImage} />
-            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>PROFILE</Text>
+            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>โปรไฟล์</Text>
           </View>
           <View style={styles.inNav}>
             <TouchableOpacity
@@ -135,7 +135,7 @@ const Profile = () => {
               <TouchableOpacity
                 onPress={() => handleSw(true)}
               >
-                <Text style={[styles.text]}>Your Posts</Text>
+                <Text style={[styles.text]}>โพสของคุณ</Text>
               </TouchableOpacity>
             </View>
             <Text style={[styles.text]}>|</Text>
@@ -143,7 +143,7 @@ const Profile = () => {
               <TouchableOpacity
                 onPress={() => handleSw(false)}
               >
-                <Text style={[styles.text]}>Saved</Text>
+                <Text style={[styles.text]}>บันทึก</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -197,10 +197,10 @@ const lightstyles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       width: "80%",
-      left: "10%" ,
       paddingTop: 2,
       backgroundColor: '#ECECEC',
       borderRadius: 20,
+      alignSelf: 'center',
     },
     boxx: {
       justifyContent: "center",

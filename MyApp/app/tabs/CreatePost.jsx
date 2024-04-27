@@ -74,6 +74,7 @@ const CreatePost = () => {
     // console.log(await db.getUserPhoto())
     console.log("ED=====================================")
   }
+  const user = db.getCurrentUser();
   const createpostImage = theme === 'light' ? require('../picture/createpost.png') : require('../picture/AddMoreDetail_w.png');
   const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
   const addTopicImage = theme === 'light' ? require('../picture/addTopic.png') : require('../picture/addTopic_w.png');
@@ -93,7 +94,7 @@ const CreatePost = () => {
         
         <View style={styles.containerContent} >
           <View style={styles.content}>
-            <Image style={styles.logo2}source={user_profileImage}/>
+            <Image style={styles.logo2}source={{uri: user.photoURL}}/>
             <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>User X</Text>
           </View>
          
@@ -102,6 +103,7 @@ const CreatePost = () => {
             <TextInput
             placeholder="Add topic"
             placeholderTextColor={styles.placeholderStyle.color}
+            
             value={topic}
             onChangeText={setTopic}
             onSubmitEditing={handleTopicSubmit}
@@ -169,7 +171,7 @@ const CreatePost = () => {
         
         <View style={styles.containerContent} >
           <View style={styles.content}>
-              <Image style={styles.logo2}source={require('../picture/user_profile.png')}/>
+              <Image style={styles.logo2}source={{uri: user.photoURL}}/>
               <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ผู้ใช้ X</Text>
             </View>
          
@@ -280,6 +282,7 @@ const lightstyles = StyleSheet.create({
       borderColor: 'gray',
       margin: 0,
       color: 'black',
+      borderRadius: 15,
     },
     placeholderStyle: {
       color: 'black', 
@@ -311,6 +314,7 @@ const lightstyles = StyleSheet.create({
     logo2: {
       width: 35,
       height: 35,
+      borderRadius: 30,
     },
     botsub: {
       marginTop: 50,
@@ -368,6 +372,7 @@ const darkstyles = StyleSheet.create({
       borderColor: 'gray',
       margin: 0,
       color: 'white',
+      borderRadius: 15,
     },
     placeholderStyle: {
       color: 'white', 
