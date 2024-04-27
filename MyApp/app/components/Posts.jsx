@@ -3,6 +3,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, ScrollView , RefreshCon
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 import UserPhoto from "./UserPhoto";
+import Name from "./Name";
 import { data } from "../system/fetchData";
 
 const Posts = ({option}) => {
@@ -78,7 +79,7 @@ const Posts = ({option}) => {
                 <View style={{flexDirection: 'row'}}>
                     <UserPhoto key={userPhotoKey} userId={info.author.uid} />
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 14}}>{info.author.displayName}</Text>
+                        <Name userId={info.author} />
                         <Text style={{fontSize: 12}}>{info.time}</Text>
                     </View>
                 </View>
