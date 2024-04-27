@@ -141,7 +141,7 @@ const Inpost = ({ navigation, route }) => {
                 key={comment.id}
               >
                 <View style={{ flexDirection: "row" }}>
-                  <UserPhoto userId={comment.author.uid} />
+                  <UserPhoto userId={comment.author} />
                   <View style={{ flexDirection: "column", paddingLeft: 6 }}>
                     <Text style={{ fontWeight: "bold", fontSize: 15 }}>
                       <Name userId={comment.author} /> <Text style={{ fontSize: 10, fontWeight: "normal" }}>{comment.time}</Text>
