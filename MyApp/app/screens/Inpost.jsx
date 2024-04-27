@@ -51,10 +51,8 @@ const Inpost = ({ navigation, route }) => {
 }
 
   const handleCreateComment = async () => {
-    await Promise.all([
-      db.createComment(postid,comment),
-      fetchComment()
-    ])
+    await db.createComment(postid,comment);
+    await fetchComment();
   }
 
   return (

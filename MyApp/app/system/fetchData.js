@@ -109,13 +109,28 @@ const logout = async () => {
 
 const getUserPhotoURL = async (userId) => {
     try {
-        const photoUrl = await db.getUserPhoto(userId);
-        if (!photoUrl) {
+        let photoUrl = null;
+        try{
+            photoUrl = await db.getUserPhoto(userId);
+        } catch (error) {
             return "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9";
+        }
+        if (!photoUrl) {
+           
         }
         return photoUrl;
     } catch (error) {
         console.error('Error fetching user photo:', error);
+        return null;
+    }
+};
+
+const getUserDisplayName = async (userId) => {
+    try {
+        const displayName = await db.getDisplayNameOfID(userId);
+        return displayName;
+    } catch (error) {
+        console.error('Error fetching user display name:', error);
         return null;
     }
 };
@@ -128,6 +143,7 @@ const data = {
     register,
 
     getUserPhotoURL,
+    getUserDisplayName,
 };
 
 export { data };

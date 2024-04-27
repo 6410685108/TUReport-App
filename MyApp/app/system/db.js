@@ -13,11 +13,7 @@ const createPost = async (title, detail, location , photo , anonymous) => {
             location: location,
             photoUrl: photoUrl,
             anonymous: anonymous,
-            author: {
-                uid: firebase_auth.currentUser.uid,
-                displayName: firebase_auth.currentUser.displayName,
-                email: firebase_auth.currentUser.email,
-            },
+            author: firebase_auth.currentUser.uid,
             time: new Date().toLocaleString(),
             status: 'in progress',
             repost: 0,
@@ -79,7 +75,7 @@ const repostPost = async (postId,isReposted) => {
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
-            notify(postId , firebase_auth.currentUser.displayName , firebase_auth.currentUser.photoURL , `${firebase_auth.currentUser.displayName} repost your post`);
+            notify(postId , firebase_auth.currentUser.uid ,  `${firebase_auth.currentUser.displayName}repost your post`);
             return false;
         }
     }
@@ -195,7 +191,6 @@ const getPost = async (postId) => {
         console.error('Error fetching post:', error);
         return null;
     }
-
 }
 
 const getPostAuthorUID = async (postId) => {
@@ -284,17 +279,15 @@ const getBookmarkPosts = async () => {
     }
 }
 
-const notify = async (postid , userCreateDisplayName , userCreatePhotoURL , title) => {
+const notify = async (postid , uid , title) => {
     try { 
         console.log("Create Notify")
         const uid = await getPostAuthorUID(postid);
         const notifyCollectionRef = collection(firebase_db, 'users' , uid , 'notification');
         await addDoc(notifyCollectionRef, {
             title: title,
-            userCreate:{
-                displayName: userCreateDisplayName,
-                photo: userCreatePhotoURL,
-            },
+            userCreate: uid,
+            postid: postid,
             time: new Date().toLocaleString(),
         });
     } catch (error) {
@@ -323,11 +316,7 @@ const createComment = async (postId, comment) => {
         const commentCollectionRef = collection(firebase_db, 'posts', postId, 'comments');
         await addDoc(commentCollectionRef, {
             comment: comment,
-            author: {
-                uid: firebase_auth.currentUser.uid,
-                displayName: firebase_auth.currentUser.displayName,
-                email: firebase_auth.currentUser.email,
-            },
+            author: firebase_auth.currentUser.uid,
             time: new Date().toLocaleString(),
         });
     } catch (error) {
@@ -389,13 +378,39 @@ const showCurrentUserInfo = async (info) => {
 
 const setDisplayName = async (name) => {
     updateProfile(firebase_auth.currentUser, { displayName: name });
+    setUserDisplayName(firebase_auth.currentUser.uid, name);
 }
 
 const getCurrentUser = () => {
     return firebase_auth.currentUser;
 }
 
+const setUserDisplayName = async (userId, name) => {
+    try{
+        const userRef = doc(firebase_db, 'users', userId);
+        await updateDoc(userRef, {
+            displayName: name,
+        });
+    } catch (error) {
+        console.error('Error setting user displayname:', error);
+    }
+}
 
+const getDisplayNameOfID = async (uid) => {
+    try {
+        const userRef = doc(firebase_db, 'users', uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+            return userDoc.data().displayName;
+        } else {
+            console.error('User document does not exist');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user displayname:', error);
+        return null;
+    }
+}
 
 const db = {
     createPost ,
@@ -403,6 +418,7 @@ const db = {
     getAllPosts ,
     deletePost,
     changeStatusPost,
+    getPost,
 
     repostPost ,
     isReposted,
@@ -423,6 +439,7 @@ const db = {
     getUserPhoto,
     setDisplayName,
     getCurrentUser,
+    getDisplayNameOfID,
 };
 
 export { db };

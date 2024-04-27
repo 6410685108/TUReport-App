@@ -1,66 +1,26 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect , useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { db } from "../system/db";
 
-const data = [
-  {
-    id: 1,
-    user: "User1",
-    message: "commented on your post",
-    date: "2021-09-01",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 2,
-    user: "User2",
-    message: "commented on your post",
-    date: "2021-09-01",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 3,
-    user: "User3",
-    message: "commented on your post",
-    date: "2021-09-01",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 4,
-    user: "User4",
-    message: "commented on your post",
-    date: "2021-09-02",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 5,
-    user: "User5",
-    message: "commented on your post",
-    date: "2021-09-02",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 6,
-    user: "User6",
-    message: "commented on your post",
-    date: "2021-09-02",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 7,
-    user: "User7",
-    message: "commented on your post",
-    date: "2021-09-03",
-    profile: require("../picture/user.png"),
-  },
-  {
-    id: 8,
-    user: "User8",
-    message: "commented on your post",
-    date: "2021-09-03",
-    profile: require("../picture/user.png"),
-  },
-];
+const Notification =  () => {
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    const res = await db.getNotification();
+    setData(res);
+  }
+  const navigation = useNavigation();
 
-const Notification = () => {
+  useEffect(() => {
+    fetchData();
+  });
+
+  const handleToInpost = async (postId) => {
+    const post = await db.getPost(postId);
+    const send = [ post ] ;
+    navigation.navigate("Inpost", { postInfo: send });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
@@ -74,15 +34,15 @@ const Notification = () => {
       <View style={{ margin: 20 }}>
         {data.map((info) => (
           <View style={{ marginVertical: 10 }} key={info.id}>
-            <TouchableOpacity onPress={console.log("hello")} style={{ flexDirection: 'row' }}>
+            <TouchableOpacity onPress={() => handleToInpost(info.postid)} style={{ flexDirection: 'row' }}>
               <View style={styles.profile}>
-                <Image style={styles.profileImg} source={info.profile} />
+                <Image style={styles.profileImg} source={{ uri: info.userCreate.photo }} />
               </View>
               <View>
                 <Text style={{ fontSize: 16 }}>
-                  {info.user} {info.message}
+                  {info.title}
                 </Text>
-                <Text style={{ fontSize: 12 }}>{info.date}</Text>
+                <Text style={{ fontSize: 12 }}>{info.time}</Text>
               </View>
             </TouchableOpacity>
             <View
@@ -138,7 +98,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   profileImg: {
-    width: 32,
-    height: 32,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
 });

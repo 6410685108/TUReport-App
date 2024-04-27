@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { firebase_auth } from "../../firebaseConfig";
 import { LinearGradient } from "expo-linear-gradient";
 import { data } from "../system/fetchData";
 
@@ -16,7 +15,6 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const auth = firebase_auth;
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {

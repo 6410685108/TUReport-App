@@ -13,7 +13,6 @@ const UserPhoto = ({ userId }) => {
         fetchUserPhoto();
     }, [userId]);
  
-
     return <Image style={{ width: 30, height: 30 , borderRadius: 15 }} source={{ uri: userPhoto }} />;
 };
 

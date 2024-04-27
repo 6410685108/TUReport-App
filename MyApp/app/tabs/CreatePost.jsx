@@ -62,10 +62,12 @@ const CreatePost = () => {
 
   const test = async () => {
     console.log("ST=====================================")
+    // const res = await db.getPost("1htWIABJxUy7p0NiYlPC")
+    // console.log(res)
     // db.showCurrentUserInfo("email");
     // const posts = await db.getBookmarkedPosts();
-    console.log(theme)
-    console.log(language)
+    // console.log(theme)
+    // console.log(language)
     //await db.uploadUserPhoto("https://i.pinimg.com/736x/cc/ed/9d/cced9d4575e75981a21176773a9758a8.jpg");
     //await db.uploadUserPhoto("https://i.pinimg.com/736x/c6/f2/a1/c6f2a1a4dcc80e3a95d93a6613b5a325.jpg");
 

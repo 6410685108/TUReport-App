@@ -6,12 +6,9 @@ import * as ImagePicker from 'expo-image-picker';
 import { SettingContext } from '../system/setting';
 import PinView from 'react-native-pin-view';
 import ReactNativePinView from "react-native-pin-view"
+
 const Pin = () => {
-    const [topic, setTopic] = useState('');
-    const [details, setDetails] = useState('');
-    const [location, setLocation] = useState('');
-    const [photo, setPhoto] = useState(null);
-    const [anonymous, setAnonymous] = useState(false);
+
     const { setting } = useContext(SettingContext);
     const { theme, language } = setting;
     const styles = theme === 'light' ? lightstyles : darkstyles;
@@ -25,14 +22,12 @@ const Pin = () => {
   
     const handleCustomLeftButtonPress = () => {
       if (enteredPin.length > 0) {
-        // Remove the last digit from the entered PIN
         setEnteredPin(enteredPin.slice(0, -1));
       }
     };
   
     const handleCustomRightButtonPress = () => {
       if (enteredPin.length === 6) {
-        // Replace with your logic to handle successful PIN entry (e.g., alert or navigation)
         alert(`Entered PIN: ${enteredPin}`);
       } else {
         alert('Please enter a 6-digit PIN');
