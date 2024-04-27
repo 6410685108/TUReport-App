@@ -23,6 +23,7 @@ const RegisterScreen = ({ navigation }) => {
     }
     setLoading(true);
     await data.register(email, password);
+    // await data.register("t@t.com", "111111");
     setLoading(false);
   };
 
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "white",
     color: "white",
-    textAlign: "flex-start",
+    textAlign: "left",
     paddingLeft: 20,
   },
   label: {
