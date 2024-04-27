@@ -10,7 +10,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { data } from "../system/fetchData";
+import { data } from "../system/data";
 import { LinearGradient } from "expo-linear-gradient";
 
 

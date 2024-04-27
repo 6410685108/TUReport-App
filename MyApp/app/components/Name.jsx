@@ -1,5 +1,5 @@
 import React , { useState , useEffect} from "react";
-import { data } from "../system/fetchData";
+import { data } from "../system/data";
 import { Text } from "react-native";
 
 const Name = ({ userId }) => {

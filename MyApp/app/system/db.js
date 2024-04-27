@@ -409,6 +409,19 @@ const getDisplayNameOfID = async (uid) => {
     }
 }
 
+const setUserRole = async (role) => {
+    const uid = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'users', uid);
+        await setDoc(userRef, {
+            role: 'role',
+        }, { merge: true });
+    } catch (error) {
+        console.error('Error setting user role:', error);
+    }
+}
+
+
 const db = {
     createPost ,
     editPost ,
@@ -438,6 +451,8 @@ const db = {
     setDisplayName,
     getCurrentUser,
     getDisplayNameOfID,
+
+    setUserRole,
 };
 
 export { db };

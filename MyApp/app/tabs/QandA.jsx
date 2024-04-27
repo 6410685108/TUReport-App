@@ -9,7 +9,7 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import { data } from "../system/fetchData";
+import { data } from "../system/data";
 import { db } from "../system/db";
 import { useNavigation } from "@react-navigation/native";
 

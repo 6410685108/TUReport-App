@@ -96,9 +96,10 @@ const register = async (email , password) => {
         } catch (error) {
             console.error('Error uploading user photo:', error);
         }
-      
+        
         const displayname = email.split("@")[0];
         await db.setDisplayName(displayname)
+        await db.setUserRole("user");
     } catch (error) {
         alert("Error registering: " + error.message);
         console.error("Registration error:", error);
