@@ -9,10 +9,23 @@ const SettingInput = () => {
     const { setting } = useContext(SettingContext);
     const { theme, language } = setting;
     const styles = theme === 'light' ? lightstyles : darkstyles;
-    const [englishChecked, setEnglishChecked] = useState(true);
-    const [thaiChecked, setThaiChecked] = useState(false);
-    const [lightChecked, setLightChecked] = useState(true);
-    const [darkChecked, setDarkChecked] = useState(false);
+    const [englishChecked, setEnglishChecked] = useState (()=>  {
+        if(language === 'EN') {return true;}
+        if(language === 'TH') {return false;}
+    });
+    const [thaiChecked, setThaiChecked] = useState (()=>  {
+        if(language === 'EN') {return false;}
+        if(language === 'TH') {return true;}
+    });
+    const [lightChecked, setLightChecked] = useState (()=>  {
+        if(theme === 'dark') {return false;}
+        if(theme === 'light') {return true;}
+    });
+    
+    const [darkChecked, setDarkChecked] = useState (()=>  {
+        if(theme === 'dark') {return true;}
+        if(theme === 'light') {return false;}
+    });
 
   const handleEditPress = () => {
     console.log("Edit Profile");
@@ -44,7 +57,7 @@ const SettingInput = () => {
   const navigation = useNavigation();
 
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
-  const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
+  const user_profileImage = theme === 'light' ? require('../picture/user_profile_g.png') : require('../picture/user_profile_g.png');
   const eng_langImage = require('../picture/eng_lang.png');
   const thai_langImage = require('../picture/thai_lang.png');
   const theme1Image = require('../picture/theme1.png');
