@@ -1,7 +1,7 @@
 import React, { useState , useEffect , useContext} from 'react'
 import { SettingContext } from '../system/setting';
 
-import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard } from 'react-native';
+import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard ,ScrollView} from 'react-native';
 import Posts from "../components/Posts";
 import { data } from '../system/fetchData';
 import { db } from '../system/db';
@@ -148,13 +148,13 @@ const Profile = () => {
             </View>
           </View>
         </View>
-          <View style={[styles.center2,{marginLeft:0}]}>
-          {sw ? (
-            <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
-          ) : (
-            <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-          )
-          }
+          <View style={[styles.center2,{justifyContent: 'flex-start',marginLeft:0}]}>
+                {sw ? (
+                <ScrollView key={`${reloadKey}-MyPost`} option={"MyPost"} />
+              ) : (
+                <ScrollView key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
+              )
+              }
           </View>
       </View>
     );
@@ -197,10 +197,10 @@ const lightstyles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       width: "80%",
-      left: "10%" ,
       paddingTop: 2,
       backgroundColor: '#ECECEC',
       borderRadius: 20,
+      alignSelf: 'center',
     },
     boxx: {
       justifyContent: "center",
