@@ -49,7 +49,7 @@ const getSortPosts = async (option) => {
     } else if (option === 'Finish'){
         sortedPosts = posts.filter(post => post.status === 'Finish');
     } else if (option == 'MyPost') {
-        sortedPosts = posts.filter(post => post.author.uid === db.getCurrentUser().uid);
+        sortedPosts = posts.filter(post => post.author === db.getCurrentUser().uid);
     } else if (option == 'Bookmark') {
         sortedPosts = await db.getBookmarkPosts();
     }

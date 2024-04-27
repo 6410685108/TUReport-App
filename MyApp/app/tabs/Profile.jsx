@@ -89,8 +89,8 @@ const Profile = () => {
             <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
           ) : (
             <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-          )
-          }
+          )}
+
           </View>
       </View>
     );
@@ -153,8 +153,7 @@ const Profile = () => {
             <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
           ) : (
             <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-          )
-          }
+          )}
           </View>
       </View>
     );
