@@ -207,6 +207,20 @@ const getPost = async (postId) => {
     }
 }
 
+const getStatusPosts = async (status) => {
+    try {
+        const postCollectionRef = collection(firebase_db, 'posts');
+        const q = query(postCollectionRef, where("status", "==", status));
+        const postsSnapshot = await getDocs(q);
+        const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        return posts;
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        return [];
+    }
+}
+
+
 const userBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
@@ -387,6 +401,10 @@ const setDisplayName = async (name) => {
     setUserDisplayName(firebase_auth.currentUser.uid, name);
 }
 
+const setPhoneNumber = async (phoneNumber) => {
+    updateProfile(firebase_auth.currentUser, { phoneNumber: phoneNumber });
+}
+
 const getCurrentUser = () => {
     return firebase_auth.currentUser;
 }
@@ -423,13 +441,29 @@ const setUserRole = async (role) => {
     try {
         const userRef = doc(firebase_db, 'users', uid);
         await setDoc(userRef, {
-            role: 'role',
+            role: role,
         }, { merge: true });
     } catch (error) {
         console.error('Error setting user role:', error);
     }
 }
 
+const getUserRole = async () => {
+    const uid = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'users', uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+            return userDoc.data().role;
+        } else {
+            console.error('User document does not exist');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user role:', error);
+        return null;
+    }
+}
 
 
 const db = {
@@ -439,6 +473,7 @@ const db = {
     deletePost,
     changeStatusPost,
     getPost,
+    getStatusPosts,
 
     repostPost ,
     isReposted,
@@ -459,10 +494,13 @@ const db = {
     getThisUserPhoto,
     getUserPhoto,
     setDisplayName,
+    setPhoneNumber,
     getCurrentUser,
     getDisplayNameOfID,
 
     setUserRole,
+    getUserRole,
+
 };
 
 export { db };

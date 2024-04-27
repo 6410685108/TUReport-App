@@ -23,21 +23,16 @@ const Edit = () => {
 
   const handleMessageSubmit = async () => {
     if (displayname==('' || null) || email==('' || null)|| phoneNumber==('' || null)){
-      console.log('con1');
-      console.log(displayname);
-      console.log(email);
-      console.log(phoneNumber);
-      return;
-    }
-    try {
-      console.log('con2');
-      console.log(displayname);
-      console.log(email);
-      console.log(phoneNumber);
-
-      Alert.alert('Profile updated successfully');
-    } catch (error) {
-      console.error('Error sending message:', error);
+      try{
+        await Promise.all([ 
+          db.setDisplayName(displayname),
+          db.setPhoneNumber(phoneNumber),
+        ]);
+        Alert.alert('Profile updated successfully');
+        return;
+      } catch (error) {
+        Alert.alert('Profile updated failed');
+      }
     }
   };
 
