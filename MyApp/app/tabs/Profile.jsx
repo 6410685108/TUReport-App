@@ -31,132 +31,67 @@ const Profile = () => {
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const exitImage = theme === 'light' ? require('../picture/exit.png') : require('../picture/exit_w.png');
   
-  if (language == "EN") {
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo]} source={userImage} />
-            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>PROFILE</Text>
-          </View>
-          <View style={styles.inNav}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Setting')}
-            >
-              <Image
-                style={{ width: 40, height: 40, marginRight: 5 }}
-                source={settingImage}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => data.logout()}
-            >
-              <Image
-                style={{ width: 40, height: 40, marginRight: 5 }}
-                source={exitImage}
-              />
-            </TouchableOpacity>
-          </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.nav}>
+        <View style={styles.inNav}>
+          <Image style={[styles.logo]} source={userImage} />
+          <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>{language === 'EN' ? "PROFILE" : "โปรไฟล์"}</Text>
         </View>
-        
-        <View style={styles.containerContent} >
-          <View style={styles.boxx}>
-            <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
-            <Text style={[styles.text]}>{user.displayName}</Text>
-            <Text style={[styles.text]}>{user.displayName}</Text>
-            <Text style={[styles.text]}>{user.email}</Text>
-          </View>
-          <View style={styles.boxx2}>
-            <View style={styles.center}>
-              <TouchableOpacity
-                onPress={() => handleSw(true)}
-              >
-                <Text style={[styles.text]}>Your Posts</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={[styles.text]}>|</Text>
-            <View style={styles.center}>
-              <TouchableOpacity
-                onPress={() => handleSw(false)}
-              >
-                <Text style={[styles.text]}>Saved</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+        <View style={styles.inNav}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Setting')}
+          >
+            <Image
+              style={{ width: 40, height: 40, marginRight: 5 }}
+              source={settingImage}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => data.logout()}
+          >
+            <Image
+              style={{ width: 40, height: 40, marginRight: 5 }}
+              source={exitImage}
+            />
+          </TouchableOpacity>
         </View>
-        <ScrollView style={{width: '84%', height: '100%', fontSize: '100%',left:'8%'}}>
-          {sw ? (
-            <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
-          ) : (
-            <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-          )}
-        </ScrollView>
       </View>
-    );
-  }
-  else{
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo]} source={userImage} />
-            <Text style={[styles.text,{marginLeft: 5, fontSize: 25,}]}>โปรไฟล์</Text>
-          </View>
-          <View style={styles.inNav}>
+      
+      <View style={styles.containerContent} >
+        <View style={styles.boxx}>
+          <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
+          <Text style={[styles.text]}>{user.displayName}</Text>
+          <Text style={[styles.text]}>{user.displayName}</Text>
+          <Text style={[styles.text]}>{user.email}</Text>
+        </View>
+        <View style={styles.boxx2}>
+          <View style={styles.center}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Setting')}
+              onPress={() => handleSw(true)}
             >
-              <Image
-                style={{ width: 40, height: 40, marginRight: 5 }}
-                source={settingImage}
-              />
+              <Text style={[styles.text]}>{language === 'EN' ? "Your Posts" : "โพสต์ของคุณ"}</Text>
             </TouchableOpacity>
+          </View>
+          <Text style={[styles.text]}>|</Text>
+          <View style={styles.center}>
             <TouchableOpacity
-              onPress={() => data.logout()}
+              onPress={() => handleSw(false)}
             >
-              <Image
-                style={{ width: 40, height: 40, marginRight: 5 }}
-                source={exitImage}
-              />
+              <Text style={[styles.text]}>{language === 'EN' ? "Saved" : "บันทึก"}</Text>
             </TouchableOpacity>
           </View>
         </View>
-        
-        <View style={styles.containerContent} >
-          <View style={styles.boxx}>
-            <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
-            <Text style={[styles.text]}>{user.displayName}</Text>
-            <Text style={[styles.text]}>{user.displayName}</Text>
-            <Text style={[styles.text]}>{user.email}</Text>
-          </View>
-          <View style={styles.boxx2}>
-            <View style={styles.center}>
-              <TouchableOpacity
-                onPress={() => handleSw(true)}
-              >
-                <Text style={[styles.text]}>โพสของคุณ</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={[styles.text]}>|</Text>
-            <View style={styles.center}>
-              <TouchableOpacity
-                onPress={() => handleSw(false)}
-              >
-                <Text style={[styles.text]}>บันทึก</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <ScrollView style={{width: '84%', height: '100%', fontSize: '100%',left:'8%'}}>
-          {sw ? (
-            <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
-          ) : (
-            <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
-          )}
-        </ScrollView>
       </View>
-    );
-  }
+      <ScrollView style={{width: '84%', height: '100%', fontSize: '100%',left:'8%'}}>
+        {sw ? (
+          <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
+        ) : (
+          <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
+        )}
+      </ScrollView>
+    </View>
+  );
 };
 
 

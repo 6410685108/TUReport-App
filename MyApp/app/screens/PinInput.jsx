@@ -16,8 +16,8 @@ import {
 import { db } from "../system/db";
 import * as ImagePicker from "expo-image-picker";
 import { SettingContext } from "../system/setting";
-// import PinView from 'react-native-pin-view';
-// import ReactNativePinView from "react-native-pin-view";
+import PinView from 'react-native-pin-view';
+import ReactNativePinView from "react-native-pin-view";
 
 const Pin = () => {
   const { setting } = useContext(SettingContext);
@@ -51,7 +51,7 @@ const Pin = () => {
       <View style={styles.pinViewContainer}>
         <ReactNativePinView
           ref={pinViewRef}
-          pinLength={6} // Enforce a 6-digit PIN
+          pinLength={6} 
           onValueChange={handlePinChange}
           inputViewEmptyStyle={styles.inputViewEmptyStyle}
           inputViewFilledStyle={styles.inputViewFilledStyle}
@@ -59,7 +59,6 @@ const Pin = () => {
           buttonTextStyle={styles.buttonTextStyle}
           customLeftButton={
             <View>
-              {/* Conditionally display "Backspace" button */}
               {enteredPin.length > 0 && (
                 <Icon name="backspace" size={36} color="gray" />
               )}
@@ -67,7 +66,6 @@ const Pin = () => {
           }
           customRightButton={
             <View>
-              {/* Only display "Unlock" button when PIN length is 6 */}
               {enteredPin.length === 6 && (
                 <Icon name="lock-open" size={36} color="gray" />
               )}
@@ -110,6 +108,7 @@ const lightstyles = StyleSheet.create({
   },
   inputViewFilledStyle: {
     backgroundColor: "black",
+    margin: 12,
   },
   buttonViewStyle: {
     borderWidth: 1,
@@ -144,6 +143,7 @@ const darkstyles = StyleSheet.create({
   },
   inputViewFilledStyle: {
     backgroundColor: "white",
+    margin: 12,
   },
   buttonViewStyle: {
     borderWidth: 1,

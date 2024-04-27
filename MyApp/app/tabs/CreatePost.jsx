@@ -82,172 +82,89 @@ const CreatePost = () => {
   const mapImage = theme === 'light' ? require('../picture/map.png') : require('../picture/map_w.png');
   const photoImage = theme === 'light' ? require('../picture/photo.png') : require('../picture/photo_w.png');
   const styles = theme === 'light' ? lightstyles : darkstyles;
-  if (language == "EN") {
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo, {margin: 5}]} source={createpostImage} />
-            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
-          </View>
-        </View>
-        
-        <View style={styles.containerContent} >
-        <TouchableOpacity onPress={handleAcceptToggle} style={{left:'8%'}}>
-          {anonymous ? (
-            <View style={styles.content}>
-              <Image style={styles.logo2}source={user_profileImage}/>
-              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>Anonymous</Text>
-            </View>
-          ) :            
-            <View style={styles.content}>
-              <Image style={styles.logo2}source={{uri: user.photoURL}}/>
-              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>{user.displayName}</Text>
-            </View>
-          }
-          </TouchableOpacity>
-         
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={addTopicImage}/>
-            <TextInput
-            placeholder="Add topic"
-            placeholderTextColor={styles.placeholderStyle.color}
-            
-            value={topic}
-            onChangeText={setTopic}
-            onSubmitEditing={handleTopicSubmit}
-            style={styles.boxx}
-            />
-          </View>
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={AddMoreDetailImage}/>
-            <TextInput
-            placeholder="Add more details"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={details}
-            onChangeText={setDetails}
-            multiline
-            style={[styles.boxx,{height:100, textAlignVertical: 'top',}]}
-            />
-          </View>
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={mapImage}/>
-            <TextInput
-            placeholder="Add location"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={location}
-            onChangeText={setLocation}
-            onSubmitEditing={handleLocationSubmit}
-            style={styles.boxx}
-            />
-          </View>
-          <View style={styles.content}>
-            <TouchableOpacity onPress={handleAddPhoto}>
-              <Image style={styles.logo2}source={photoImage}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleAddPhoto} style={{ flex: 1 }}>
-              <Text style={styles.boxx}>Add photos</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.content}>
-            <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
-              {anonymous ? (
-                <Text style={styles.checkmark}>✓</Text>
-              ) : null}
-            </TouchableOpacity>
-            <Text style={styles.boxx}>Anonymous</Text>
-          </View>
-  
-        </View>
-        <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
-          <Text style={styles.text2}>Submit</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-  else{
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo, {margin: 5}]} source={createpostImage} />
-            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
-          </View>
-        </View>
-        
-        <View style={styles.containerContent} >
-          <TouchableOpacity onPress={handleAcceptToggle} style={{left:'8%'}}>
-          {anonymous ? (
-            <View style={styles.content}>
-              <Image style={styles.logo2}source={user_profileImage}/>
-              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ไม่ระบุตัวตน</Text>
-            </View>
-          ) :            
-            <View style={styles.content}>
-              <Image style={styles.logo2}source={{uri: user.photoURL}}/>
-              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>{user.displayName}</Text>
-            </View>
-          }
-          </TouchableOpacity>
 
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={addTopicImage}/>
-            <TextInput
-            placeholder="เพิ่มหัวข้อ"
-            placeholderTextColor={styles.placeholderStyle.color}
-            
-            value={topic}
-            onChangeText={setTopic}
-            onSubmitEditing={handleTopicSubmit}
-            style={styles.boxx}
-            />
-          </View>
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={AddMoreDetailImage}/>
-            <TextInput
-            placeholder="เพิ่มรายละเอียด"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={details}
-            onChangeText={setDetails}
-            multiline
-            style={[styles.boxx,{height:100, textAlignVertical: 'top',}]}
-            />
-          </View>
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={mapImage}/>
-            <TextInput
-            placeholder="ระบุสถานที่"
-            placeholderTextColor={styles.placeholderStyle.color}
-            value={location}
-            onChangeText={setLocation}
-            onSubmitEditing={handleLocationSubmit}
-            style={styles.boxx}
-            />
-          </View>
-          <View style={styles.content}>
-            <TouchableOpacity onPress={handleAddPhoto}>
-              <Image style={styles.logo2}source={photoImage}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleAddPhoto} style={{ flex: 1 }}>
-              <Text style={styles.boxx}>เพิ่มรูปภาพ</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.content}>
-            <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
-              {anonymous ? (
-                <Text style={styles.checkmark}>✓</Text>
-              ) : null}
-            </TouchableOpacity>
-            <Text style={styles.boxx}>ไม่ระบุตัวตน</Text>
-          </View>
-  
+  return (
+    <View style={styles.container}>
+      <View style={styles.nav}>
+        <View style={styles.inNav}>
+          <Image style={[styles.logo, {margin: 5}]} source={createpostImage} />
+          <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>{language === 'EN' ? "CREATE POST" : "สร้างโพสต์"}</Text>
         </View>
-        <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
-          <Text style={styles.text2}>โพสต์</Text>
-        </TouchableOpacity>
       </View>
-    );
-  }
+      
+      <View style={styles.containerContent} >
+      <TouchableOpacity onPress={handleAcceptToggle} style={{left:'8%'}}>
+        {anonymous ? (
+          <View style={styles.content}>
+            <Image style={styles.logo2}source={user_profileImage}/>
+            <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>{language === 'EN' ? "Anonymous" : "ไม่ระบุตัวตน"}</Text>
+          </View>
+        ) :            
+          <View style={styles.content}>
+            <Image style={styles.logo2}source={{uri: user.photoURL}}/>
+            <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>{user.displayName}</Text>
+          </View>
+        }
+        </TouchableOpacity>
+        
+        <View style={styles.content}>
+          <Image style={styles.logo2}source={addTopicImage}/>
+          <TextInput
+          placeholder={language === 'EN' ? "Add topic" : "เพิ่มหัวข้อ"}
+          placeholderTextColor={styles.placeholderStyle.color}
+          
+          value={topic}
+          onChangeText={setTopic}
+          onSubmitEditing={handleTopicSubmit}
+          style={styles.boxx}
+          />
+        </View>
+        <View style={styles.content}>
+          <Image style={styles.logo2}source={AddMoreDetailImage}/>
+          <TextInput
+          placeholder={language === 'EN' ? "Add more details" : "เพิ่มรายละเอียด"}
+          placeholderTextColor={styles.placeholderStyle.color}
+          value={details}
+          onChangeText={setDetails}
+          multiline
+          style={[styles.boxx,{height:100, textAlignVertical: 'top',}]}
+          />
+        </View>
+        <View style={styles.content}>
+          <Image style={styles.logo2}source={mapImage}/>
+          <TextInput
+          placeholder={language === 'EN' ? "Add location" : "ระบุสถานที่"}
+          placeholderTextColor={styles.placeholderStyle.color}
+          value={location}
+          onChangeText={setLocation}
+          onSubmitEditing={handleLocationSubmit}
+          style={styles.boxx}
+          />
+        </View>
+        <View style={styles.content}>
+          <TouchableOpacity onPress={handleAddPhoto}>
+            <Image style={styles.logo2}source={photoImage}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleAddPhoto} style={[styles.boxx,{ flex: 1 }]}>
+            <Text style={[styles.text,{height:25,top:-2,}]}>{language === 'EN' ? "Add photos" : "เพิ่มรูปภาพ"}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.content}>
+          <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
+            {anonymous ? (
+              <Text style={styles.checkmark}>✓</Text>
+            ) : null}
+          </TouchableOpacity>
+          <Text style={styles.boxx}>{language === 'EN' ? "Anonymous" : "ไม่ระบุตัวตน"}</Text>
+        </View>
+
+      </View>
+      <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
+        <Text style={styles.text2}>{language === 'EN' ? "Submit" : "โพสต์"}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+  
 };
 
 let styles ;

@@ -65,8 +65,6 @@ const Home = ({ navigation }) => {
   const notiImage = theme === 'light' ? require('../picture/noti.png') : require('../picture/noti_w.png');
 
 
-
-if (language == "EN") {
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
@@ -75,7 +73,7 @@ if (language == "EN") {
             style={styles.logo}
             source={homeImage}
           />
-          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>HOME</Text>
+          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>{language === 'EN' ? "HOME" : "หน้าหลัก"}</Text>
         </View>
         <TouchableOpacity
           onPress={() => {
@@ -110,52 +108,7 @@ if (language == "EN") {
       <Posts option={country} />
     </View>
   );
-}
-else{
-  return (
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <View style={styles.inNav}>
-          <Image
-            style={styles.logo}
-            source={homeImage}
-          />
-          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>หน้าหลัก</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Notification");
-          }}
-        >
-          <Image
-            style={{ width: 40, height: 40, marginRight: 5 }}
-            source={notiImage}
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.nav2}>
-        <SelectCountry
-          style={styles.dropdown}
-          containerStyle={styles.containerStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          placeholderStyle={styles.placeholderStyle}
-          imageStyle={styles.imageStyle}
-          iconStyle={styles.iconStyle}
-          maxHeight={200}
-          value={country}
-          data={local_data}
-          valueField="value"
-          labelField="lable"
-          onChange={(e) => {
-            setCountry(e.value);
-          }}
-        />
-      </View>
 
-      <Posts option={country} />
-    </View>
-  );
-}
 };
 
 const darkstyles = StyleSheet.create({

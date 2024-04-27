@@ -71,74 +71,39 @@ const QandA = () => {
     theme === "light"
       ? require("../picture/qa.png")
       : require("../picture/qa_w.png");
-
-  if (language == "EN") {
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo]} source={qa_iconImage} />
-            <Text style={[styles.textHeader, { marginLeft: 5, fontSize: 25 }]}>
-              Q & A
-            </Text>
-          </View>
+      
+  return (
+    <View style={styles.container}>
+      <View style={styles.nav}>
+        <View style={styles.inNav}>
+          <Image style={[styles.logo]} source={qa_iconImage} />
+          <Text style={[styles.textHeader, { marginLeft: 5, fontSize: 25 }]}>
+            {language === 'EN' ? "Q & A" : "ช่วยเหลือ"}
+          </Text>
         </View>
-
-        <View style={styles.boxx}>
-          <View style={styles.contactAdminContainer}>
-            <Image style={styles.logo2} source={qaImage} />
-            <View style={styles.contactAdminInfo}>
-              <Text style={styles.contactAdminTitle}>Contact Admin</Text>
-              <Text style={styles.contactAdminText}>Tel: 00000000</Text>
-              <Text style={styles.contactAdminText}>Line: BBBBBB</Text>
-            </View>
-          </View>
-        </View>
-
-        <ScrollView style={[styles.center, { marginLeft: 0 }]}>
-          {questions.map((item, index) => (
-            <View key={index} style={styles.qa}>
-              <Text style={styles.questionText}>Q: {item.question}</Text>
-              <Text style={styles.answerText}>A: {item.answer}</Text>
-            </View>
-          ))}
-        </ScrollView>
       </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <View style={styles.nav}>
-          <View style={styles.inNav}>
-            <Image style={[styles.logo]} source={qa_iconImage} />
-            <Text style={[styles.text, { marginLeft: 5, fontSize: 25 }]}>
-              ช่วยเหลือ
-            </Text>
+
+      <View style={styles.boxx}>
+        <View style={styles.contactAdminContainer}>
+          <Image style={styles.logo2} source={qaImage} />
+          <View style={styles.contactAdminInfo}>
+            <Text style={styles.contactAdminTitle}>{language === 'EN' ? "Contact Admin" : "ติดต่อ แอดมิน"}</Text>
+            <Text style={styles.contactAdminText}>{language === 'EN' ? "Tel: 00000000" : "โทรศัพท์: 00000000"}</Text>
+            <Text style={styles.contactAdminText}>{language === 'EN' ? "Line: BBBBBB" : "ไลน์: BBBBBB"}</Text>
           </View>
         </View>
-
-        <View style={styles.boxx}>
-          <View style={styles.contactAdminContainer}>
-            <Image style={styles.logo2} source={qaImage} />
-            <View style={styles.contactAdminInfo}>
-              <Text style={styles.contactAdminTitle}>ติดต่อ แอดมิน</Text>
-              <Text style={styles.contactAdminText}>โทรศัพท์: 00000000</Text>
-              <Text style={styles.contactAdminText}>ไลน์: BBBBBB</Text>
-            </View>
-          </View>
-        </View>
-
-        <ScrollView style={[styles.center, { marginLeft: 0 }]}>
-          {questions.map((item, index) => (
-            <View key={index} style={styles.qa}>
-              <Text style={styles.questionText}>Q: {item.question}</Text>
-              <Text style={styles.answerText}>A: {item.answer}</Text>
-            </View>
-          ))}
-        </ScrollView>
       </View>
-    );
-  }
+
+      <ScrollView style={[styles.center, { marginLeft: 0 }]}>
+        {questions.map((item, index) => (
+          <View key={index} style={styles.qa}>
+            <Text style={styles.questionText}>Q: {item.question}</Text>
+            <Text style={styles.answerText}>A: {item.answer}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  );
 };
 
 const lightstyles = StyleSheet.create({
