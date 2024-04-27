@@ -191,7 +191,7 @@ const SettingInput = () => {
                 <Image style={styles.logo2}source={{ uri: user.photoURL }}/>
                 <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
                     <View style={styles.boxx3}>
-                        <Text style={[styles.text,{fontSize:12}]}>แก้ไข ข้อมูล</Text>
+                        <Text style={[styles.text,{fontSize:12}]}>แก้ไขข้อมูล</Text>
                     </View>
                 </TouchableOpacity>
                 </View>

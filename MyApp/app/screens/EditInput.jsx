@@ -10,23 +10,22 @@ const Edit = () => {
     const { theme, language } = setting;
 
     const [displayname, setDisplayname] = useState('');
-    const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
 
     const user = db.getCurrentUser();
     useEffect (()=>{
         setDisplayname(user.displayName)
-        setEmail(user.email)
         setPhoneNumber(user.phoneNumber)
     } ,[])
 
   const handleMessageSubmit = async () => {
-    if (displayname==('' || null) || email==('' || null)|| phoneNumber==('' || null)){
+    if (displayname!=('' || null) || phoneNumber!=('' || null)){
       try{
         await Promise.all([ 
           db.setDisplayName(displayname),
-          db.setPhoneNumber(phoneNumber),
+          // db.setPhoneNumber(phoneNumber), ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+          // db.uploadUserPhoto(photo), tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
         ]);
         Alert.alert('Profile updated successfully');
         return;
@@ -97,16 +96,6 @@ const Edit = () => {
                 style={styles.boxx}
                 />
             </View>
-            <Text style={[styles.text2]}>{'Email'}</Text>
-            <View style={styles.content}>
-                <TextInput
-                placeholderTextColor={styles.placeholderStyle.color}
-                value={email}
-                onChangeText={setEmail}
-                onSubmitEditing={handleEmailSubmit}
-                style={[styles.boxx]}
-                />
-            </View>
             <Text style={[styles.text2]}>{'Phone'}</Text>
             <View style={styles.content}>
                 <TextInput
@@ -126,7 +115,46 @@ const Edit = () => {
     );
   }
   else{
-    return true;
+    return (
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <Text style={[styles.text,{margin: 5, fontSize: 25,paddingBottom:20}]}>แก้ไขข้อมูล</Text>
+          </View>
+        </View>
+        <View style={styles.containerContent} >
+            <View style={styles.center}>
+                <TouchableOpacity onPress={handleAddPhoto}>
+                <Image style={[styles.logo2]}source={{ uri: user.photoURL }}/>
+                </TouchableOpacity>
+            </View>
+            <Text style={[styles.text2]}>{'ชื่อผู้ใช้'}</Text>
+            <View style={styles.content}>
+                <TextInput
+                placeholderTextColor={styles.placeholderStyle.color}
+                value={displayname}
+                onChangeText={setDisplayname}
+                onSubmitEditing={handleNameSubmit}
+                style={styles.boxx}
+                />
+            </View>
+            <Text style={[styles.text2]}>{'เบอร์โทร'}</Text>
+            <View style={styles.content}>
+                <TextInput
+                placeholderTextColor={styles.placeholderStyle.color}
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
+                onSubmitEditing={handlePhoneSubmit}
+                style={styles.boxx}
+                />
+            </View>
+
+        </View>
+        <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
+          <Text style={styles.text3}>ตกลง</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 };
 
@@ -168,7 +196,7 @@ const lightstyles = StyleSheet.create({
         left: "10%" ,
         paddingTop: 10,
         paddingBottom: 10,
-        maxWidth: "80%",
+        maxWidth: "80%", 
     },
     center: {
         justifyContent: 'center',
@@ -184,6 +212,7 @@ const lightstyles = StyleSheet.create({
       borderColor: 'gray',
       margin: 0,
       color: 'black',
+      borderRadius: 15,
     },
     placeholderStyle: {
       color: 'black', 
@@ -289,6 +318,7 @@ const darkstyles = StyleSheet.create({
       borderColor: 'gray',
       margin: 0,
       color: 'white',
+      borderRadius: 15,
     },
     placeholderStyle: {
       color: 'white', 

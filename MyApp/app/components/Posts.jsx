@@ -82,7 +82,37 @@ const Posts = ({option}) => {
                                 <Text style={{fontSize: 12}}>{info.time}</Text>
                             </View>
                         </View>
-                        <Text style={{fontSize: 14}}>{info.status}</Text>
+
+                        {info.status !== 'Finished' && info.status !== 'Reject' && (
+                        <View style={{flexDirection: 'column'}}>
+                            <Text style={{fontSize: 14,color: 'black',textAlign: 'center'}}>{info.status}</Text>
+                            {info.status === 'Pending' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Pending.png')} />
+                            )}
+                            {info.status === 'Approved' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
+                            )}
+                            {info.status === 'in progress' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
+                            )}
+                            {info.status === 'Waiting' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Waiting.png')} />
+                            )}
+                        </View>
+                        )}
+                        {info.status === 'Reject' || info.status === 'Finished' && (
+                        <View style={{flexDirection: 'row'}}>
+                            
+                            {info.status === 'Reject' &&(
+                            <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
+                            )}
+                            {info.status === 'Finished' &&(
+                            <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
+                            )}
+                            <Text style={{fontSize: 14,color: 'black',textAlign: 'center'}}>{info.status}</Text>
+                        </View>
+                        )}
+
                     </View>
                     <Text style={{fontWeight: 'bold', fontSize: 16, marginTop: 10}}>
                         {info.title}
@@ -128,8 +158,37 @@ const Posts = ({option}) => {
                                 <Text style={{fontSize: 12,color: 'white'}}>{info.time}</Text>
                             </View>
                         </View>
-                        <Text style={{fontSize: 14,color: 'white'}}>{info.status}</Text>
-                        <Image style={{width: 40, height: 40}} source={require('../picture/Inprogress.png')} />
+
+                        {info.status !== 'Finished' && info.status !== 'Reject' && (
+                        <View style={{flexDirection: 'column'}}>
+                            <Text style={{fontSize: 14,color: 'white',textAlign: 'center'}}>{info.status}</Text>
+                            {info.status === 'Pending' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Pending.png')} />
+                            )}
+                            {info.status === 'Approved' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
+                            )}
+                            {info.status === 'in progress' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
+                            )}
+                            {info.status === 'Waiting' &&(
+                                <Image style={{width: 70, height: 20}} source={require('../picture/Waiting.png')} />
+                            )}
+                        </View>
+                        )}
+                        {info.status === 'Reject' || info.status === 'Finished' && (
+                        <View style={{flexDirection: 'row'}}>
+                            
+                            {info.status === 'Reject' &&(
+                            <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
+                            )}
+                            {info.status === 'Finished' &&(
+                            <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
+                            )}
+                            <Text style={{fontSize: 14,color: 'white',textAlign: 'center'}}>{info.status}</Text>
+                        </View>
+                        )}
+
                     </View>
                     <Text style={{fontWeight: 'bold', fontSize: 16, marginTop: 10,color:'snow'}}>
                         {info.title}

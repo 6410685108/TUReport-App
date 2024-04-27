@@ -162,9 +162,6 @@ const CreatePost = () => {
         <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
           <Text style={styles.text2}>Submit</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={test}>
-          <Text style={styles.botsub}>Test Func</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -247,9 +244,6 @@ const CreatePost = () => {
         </View>
         <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
           <Text style={styles.text2}>โพสต์</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={test}>
-          <Text style={styles.botsub}>Test Func</Text>
         </TouchableOpacity>
       </View>
     );
