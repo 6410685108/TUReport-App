@@ -69,7 +69,7 @@ function AuthenticatedScreens() {
   const { setting } = useContext(SettingContext);
   const { theme , language } = setting;
   const styles = theme == 'light' ? lightStyle : darkStyle;
-  const [isStaff, setIsStaff] = useState(true);
+  const [isStaff, setIsStaff] = useState(false);
   if (isStaff) {
     return (
       <Tab.Navigator
