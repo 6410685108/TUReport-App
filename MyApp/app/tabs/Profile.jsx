@@ -3,7 +3,7 @@ import { SettingContext } from '../system/setting';
 
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard ,ScrollView} from 'react-native';
 import Posts from "../components/Posts";
-import { data } from '../system/fetchData';
+import { data } from '../system/data';
 import { db } from '../system/db';
 import { useNavigation } from '@react-navigation/native';
 

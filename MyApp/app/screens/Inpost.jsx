@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React, { useEffect , useState } from "react";
 import { db } from "../system/db"
-import { data } from "../system/fetchData";
+import { data } from "../system/data";
 import UserPhoto from "../components/UserPhoto";
 import Name from "../components/Name";
 

@@ -15,7 +15,7 @@ const createPost = async (title, detail, location , photo , anonymous) => {
             anonymous: anonymous,
             author: firebase_auth.currentUser.uid,
             time: new Date().toLocaleString(),
-            status: 'in progress',
+            status: 'Pending',
             repost: 0,
         });
     } catch (error) {
@@ -154,6 +154,16 @@ const deletePost = async (postId) => {
 }
 
 const changeStatusPost = async (postId, status) => {
+    if( status !== 'Pending' // Use it for test
+        && status !== 'Approved' 
+        && status !== 'In progress'
+        && status !== 'Waiting'
+        && status !== 'Reject'
+        && status !== 'Finished'
+    ){
+        console.error('Invalid status:', status);
+        return;
+    }
     const postCollectionRef = collection(firebase_db, 'posts');
     const postDocRef = doc(postCollectionRef, postId);
 
@@ -305,7 +315,6 @@ const deleteAllNotifications = async () => {
     }
 }
 
-
 const createComment = async (postId, comment) => {
     try {
         const commentCollectionRef = collection(firebase_db, 'posts', postId, 'comments');
@@ -409,6 +418,20 @@ const getDisplayNameOfID = async (uid) => {
     }
 }
 
+const setUserRole = async (role) => {
+    const uid = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'users', uid);
+        await setDoc(userRef, {
+            role: 'role',
+        }, { merge: true });
+    } catch (error) {
+        console.error('Error setting user role:', error);
+    }
+}
+
+
+
 const db = {
     createPost ,
     editPost ,
@@ -438,6 +461,8 @@ const db = {
     setDisplayName,
     getCurrentUser,
     getDisplayNameOfID,
+
+    setUserRole,
 };
 
 export { db };

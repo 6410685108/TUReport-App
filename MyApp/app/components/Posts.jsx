@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 import UserPhoto from "./UserPhoto";
 import Name from "./Name";
-import { data } from "../system/fetchData";
+import { data } from "../system/data";
 
 const Posts = ({option}) => {
     const { setting } = useContext(SettingContext);

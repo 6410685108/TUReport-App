@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { data } from "../system/fetchData";
+import { data } from "../system/data";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
