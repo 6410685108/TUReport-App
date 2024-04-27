@@ -33,7 +33,7 @@ const Notification =  () => {
         <View style={styles.inNav}>
         <Image style={styles.logo} source={noti_Image} />
           <Text style={[styles.text, { marginLeft: 5, fontSize: 25 }]}>
-            Notification
+          {language === 'EN' ? "Notification" : "การแจ้งเตือน"}
           </Text>
         </View>
         <TouchableOpacity
