@@ -13,9 +13,10 @@ const Posts = ({option}) => {
     const [sortedPosts, setSortedPosts] = useState([]);
 
     const fetchData = async () => {
-        const posts = await data.getSortPosts(option);
+        posts = await data.getSortPosts(option);
         setSortedPosts(posts);
         setLoading(false);
+       
     }
 
     const handleRefresh = async () => {

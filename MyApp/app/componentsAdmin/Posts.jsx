@@ -6,14 +6,19 @@ import UserPhoto from "../components/UserPhoto";
 import Name from "../components/Name";
 import { data } from "../system/data";
 
-const Posts = ({option}) => {
+const Posts = ({option , status}) => {
     const [refreshing, setRefreshing] = useState(false); 
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
 
     const fetchData = async () => {
-        const posts = await data.getSortPosts(option);
+        let posts = [];
+        if(status){
+            posts = await db.getStatusPosts(option,status);
+        } else{
+            posts = await data.getSortPosts(option);
+        }
         setSortedPosts(posts);
         setLoading(false);
     }

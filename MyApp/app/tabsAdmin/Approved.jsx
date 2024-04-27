@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import Posts from "../components/Posts";
+import Posts from "../componentsAdmin/Posts";
 import { SelectCountry } from "react-native-element-dropdown";
 import { SettingContext } from "../system/setting";
 
@@ -78,7 +78,7 @@ if (language == "EN") {
           <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>Approved</Text>
         </View>
       </View>
-      <Posts option={country} />
+      <Posts option={country} status={"Approved"}/>
     </View>
   );
 }
@@ -94,7 +94,7 @@ else{
           <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>ร้องขอ</Text>
         </View>
       </View>
-      <Posts option={country} />
+      <Posts option={country} status={"Approved"}/>
     </View>
   );
 }

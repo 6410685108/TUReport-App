@@ -95,7 +95,7 @@ const Pending = ({ navigation }) => {
           />
         </View>
   
-        <Posts option={country} />
+        <Posts option={country} status={"Pending"}/>
       </View>
     );
   }
@@ -140,7 +140,7 @@ const Pending = ({ navigation }) => {
           />
         </View>
   
-        <Posts option={country} />
+        <Posts option={country} status={"Pending"}/>
       </View>
     );
   }
