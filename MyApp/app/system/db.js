@@ -75,7 +75,7 @@ const repostPost = async (postId,isReposted) => {
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
-            notify(postId , firebase_auth.currentUser.uid ,  `${firebase_auth.currentUser.displayName}repost your post`);
+            notify(postId , firebase_auth.currentUser.uid ,  `${firebase_auth.currentUser.displayName} repost your post`);
             return false;
         }
     }
@@ -282,7 +282,6 @@ const getBookmarkPosts = async () => {
 const notify = async (postid , uid , title) => {
     try { 
         console.log("Create Notify")
-        const uid = await getPostAuthorUID(postid);
         const notifyCollectionRef = collection(firebase_db, 'users' , uid , 'notification');
         await addDoc(notifyCollectionRef, {
             title: title,
@@ -291,7 +290,7 @@ const notify = async (postid , uid , title) => {
             time: new Date().toLocaleString(),
         });
     } catch (error) {
-        console.error('Error creating post:', error);
+        console.error('Error creating notify:', error);
         throw error;
     }
 }
