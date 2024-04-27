@@ -19,8 +19,7 @@ const Notification =  () => {
 
   const handleToInpost = async (postId) => {
     const post = await db.getPost(postId);
-    const send = [ post ] ;
-    navigation.navigate("Inpost", { postInfo: send });
+    navigation.navigate("Inpost", { postInfo: post });
   }
 
   return (
