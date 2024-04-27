@@ -57,26 +57,28 @@ const uploadImage = async (image , path) => {
     }
 };
 
-const repostPost = async (postId,isReposted) => {
+const repostPost = async (postId) => {
     const postCollectionRef = collection(firebase_db, 'posts');
     const postDocRef = doc(postCollectionRef, postId);
     const postDocSnap = await getDoc(postDocRef);
     if (postDocSnap.exists()) {
-        if(isReposted){
+        if(await isReposted(postId)){
             console.log('unrepost');
             const repostCount = postDocSnap.data().repost - 1;
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
-            return true;
+            await removeReposter(postId);
+            return false;
         } else {
             console.log('repost');
             const repostCount = postDocSnap.data().repost + 1;
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
+            await addReposter(postId);
             notify(postId , firebase_auth.currentUser.uid ,  `repost your post`);
-            return false;
+            return true;
         }
     }
 }

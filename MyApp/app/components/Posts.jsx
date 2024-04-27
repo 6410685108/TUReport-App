@@ -46,13 +46,7 @@ const Posts = ({option}) => {
     }
 
     const handleRepost = async (postId) => {
-        const isReposted = await db.isReposted(postId);
-        await db.repostPost(postId,isReposted);
-        if (isReposted){
-            db.removeReposter(postId);
-        }else{
-            db.addReposter(postId);
-        }
+        await db.repostPost(postId,);
         await fetchData();
     }
 

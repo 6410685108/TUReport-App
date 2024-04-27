@@ -12,6 +12,7 @@ import React, { useEffect , useState } from "react";
 import { db } from "../system/db"
 import { data } from "../system/fetchData";
 import UserPhoto from "../components/UserPhoto";
+import Name from "../components/Name";
 
 const Inpost = ({ navigation, route }) => {
   const { postInfo } = route.params;
@@ -38,8 +39,9 @@ const Inpost = ({ navigation, route }) => {
 }, [navigation,repost]);
 
   const handleRepost = async (postId) => {
-    const isRepost = await db.repostPost(postId);
-    if (isRepost){
+    db.repostPost(postId);
+    const isRepost = await db.isReposted(postId)
+    if (isRepost) {
       setRepost(repost - 1);
     } else {
       setRepost(repost + 1);
@@ -72,7 +74,7 @@ const Inpost = ({ navigation, route }) => {
             <UserPhoto userId={postInfo.author.uid} />
               <View style={{ flexDirection: "column", paddingLeft: 5 }}>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                  {postInfo.author.displayName}
+                  <Name userId={postInfo.author} />
                 </Text>
                 <Text style={{ fontSize: 12 }}>{postInfo.time}</Text>
               </View>
@@ -128,8 +130,6 @@ const Inpost = ({ navigation, route }) => {
               marginTop: 15,
             }}
           />
-
-
           <View>
             {comments.map((comment) => (
               <View
@@ -144,7 +144,7 @@ const Inpost = ({ navigation, route }) => {
                   <UserPhoto userId={comment.author.uid} />
                   <View style={{ flexDirection: "column", paddingLeft: 6 }}>
                     <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-                      {comment.author.displayName}
+                      <Name userId={comment.author} /> <Text style={{ fontSize: 10, fontWeight: "normal" }}>{comment.time}</Text>
                     </Text>
                     <Text style={{ fontSize: 13 }}>{comment.comment}</Text>
                   </View>
