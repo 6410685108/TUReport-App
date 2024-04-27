@@ -14,6 +14,7 @@ const Posts = ({option}) => {
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
+    const [pressBookmark, setPressBookmark] = useState(false);
 
     const fetchData = async () => {
         const posts = await data.getSortPosts(option);
@@ -96,7 +97,8 @@ const Posts = ({option}) => {
                             <Text style={{paddingLeft: 5}}>{info.repost}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                            <Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />
+                        { pressBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2.png')} /> 
+                            ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />)}
                         </TouchableOpacity>
                     </View>
                     <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginVertical: 10}}/>
@@ -126,7 +128,7 @@ const Posts = ({option}) => {
                             </View>
                         </View>
                         <Text style={{fontSize: 14,color: 'white'}}>{info.status}</Text>
-                        <Image style={{width: 40, height: 40}} source={require(`../picture/InProgress_icon.png`)} />
+                        <Image style={{width: 40, height: 40}} source={require('../picture/Inprogress.png')} />
                     </View>
                     <Text style={{fontWeight: 'bold', fontSize: 16, marginTop: 10,color:'snow'}}>
                         {info.title}
@@ -138,11 +140,12 @@ const Posts = ({option}) => {
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => handleRepost(info.id)}>
-                            <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon.png')} />
-                            <Text style={{paddingLeft: 5}}>{info.repost}</Text>
+                            <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon_w.png')} />
+                            <Text style={{paddingLeft: 5,color:'white'}}>{info.repost}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                            <Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />
+                            { pressBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2_w.png')} /> 
+                            ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1_w.png')} />)}
                         </TouchableOpacity>
                     </View>
                     <TextInput placeholder="Comment" placeholderTextColor={'white'} style={{borderWidth: 1, borderColor: 'white', borderRadius: 10, padding: 5, marginVertical: 10}}/>
