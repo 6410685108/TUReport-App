@@ -7,6 +7,7 @@ import Name from "../components/Name";
 
 const Notification =  () => {
   const [data, setData] = useState([]);
+  const notiImage = require("../picture/noti.png");
   const fetchData = async () => {
     const res = await db.getNotification();
     setData(res);
@@ -31,6 +32,16 @@ const Notification =  () => {
             Notification
           </Text>
         </View>
+        <TouchableOpacity
+          onPress={() => {
+            console.log("Clear");
+          }}
+        >
+          <Image
+            style={{ width: 40, height: 40, marginRight: 5 }}
+            source={notiImage}
+          />
+        </TouchableOpacity>
       </View>
       <View style={{ margin: 20 }}>
         {data.map((info) => (
