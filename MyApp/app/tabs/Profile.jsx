@@ -84,14 +84,13 @@ const Profile = () => {
             </View>
           </View>
         </View>
-          <View style={[styles.center2,{marginLeft:0}]}>
+        <ScrollView style={{width: '84%', height: '100%', fontSize: '100%',left:'8%'}}>
           {sw ? (
             <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
           ) : (
             <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
           )}
-
-          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -148,13 +147,13 @@ const Profile = () => {
             </View>
           </View>
         </View>
-          <View style={[styles.center2,{marginLeft:0}]}>
+        <ScrollView style={{width: '84%', height: '100%', fontSize: '100%',left:'8%'}}>
           {sw ? (
             <Posts key={`${reloadKey}-MyPost`} option={"MyPost"} />
           ) : (
             <Posts key={`${reloadKey}-Bookmark`} option={"Bookmark"} />
           )}
-          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -191,15 +190,6 @@ const lightstyles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       width: "50%",
-    },
-    center2: {
-      justifyContent: "center",
-      alignItems: "center",
-      width: "80%",
-      paddingTop: 2,
-      backgroundColor: '#ECECEC',
-      borderRadius: 20,
-      alignSelf: 'center',
     },
     boxx: {
       justifyContent: "center",
@@ -268,15 +258,6 @@ const darkstyles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       width: "50%",
-    },
-    center2: {
-      justifyContent: "center",
-      alignItems: "center",
-      width: "80%",
-      left: "10%" ,
-      paddingTop: 2,
-      backgroundColor: '#ECECEC',
-      borderRadius: 20,
     },
     boxx: {
       justifyContent: "center",
