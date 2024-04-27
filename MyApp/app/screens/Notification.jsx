@@ -90,17 +90,9 @@ const styles = StyleSheet.create({
     height: 40,
   },
   profile: {
-    width: 40,
-    height: 40,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "lightgrey",
     marginRight: 10,
-  },
-  profileImg: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
   },
 });
