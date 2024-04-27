@@ -78,7 +78,7 @@ const QandA = () => {
         <View style={styles.nav}>
           <View style={styles.inNav}>
             <Image style={[styles.logo]} source={qa_iconImage} />
-            <Text style={[styles.text, { marginLeft: 5, fontSize: 25 }]}>
+            <Text style={[styles.textHeader, { marginLeft: 5, fontSize: 25 }]}>
               Q & A
             </Text>
           </View>
@@ -98,8 +98,8 @@ const QandA = () => {
         <ScrollView style={[styles.center, { marginLeft: 0 }]}>
           {questions.map((item, index) => (
             <View key={index} style={styles.qa}>
-              <Text style={styles.text2}>Q:{item.question}</Text>
-              <Text style={styles.text2}>A:{item.answer}</Text>
+              <Text style={styles.questionText}>Q: {item.question}</Text>
+              <Text style={styles.answerText}>A: {item.answer}</Text>
             </View>
           ))}
         </ScrollView>
@@ -131,8 +131,8 @@ const QandA = () => {
         <ScrollView style={[styles.center, { marginLeft: 0 }]}>
           {questions.map((item, index) => (
             <View key={index} style={styles.qa}>
-              <Text style={styles.text}>Q: {item.question}</Text>
-              <Text style={styles.text2}>A: {item.answer}</Text>
+              <Text style={styles.questionText}>Q: {item.question}</Text>
+              <Text style={styles.answerText}>A: {item.answer}</Text>
             </View>
           ))}
         </ScrollView>
@@ -169,15 +169,34 @@ const lightstyles = StyleSheet.create({
     marginHorizontal: 5,
     marginTop: 5,
   },
+  textHeader: {
+    color: "black",
+  },
   text: {
     color: "black",
     fontSize: 18,
+    fontFamily: "Arial",
+    lineHeight: 24,
+    letterSpacing: 0.5,
     marginLeft: "5%",
     marginRight: "5%",
   },
-  text2: {
+  questionText: {
     color: "black",
     fontSize: 16,
+    fontFamily: "Arial",
+    lineHeight: 20,
+    letterSpacing: 0.5,
+    marginLeft: "5%",
+    marginRight: "5%",
+    fontWeight: "bold",
+  },
+  answerText: {
+    color: "black",
+    fontSize: 14,
+    fontFamily: "Arial",
+    lineHeight: 18,
+    letterSpacing: 0.5,
     marginLeft: "5%",
     marginRight: "5%",
   },
@@ -213,7 +232,7 @@ const lightstyles = StyleSheet.create({
     borderRadius: 30,
   },
   qa: {
-    marginBottom: 20,
+    marginBottom: 15,
     borderWidth: 1,
     borderColor: "black",
     padding: 10,
@@ -266,15 +285,34 @@ const darkstyles = StyleSheet.create({
     marginHorizontal: 5,
     marginTop: 5,
   },
+  textHeader: {
+    color: "white",
+  },
   text: {
     color: "black",
     fontSize: 18,
+    fontFamily: "Arial",
+    lineHeight: 24,
+    letterSpacing: 0.5,
     marginLeft: "5%",
     marginRight: "5%",
   },
-  text2: {
+  questionText: {
     color: "white",
     fontSize: 16,
+    fontFamily: "Arial",
+    lineHeight: 20,
+    letterSpacing: 0.5,
+    marginLeft: "5%",
+    marginRight: "5%",
+    fontWeight: "bold",
+  },
+  answerText: {
+    color: "white",
+    fontSize: 14,
+    fontFamily: "Arial",
+    lineHeight: 18,
+    letterSpacing: 0.5,
     marginLeft: "5%",
     marginRight: "5%",
   },
@@ -299,8 +337,8 @@ const darkstyles = StyleSheet.create({
     marginBottom: 15,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     marginTop: 0,
     borderColor: "white",
   },
@@ -310,7 +348,7 @@ const darkstyles = StyleSheet.create({
     borderRadius: 30,
   },
   qa: {
-    marginBottom: 20,
+    marginBottom: 15,
     borderWidth: 1,
     borderColor: "#ddd",
     padding: 10,
