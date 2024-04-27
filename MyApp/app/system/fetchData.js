@@ -90,7 +90,7 @@ const register = async (email , password) => {
         await signInWithEmailAndPassword(auth,email, password)
         try{
             await db.uploadUserPhoto(
-                "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9"
+                "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile_g.png?alt=media&token=f5e20af9-387f-44ab-a4d8-52b68cbc42b1"
             );
         } catch (error) {
             console.error('Error uploading user photo:', error);
@@ -118,7 +118,7 @@ const getUserPhotoURL = async (userId) => {
         try{
             photoUrl = await db.getUserPhoto(userId);
         } catch (error) {
-            return "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile.png?alt=media&token=71e29d50-3a4c-4403-b9ab-1fd0885916f9";
+            return "https://firebasestorage.googleapis.com/v0/b/tu-reports.appspot.com/o/user_profile_g.png?alt=media&token=f5e20af9-387f-44ab-a4d8-52b68cbc42b1";
         }
         if (!photoUrl) {
            
