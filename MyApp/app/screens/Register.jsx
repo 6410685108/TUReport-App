@@ -30,7 +30,7 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <LinearGradient
-      colors={["#ff7100", "#ffda27"]}
+      colors={["#b50d2e", "#ffd13e"]}
       style={styles.background}
     >
       <View style={styles.container}>
@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "white",
     color: "white",
-    textAlign: "center",
+    textAlign: "flex-start",
+    paddingLeft: 20,
   },
   label: {
     color: "white",
