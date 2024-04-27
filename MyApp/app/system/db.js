@@ -185,7 +185,9 @@ const getPost = async (postId) => {
         const postDocRef = doc(firebase_db, 'posts', postId);
         const postDocSnap = await getDoc(postDocRef);
         if (postDocSnap.exists()) {
-            return postDocSnap.data();
+            const postData = postDocSnap.data();
+            postData.id = postId;
+            return postData;
         } else {
             return null;
         }
@@ -194,21 +196,6 @@ const getPost = async (postId) => {
         return null;
     }
 }
-
-const getPostAuthorUID = async (postId) => {
-    try {
-        const postDocRef = doc(firebase_db, 'posts', postId);
-        const postDocSnap = await getDoc(postDocRef);
-        if (postDocSnap.exists()) {
-            return postDocSnap.data().author.uid;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching post author:', error);
-        return null;
-    }
-};
 
 const userBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
@@ -310,6 +297,20 @@ const getNotification = async () => {
         return [];
     }
 };
+
+const deleteAllNotifications = async () => {
+    const userId = firebase_auth.currentUser.uid;
+    try{
+        const userRef = doc(firebase_db, 'users', userId);
+        const notificationCollectionRef = collection(userRef, 'notification');
+        const notificationSnapshot = await getDocs(notificationCollectionRef);
+        notificationSnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+    } catch (error) {
+        console.error('Error deleting notification:', error);
+    }
+}
 
 
 const createComment = async (postId, comment) => {
@@ -435,6 +436,7 @@ const db = {
     getBookmarkPosts,
 
     getNotification,
+    deleteAllNotifications,
     
     showCurrentUserInfo,
     uploadUserPhoto,
