@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React, { useEffect , useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
+import UserPhoto from "../components/UserPhoto";
+import Name from "../components/Name";
 
 const Notification =  () => {
   const [data, setData] = useState([]);
@@ -36,11 +38,11 @@ const Notification =  () => {
           <View style={{ marginVertical: 10 }} key={info.id}>
             <TouchableOpacity onPress={() => handleToInpost(info.postid)} style={{ flexDirection: 'row' }}>
               <View style={styles.profile}>
-                <Image style={styles.profileImg} source={{ uri: info.userCreate.photo }} />
+                <UserPhoto userId={info.userCreate} />
               </View>
               <View>
                 <Text style={{ fontSize: 16 }}>
-                  {info.title}
+                  <Name userId={info.userCreate}/> {info.title}
                 </Text>
                 <Text style={{ fontSize: 12 }}>{info.time}</Text>
               </View>
