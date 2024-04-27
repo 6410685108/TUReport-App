@@ -75,7 +75,7 @@ const repostPost = async (postId,isReposted) => {
             await updateDoc(postDocRef, {
                 repost: repostCount,
             });
-            notify(postId , firebase_auth.currentUser.uid ,  `${firebase_auth.currentUser.displayName} repost your post`);
+            notify(postId , firebase_auth.currentUser.uid ,  `repost your post`);
             return false;
         }
     }
