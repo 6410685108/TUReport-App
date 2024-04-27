@@ -3,11 +3,11 @@ import React, { useEffect , useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 import UserPhoto from "../components/UserPhoto";
-import Name from "../components/Name";
+import Name from "../components/Name"
 
 const Notification =  () => {
   const [data, setData] = useState([]);
-  const notiImage = require("../picture/noti.png");
+  const notiImage = require("../picture/bin_b1.png");
   const fetchData = async () => {
     const res = await db.getNotification();
     setData(res);
@@ -38,7 +38,7 @@ const Notification =  () => {
           }}
         >
           <Image
-            style={{ width: 40, height: 40, marginRight: 5 }}
+            style={{ width: 30, height: 30, marginRight: 10 }}
             source={notiImage}
           />
         </TouchableOpacity>
