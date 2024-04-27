@@ -76,7 +76,7 @@ const CreatePost = () => {
   }
   const user = db.getCurrentUser();
   const createpostImage = theme === 'light' ? require('../picture/createpost.png') : require('../picture/AddMoreDetail_w.png');
-  const user_profileImage = theme === 'light' ? require('../picture/user_profile.png') : require('../picture/user_profile_w.png');
+  const user_profileImage = theme === 'light' ? require('../picture/user_profile_g.png') : require('../picture/user_profile_g.png');
   const addTopicImage = theme === 'light' ? require('../picture/addTopic.png') : require('../picture/addTopic_w.png');
   const AddMoreDetailImage = theme === 'light' ? require('../picture/AddMoreDetail.png') : require('../picture/AddMoreDetail_w.png');
   const mapImage = theme === 'light' ? require('../picture/map.png') : require('../picture/map_w.png');
@@ -93,10 +93,19 @@ const CreatePost = () => {
         </View>
         
         <View style={styles.containerContent} >
-          <View style={styles.content}>
-            <Image style={styles.logo2}source={{uri: user.photoURL}}/>
-            <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>User X</Text>
-          </View>
+        <TouchableOpacity onPress={handleAcceptToggle} style={{left:'8%'}}>
+          {anonymous ? (
+            <View style={styles.content}>
+              <Image style={styles.logo2}source={user_profileImage}/>
+              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>Anonymous</Text>
+            </View>
+          ) :            
+            <View style={styles.content}>
+              <Image style={styles.logo2}source={{uri: user.photoURL}}/>
+              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>{user.displayName}</Text>
+            </View>
+          }
+          </TouchableOpacity>
          
           <View style={styles.content}>
             <Image style={styles.logo2}source={addTopicImage}/>
@@ -164,22 +173,32 @@ const CreatePost = () => {
       <View style={styles.container}>
         <View style={styles.nav}>
           <View style={styles.inNav}>
-            <Image style={[styles.logo, {margin: 5}]} source={require('../picture/createpost.png')} />
-            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>สร้างโพสต์</Text>
+            <Image style={[styles.logo, {margin: 5}]} source={createpostImage} />
+            <Text style={[styles.text,{margin: 5, fontSize: 25,}]}>CREATE POST</Text>
           </View>
         </View>
         
         <View style={styles.containerContent} >
-          <View style={styles.content}>
-              <Image style={styles.logo2}source={{uri: user.photoURL}}/>
-              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ผู้ใช้ X</Text>
+          <TouchableOpacity onPress={handleAcceptToggle} style={{left:'8%'}}>
+          {anonymous ? (
+            <View style={styles.content}>
+              <Image style={styles.logo2}source={user_profileImage}/>
+              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>ไม่ระบุตัวตน</Text>
             </View>
-         
+          ) :            
+            <View style={styles.content}>
+              <Image style={styles.logo2}source={{uri: user.photoURL}}/>
+              <Text style={[styles.text,{width: 280,height: 35,marginLeft: 10, paddingTop:5,fontSize: 18,}]}>{user.displayName}</Text>
+            </View>
+          }
+          </TouchableOpacity>
+
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/addTopic.png')}/>
+            <Image style={styles.logo2}source={addTopicImage}/>
             <TextInput
             placeholder="เพิ่มหัวข้อ"
             placeholderTextColor={styles.placeholderStyle.color}
+            
             value={topic}
             onChangeText={setTopic}
             onSubmitEditing={handleTopicSubmit}
@@ -187,9 +206,9 @@ const CreatePost = () => {
             />
           </View>
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/AddMoreDetail.png')}/>
+            <Image style={styles.logo2}source={AddMoreDetailImage}/>
             <TextInput
-            placeholder="เพิ่มรายละเอียดเพิ่มเติม"
+            placeholder="เพิ่มรายละเอียด"
             placeholderTextColor={styles.placeholderStyle.color}
             value={details}
             onChangeText={setDetails}
@@ -198,9 +217,9 @@ const CreatePost = () => {
             />
           </View>
           <View style={styles.content}>
-            <Image style={styles.logo2}source={require('../picture/map.png')}/>
+            <Image style={styles.logo2}source={mapImage}/>
             <TextInput
-            placeholder="เพิ่มสถานที่"
+            placeholder="ระบุสถานที่"
             placeholderTextColor={styles.placeholderStyle.color}
             value={location}
             onChangeText={setLocation}
@@ -210,24 +229,24 @@ const CreatePost = () => {
           </View>
           <View style={styles.content}>
             <TouchableOpacity onPress={handleAddPhoto}>
-              <Image style={styles.logo2}source={require('../picture/photo.png')}/>
+              <Image style={styles.logo2}source={photoImage}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleAddPhoto} style={{ flex: 1 }}>
-              <Text style={styles.boxx}>เพิ่มรูปถ่าย</Text>
+              <Text style={styles.boxx}>เพิ่มรูปภาพ</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.content}>
-          <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
-            {anonymous ? (
-              <Text style={styles.checkmark}>✓</Text>
-            ) : null}
-          </TouchableOpacity>
-            <Text style={styles.boxx}>ไม่ระบุชื่อ</Text>
+            <TouchableOpacity onPress={handleAcceptToggle} style={styles.circle}>
+              {anonymous ? (
+                <Text style={styles.checkmark}>✓</Text>
+              ) : null}
+            </TouchableOpacity>
+            <Text style={styles.boxx}>ไม่ระบุตัวตน</Text>
           </View>
   
         </View>
         <TouchableOpacity style={styles.botsub} onPress={handleMessageSubmit}>
-          <Text style={styles.text2}>ส่ง</Text>
+          <Text style={styles.text2}>โพสต์</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={test}>
           <Text style={styles.botsub}>Test Func</Text>
