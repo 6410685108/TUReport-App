@@ -51,7 +51,8 @@ const getSortPosts = async (option) => {
     } else if (option == 'MyPost') {
         sortedPosts = posts.filter(post => post.author === db.getCurrentUser().uid);
     } else if (option == 'Bookmark') {
-        sortedPosts = await db.getBookmarkPosts();
+        const bookmarkPostId = await db.getBookmarkPostsID();
+        sortedPosts = posts.filter(post => bookmarkPostId.includes(post.id));
     }
     return sortedPosts;
 }
