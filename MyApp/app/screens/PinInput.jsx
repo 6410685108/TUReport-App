@@ -24,65 +24,60 @@ const Pin = () => {
   const { theme, language } = setting;
   const styles = theme === "light" ? lightstyles : darkstyles;
 
-  const [enteredPin, setEnteredPin] = useState("");
-  const pinViewRef = useRef(null);
-
-  const handlePinChange = (value) => {
-    setEnteredPin(value);
-  };
-
-  const handleCustomLeftButtonPress = () => {
+  const pinView = useRef(null)
+  const [showRemoveButton, setShowRemoveButton] = useState(false)
+  const [enteredPin, setEnteredPin] = useState("")
+  const [showCompletedButton, setShowCompletedButton] = useState(false)
+  useEffect(() => {
     if (enteredPin.length > 0) {
-      setEnteredPin(enteredPin.slice(0, -1));
-    }
-  };
-
-  const handleCustomRightButtonPress = () => {
-    if (enteredPin.length === 6) {
-      alert(`Entered PIN: ${enteredPin}`);
+      setShowRemoveButton(true)
+      console.log("enter now pin",enteredPin)
     } else {
-      alert("Please enter a 6-digit PIN");
+      setShowRemoveButton(false)
     }
-  };
-
+    if (enteredPin.length === 6) {
+      setShowCompletedButton(true)
+    } else {
+      setShowCompletedButton(false)
+    }
+  }, [enteredPin])
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.pinText}>PIN</Text>
-      <View style={styles.pinViewContainer}>
+    <>
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.pinText}>PIN</Text>
         <ReactNativePinView
-          ref={pinViewRef}
-          pinLength={6} 
-          onValueChange={handlePinChange}
-          inputViewEmptyStyle={styles.inputViewEmptyStyle}
-          inputViewFilledStyle={styles.inputViewFilledStyle}
-          buttonViewStyle={styles.buttonViewStyle}
+          inputSize={32}
+          ref={pinView}
+          pinLength={6}
+          buttonSize={60}
+          onValueChange={value => setEnteredPin(value)}
+          buttonAreaStyle={{ marginTop: 24 }}
+          inputAreaStyle={{ marginBottom: 24 }}
+          inputViewEmptyStyle={[styles.inputViewEmptyStyle]}
+          inputViewFilledStyle={[styles.inputViewFilledStyle]}
+          buttonViewStyle={[styles.buttonViewStyle]}
           buttonTextStyle={styles.buttonTextStyle}
-          customLeftButton={
-            <View>
-              {enteredPin.length > 0 && (
-                <Icon name="backspace" size={36} color="gray" />
-              )}
-            </View>
-          }
-          customRightButton={
-            <View>
-              {enteredPin.length === 6 && (
-                <Icon name="lock-open" size={36} color="gray" />
-              )}
-            </View>
-          }
-          onButtonPress={(key) => {
+          onButtonPress={key => {
             if (key === "custom_left") {
-              handleCustomLeftButtonPress();
-            } else if (key === "custom_right") {
-              handleCustomRightButtonPress();
+              pinView.current.clear();
+              console.log("enter now pin",enteredPin)
+            }
+            if (key === "custom_right") {
+              alert("Entered Pin: " + enteredPin);
+            }
+            if (key === "three") {
+              alert("You just clicked 3");
             }
           }}
+          customLeftButton={showRemoveButton ? <Icon name={"ios-backspace"} size={36} color={theme === "light" ? "black" : "white"} /> : undefined}
+          customRightButton={showCompletedButton ? <Icon name={"lock-open"} size={36} color={theme === "light" ? "black" : "white"} /> : undefined}
         />
-      </View>
-    </SafeAreaView>
-  );
-};
+      </SafeAreaView>
+    </>
+  )
+}
+
 
 const lightstyles = StyleSheet.create({
   container: {
@@ -104,11 +99,11 @@ const lightstyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     backgroundColor: "white",
-    margin: 12,
+    margin: 8,
   },
   inputViewFilledStyle: {
     backgroundColor: "black",
-    margin: 12,
+    margin: 8,
   },
   buttonViewStyle: {
     borderWidth: 1,
@@ -139,11 +134,11 @@ const darkstyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "white",
     backgroundColor: "#1c1c1c",
-    margin: 12,
+    margin: 8,
   },
   inputViewFilledStyle: {
     backgroundColor: "white",
-    margin: 12,
+    margin: 8,
   },
   buttonViewStyle: {
     borderWidth: 1,
