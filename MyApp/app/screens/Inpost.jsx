@@ -36,7 +36,7 @@ const Inpost = ({ navigation, route }) => {
     return () => {
         unsubscribe();
     };
-}, [navigation,repost]);
+  }, [navigation,repost]);
 
   const handleRepost = async (postId) => {
     db.repostPost(postId);
@@ -71,7 +71,7 @@ const Inpost = ({ navigation, route }) => {
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <View style={{ flexDirection: "row" }}>
-            <UserPhoto userId={postInfo.author.uid} />
+            <UserPhoto userId={postInfo.author} />
               <View style={{ flexDirection: "column", paddingLeft: 5 }}>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
                   <Name userId={postInfo.author} />

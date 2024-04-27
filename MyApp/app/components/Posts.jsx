@@ -11,7 +11,6 @@ const Posts = ({option}) => {
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
-    const [userPhotoKey, setUserPhotoKey] = useState(0);
 
     const fetchData = async () => {
         const posts = await data.getSortPosts(option);
@@ -71,7 +70,7 @@ const Posts = ({option}) => {
             <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
-                    <UserPhoto key={userPhotoKey} userId={info.author.uid} />
+                    <UserPhoto key={info.id} userId={info.author} />
                     <View style={{flexDirection: 'column', paddingLeft: 5}}>
                         <Name userId={info.author} />
                         <Text style={{fontSize: 12}}>{info.time}</Text>
