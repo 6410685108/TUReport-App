@@ -10,19 +10,19 @@ const Posts = ({option , status}) => {
     const [refreshing, setRefreshing] = useState(false); 
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
-    // const [sortedPosts, setSortedPosts] = useState([]);
-    const  sortedPosts = [
-        {
-            id: 1,
-            author: 1,
-            time: '2021-10-01 10:00',
-            status: 'Pending',
-            title: 'Post 1',
-            detail: 'This is post 1',
-            photoUrl: 'https://picsum.photos/200',
-            repost: 10
-        },
-    ];
+    const [sortedPosts, setSortedPosts] = useState([]);
+    // const  sortedPosts = [
+    //     {
+    //         id: 1,
+    //         author: 1,
+    //         time: '2021-10-01 10:00',
+    //         status: 'Pending',
+    //         title: 'Post 1',
+    //         detail: 'This is post 1',
+    //         photoUrl: 'https://picsum.photos/200',
+    //         repost: 10
+    //     },
+    // ];
 
     const fetchData = async () => {
         let posts = [];
