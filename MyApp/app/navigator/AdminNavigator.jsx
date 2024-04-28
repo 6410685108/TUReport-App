@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Inpost from '../screens/Inpost';
-import Posts from '../components/Posts';
+import Inpost from '../componentsAdmin/Inpost';
+import Posts from '../componentsAdmin/Posts';
 import Notification from '../screens/Notification';
 import Pending from '../tabsAdmin/Pending';
 
 const Stack = createNativeStackNavigator();
 
-export default function HomeNavigator() {
+export default function AdminNavigator() {
     return (
             <Stack.Navigator initialRouteName='Pending'>
                 <Stack.Screen
@@ -15,7 +15,7 @@ export default function HomeNavigator() {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name="Inpost"
+                    name="InpostAdmin"
                     component={Inpost}
                     options={{ headerShown: false }}
                 />

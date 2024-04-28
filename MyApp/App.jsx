@@ -77,9 +77,10 @@ function AuthenticatedScreens() {
     return role;
   }
   useEffect(() => {
-    getRole().then((role) => {
-      setRole(role);
-    });
+    // getRole().then((role) => {
+    //   setRole(role);
+    // });
+    setRole('admin');
   }, [role]);
   
   if (role == "admin") {
@@ -123,7 +124,7 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="InProgress"
+          name="INProgress"
           component={InProgress}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
