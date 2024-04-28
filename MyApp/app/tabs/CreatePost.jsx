@@ -244,7 +244,7 @@ const lightstyles = StyleSheet.create({
     logo2: {
       width: 35,
       height: 35,
-      borderRadius: 30,
+      borderRadius: 35,
     },
     botsub: {
       marginTop: 50,
@@ -336,7 +336,7 @@ const darkstyles = StyleSheet.create({
     logo2: {
       width: 35,
       height: 35,
-      borderRadius: 30,
+      borderRadius: 35,
     },
     botsub: {
       marginTop: 50,
