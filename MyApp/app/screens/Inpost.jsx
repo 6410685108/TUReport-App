@@ -92,7 +92,7 @@ const Inpost = ({ navigation, route }) => {
                 {postInfo.status === 'Approved' &&(
                     <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
                 )}
-                {postInfo.status === 'in progress' &&(
+                {postInfo.status === 'InProgress' &&(
                     <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
                 )}
                 {postInfo.status === 'Waiting' &&(

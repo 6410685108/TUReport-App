@@ -91,12 +91,12 @@ const SettingInput = () => {
                 <Image style={styles.logo2}source={{ uri: user.photoURL }}/>
                 <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
                     <View style={styles.boxx3}>
-                        <Text style={[styles.text,{fontSize:12}]}>{language === 'EN' ? "Edit Profile" : "โปรไฟล์"}</Text>
+                        <Text style={[styles.text,{fontSize:12}]}>{language === 'EN' ? "Edit Profile" : "แก้ไขโปรไฟล์"}</Text>
                     </View>
                 </TouchableOpacity>
                 </View>
                 <Text style={[styles.text]}>{user.displayName}</Text>
-                <Text style={[styles.text]}>{user.displayName}</Text>
+                <Text style={[styles.text]}>{user.phoneNumber !== null ? user.phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
                 <Text style={[styles.text]}>{user.email}</Text>
             </View>
             <Text style={[styles.text2]}>{language === 'EN' ? '> Language' : '> ภาษา'}</Text>

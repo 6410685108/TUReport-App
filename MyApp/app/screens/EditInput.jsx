@@ -3,6 +3,7 @@ import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Ale
 import { db } from '../system/db';
 import * as ImagePicker from 'expo-image-picker';
 import { SettingContext } from '../system/setting';
+import { useNavigation } from '@react-navigation/native';
 
 const Edit = () => {
     const user = db.getCurrentUser();
@@ -13,7 +14,7 @@ const Edit = () => {
 
     const [displayname, setDisplayname] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    
+    const navigation = useNavigation();
     const getPhoneNumber = async () => {
       setPhoneNumber(await db.getMyPhoneNumber());
     }
@@ -35,8 +36,10 @@ const Edit = () => {
           db.setDisplayName(displayname),
           db.setPhoneNumber(phoneNumber),
           db.uploadUserPhoto(photo),
-        ]);
+        ]
+      );
         Alert.alert('Profile updated successfully');
+        navigation.navigate('Setting');
         return;
       } catch (error) {
         Alert.alert('Profile updated failed');
