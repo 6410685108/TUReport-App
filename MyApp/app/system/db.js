@@ -351,6 +351,7 @@ const deleteAllNotifications = async () => {
 const createComment = async (postId, comment) => {    
     try {
         const commentCollectionRef = collection(firebase_db, 'posts', postId, 'comments');
+        const uid = firebase_auth.currentUser.uid;
         await addDoc(commentCollectionRef, {
             comment: comment,
             author: uid,

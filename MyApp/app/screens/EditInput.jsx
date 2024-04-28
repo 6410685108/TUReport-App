@@ -29,7 +29,7 @@ const Edit = () => {
     } ,[])
 
   const handleMessageSubmit = async () => {
-    if (displayname!=('' || null) || phoneNumber!=('' || null)){
+    if (displayname!=('' || null) || phoneNumber!=('' || null || undefined)){
       try{
         await Promise.all([ 
           db.setDisplayName(displayname),

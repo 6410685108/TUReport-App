@@ -75,7 +75,7 @@ const Profile = () => {
         <View style={styles.boxx}>
           <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
           <Text style={[styles.text]}>{user.displayName}</Text>
-          <Text style={[styles.text]}>{phoneNumber !== null ? phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
+          <Text style={[styles.text]}>{phoneNumber !== undefined ? phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
           <Text style={[styles.text]}>{user.email}</Text>
         </View>
         <View style={styles.boxx2}>
