@@ -109,7 +109,6 @@ const register = async (email , password) => {
         Promise.all([
         db.setDisplayName(displayname),
         db.setUserRole("user"),
-        db.setPin(null),
         ]);
     } catch (error) {
         alert("Error registering: " + error.message);

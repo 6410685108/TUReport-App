@@ -82,9 +82,9 @@ const SettingInput = () => {
   useEffect (()=>{
     getPhoneNumber();
     getUsername();
-    if (!isEnabled) {
-      db.unSetPin();
-    }
+    // if (!isEnabled) {
+    //   db.unSetPin();
+    // }
 
   } ,[isEnabled])
   useFocusEffect(
