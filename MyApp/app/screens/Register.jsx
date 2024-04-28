@@ -23,7 +23,6 @@ const RegisterScreen = ({ navigation }) => {
     }
     setLoading(true);
     await data.register(email, password);
-    // await data.register("t@t.com", "111111");
     setLoading(false);
   };
 
