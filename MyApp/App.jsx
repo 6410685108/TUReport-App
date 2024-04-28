@@ -17,6 +17,7 @@ import { data } from './app/system/data';
 import HomeNavigator from "./app/navigator/HomeNavigator";
 import ProfileNavigator from "./app/navigator/ProfileNavigator";
 import FinishNavigator from "./app/navigator/FinishNavigator";
+import AdminNavigator from "./app/navigator/AdminNavigator";
 import InProgress from "./app/tabsAdmin/InProgress";
 import Waiting from "./app/tabsAdmin/Waiting";
 
@@ -153,7 +154,7 @@ function AuthenticatedScreens() {
         />
         <Tab.Screen
           name="Logout"
-          component={() => null}
+          component={AdminNavigator}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
@@ -165,7 +166,8 @@ function AuthenticatedScreens() {
             tabBarStyle: styles.tabBarStyle,
           }}
           listeners={() => ({
-            tabPress: () => {
+            tabPress: (e) => {
+              e.preventDefault();
               data.logout();
             },
           })}
