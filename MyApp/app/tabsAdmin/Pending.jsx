@@ -79,22 +79,6 @@ const Pending = ({ navigation }) => {
               Pending
             </Text>
           </View>
-          <SelectCountry
-            style={styles.dropdown}
-            containerStyle={styles.containerStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            placeholderStyle={styles.placeholderStyle}
-            imageStyle={styles.imageStyle}
-            iconStyle={styles.iconStyle}
-            maxHeight={200}
-            value={country}
-            data={local_data}
-            valueField="value"
-            labelField="lable"
-            onChange={(e) => {
-              setCountry(e.value);
-            }}
-          />
         </View>
 
         <Posts option={country} status={"Pending"} />
