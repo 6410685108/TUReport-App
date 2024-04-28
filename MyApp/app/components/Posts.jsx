@@ -6,6 +6,7 @@ import { db } from "../system/db";
 import UserPhoto from "./UserPhoto";
 import Name from "./Name";
 import { data } from "../system/data";
+import Bookmark from "./Bookmark";
 
 const Posts = ({option}) => {
     const { setting } = useContext(SettingContext);
@@ -14,7 +15,8 @@ const Posts = ({option}) => {
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
-    const [pressBookmark, setPressBookmark] = useState(false);
+    const [refreshKey, setRefreshKey] = useState(0);
+    const [isBookmark, setIsBookmark] = useState(false);
 
     const fetchData = async () => {
         posts = await data.getSortPosts(option);
@@ -55,10 +57,12 @@ const Posts = ({option}) => {
     }
 
     const handleBookmark = async (postId) => {
+        
         await Promise.all([
             db.userBookmark(postId),
-            fetchData()
+            fetchData(),  
         ]);
+        setRefreshKey(refreshKey + 1)
     }
 
     if (theme == 'light') {
@@ -92,7 +96,7 @@ const Posts = ({option}) => {
                             {info.status === 'Approved' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
                             )}
-                            {info.status === 'InProgress' &&(
+                            {info.status === 'In progress' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
                             )}
                             {info.status === 'Waiting' &&(
@@ -102,7 +106,6 @@ const Posts = ({option}) => {
                         )}
                         {info.status === 'Reject' || info.status === 'Finished' && (
                         <View style={{flexDirection: 'row'}}>
-                            
                             {info.status === 'Reject' &&(
                             <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
                             )}
@@ -128,11 +131,9 @@ const Posts = ({option}) => {
                             <Text style={{paddingLeft: 5}}>{info.repost}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                        { pressBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2.png')} /> 
-                            ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />)}
+                            <Bookmark postId={info.id} key={info.id} refreshKey={refreshKey} />
                         </TouchableOpacity>
                     </View>
-                    {/* <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginVertical: 10}}/> */}
                   </View>
                 ))}
             </ScrollView>
@@ -168,7 +169,7 @@ const Posts = ({option}) => {
                             {info.status === 'Approved' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
                             )}
-                            {info.status === 'InProgress' &&(
+                            {info.status === 'In progress' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
                             )}
                             {info.status === 'Waiting' &&(
@@ -204,11 +205,10 @@ const Posts = ({option}) => {
                             <Text style={{paddingLeft: 5,color:'white'}}>{info.repost}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                            { pressBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2_w.png')} /> 
+                        { isBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2_w.png')} /> 
                             ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1_w.png')} />)}
                         </TouchableOpacity>
                     </View>
-                    {/* <TextInput placeholder="Comment" placeholderTextColor={'white'} style={{borderWidth: 1, borderColor: 'white', borderRadius: 10, padding: 5, marginVertical: 10}}/> */}
                   </View>
                 ))}
             </ScrollView>
