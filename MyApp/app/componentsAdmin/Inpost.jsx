@@ -84,34 +84,38 @@ import {
                 </View>
               </View>
               {postInfo.status !== 'Finished' && postInfo.status !== 'Reject' && (
-              <View style={{flexDirection: 'column'}}>
-                  <Text style={[styles.text,{fontSize: 14,textAlign: 'center'}]}>{postInfo.status}</Text>
-                  {postInfo.status === 'Pending' &&(
-                      <Image style={{width: 70, height: 20}} source={require('../picture/Pending.png')} />
-                  )}
-                  {postInfo.status === 'Approved' &&(
-                      <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
-                  )}
-                  {postInfo.status === 'in progress' &&(
-                      <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
-                  )}
-                  {postInfo.status === 'Waiting' &&(
-                      <Image style={{width: 70, height: 20}} source={require('../picture/Waiting.png')} />
-                  )}
-              </View>
-              )}
-              {postInfo.status !== 'Reject' || postInfo.status !== 'Finished' && (
-              <View style={{flexDirection: 'row'}}>
-                  
-                  {postInfo.status === 'Reject' &&(
-                  <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
-                  )}
-                  {postInfo.status === 'Finished' &&(
-                  <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
-                  )}
-                  <Text style={[styles.text,{fontSize: 14,textAlign: 'center'}]}>{postInfo.status}</Text>
-              </View>
-              )}
+            <View style={{flexDirection: 'column'}}>
+                <Text style={[styles.text,{fontSize: 14,textAlign: 'center'}]}>{postInfo.status}</Text>
+                {postInfo.status === 'Pending' &&(
+                    <Image style={{width: 70, height: 20}} source={require('../picture/Pending.png')} />
+                )}
+                {postInfo.status === 'Approved' &&(
+                    <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
+                )}
+                {postInfo.status === 'In progress' &&(
+                    <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
+                )}
+                {postInfo.status === 'Waiting' &&(
+                    <Image style={{width: 70, height: 20}} source={require('../picture/Waiting.png')} />
+                )}
+            </View>
+            )}
+            {postInfo.status === 'Reject'  && (
+            <View style={{flexDirection: 'row'}}>
+                {postInfo.status === 'Reject' &&(
+                <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
+                )}
+                <Text style={[styles.text,{fontSize: 14,textAlign: 'center'}]}>{postInfo.status}</Text>
+            </View>
+            )}
+            {postInfo.status === 'Finished' && (
+            <View style={{flexDirection: 'row'}}>
+                {postInfo.status === 'Finished' &&(
+                <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
+                )}
+                <Text style={[styles.text,{fontSize: 14,textAlign: 'center'}]}>{postInfo.status}</Text>
+            </View>
+            )}
             </View>
             <Text style={[styles.text,{ fontWeight: "bold", fontSize: 16, marginTop: 10 }]}>
               {postInfo.title}

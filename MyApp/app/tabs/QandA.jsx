@@ -45,7 +45,13 @@ const QandA = () => {
         //   answer: "ตอบๆเว้ย",
         // },
         // Add more Q&A here
-      ];
+      ]
+    }else{ 
+      return[
+        {question: "การดำเนินการใช้เวลากี่วันโดยประมาณ",
+        answer:
+          "เราจะเพิ่มความสำคัญให้กับปัญหาและส่งต่อไปยังฝ่ายที่รับผิดชอบในการแก้ไขภายใน 1-3 วัน หลังจากนั้นพวกเขาจะแจ้งให้เราทราบเกี่ยวกับเวลาที่ต้องใช้ในการแก้ไข และเราจะอัปเดตสถานะ",}
+      ]
     }
   });
   const [sw, setSw] = useState(true);
@@ -140,7 +146,6 @@ const lightstyles = StyleSheet.create({
   text: {
     color: "black",
     fontSize: 18,
-    fontFamily: "Arial",
     lineHeight: 24,
     letterSpacing: 0.5,
     marginLeft: "5%",
@@ -149,7 +154,6 @@ const lightstyles = StyleSheet.create({
   questionText: {
     color: "black",
     fontSize: 16,
-    fontFamily: "Arial",
     lineHeight: 20,
     letterSpacing: 0.5,
     marginLeft: "5%",
@@ -159,7 +163,6 @@ const lightstyles = StyleSheet.create({
   answerText: {
     color: "black",
     fontSize: 14,
-    fontFamily: "Arial",
     lineHeight: 18,
     letterSpacing: 0.5,
     marginLeft: "5%",
@@ -256,7 +259,6 @@ const darkstyles = StyleSheet.create({
   text: {
     color: "black",
     fontSize: 18,
-    fontFamily: "Arial",
     lineHeight: 24,
     letterSpacing: 0.5,
     marginLeft: "5%",
@@ -265,7 +267,6 @@ const darkstyles = StyleSheet.create({
   questionText: {
     color: "white",
     fontSize: 16,
-    fontFamily: "Arial",
     lineHeight: 20,
     letterSpacing: 0.5,
     marginLeft: "5%",
@@ -275,7 +276,6 @@ const darkstyles = StyleSheet.create({
   answerText: {
     color: "white",
     fontSize: 14,
-    fontFamily: "Arial",
     lineHeight: 18,
     letterSpacing: 0.5,
     marginLeft: "5%",

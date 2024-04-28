@@ -104,12 +104,16 @@ const Inpost = ({ navigation, route }) => {
                 )}
             </View>
             )}
-            {postInfo.status !== 'Reject' || postInfo.status !== 'Finished' && (
+            {postInfo.status === 'Reject'  && (
             <View style={{flexDirection: 'row'}}>
-                
                 {postInfo.status === 'Reject' &&(
                 <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
                 )}
+                <Text style={[styles.text,{fontSize: 14,textAlign: 'center'}]}>{postInfo.status}</Text>
+            </View>
+            )}
+            {postInfo.status === 'Finished' && (
+            <View style={{flexDirection: 'row'}}>
                 {postInfo.status === 'Finished' &&(
                 <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
                 )}

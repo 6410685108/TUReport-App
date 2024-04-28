@@ -184,7 +184,7 @@ function AuthenticatedScreens() {
         }}
       >
         <Tab.Screen 
-          name="Home"
+          name={language === 'EN' ? "HOME" : "หน้าหลัก"}
           component={HomeNavigator}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
@@ -198,7 +198,7 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="Status"
+          name={language === 'EN' ? "Status" : "สถานะ"}
           component={FinishNavigator}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
@@ -212,7 +212,7 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="CreatePost"
+          name={language === 'EN' ? "CREATE POST" : "สร้างโพสต์"}
           component={CreatePost}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
@@ -226,7 +226,7 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="QandA"
+          name={language === 'EN' ? "Q & A" : "ช่วยเหลือ"}
           component={QandA}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
@@ -240,7 +240,7 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="Profile"
+          name={language === 'EN' ? "PROFILE" : "โปรไฟล์"}
           component={ProfileNavigator}
           options={{
             tabBarIcon: ({ focused, color, size }) => (

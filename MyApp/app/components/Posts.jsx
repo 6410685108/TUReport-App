@@ -10,7 +10,7 @@ import Bookmark from "./Bookmark";
 
 const Posts = ({option}) => {
     const { setting } = useContext(SettingContext);
-    const { theme } = setting;
+    const { theme,language } = setting;
     const [refreshing, setRefreshing] = useState(false); 
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
@@ -43,11 +43,11 @@ const Posts = ({option}) => {
 
     
     if (loading) {
-        return <Text style={{color: (theme === 'light' ? 'black':'white')}}>Loading...</Text>;
+        return <Text style={{color: (theme === 'light' ? 'black':'white')}}>{language === 'EN' ? "Loading..." : "กำลังโหลด..."}</Text>;
     }
 
     if (sortedPosts.length === 0) {
-        return <Text style={{color: (theme === 'light' ? 'black':'white')}}>No Post Available</Text>;
+        return <Text style={{color: (theme === 'light' ? 'black':'white')}}>{language === 'EN' ? "No Post Available" : "ไม่มีการโพสต์"}</Text>;
     }
 
     const handleRepost = async (postId) => {
@@ -103,11 +103,16 @@ const Posts = ({option}) => {
                             )}
                         </View>
                         )}
-                        {info.status !== 'Reject' || info.status !== 'Finished' && (
+                        {info.status === 'Reject' && (
                         <View style={{flexDirection: 'row'}}>
                             {info.status === 'Reject' &&(
                             <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
                             )}
+                            <Text style={{fontSize: 14,color: 'black',textAlign: 'center'}}>{info.status}</Text>
+                        </View>
+                        )}
+                        {info.status === 'Finished' && (
+                        <View style={{flexDirection: 'row'}}>
                             {info.status === 'Finished' &&(
                             <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
                             )}

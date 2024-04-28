@@ -126,12 +126,16 @@ const Posts = ({option , status}) => {
                             )}
                         </View>
                         )}
-                        {info.status === 'Reject' || info.status === 'Finished' && (
+                        {info.status === 'Reject' && (
                         <View style={{flexDirection: 'row'}}>
-                            
                             {info.status === 'Reject' &&(
                             <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
                             )}
+                            <Text style={{fontSize: 14,color: 'black',textAlign: 'center'}}>{info.status}</Text>
+                        </View>
+                        )}
+                        {info.status === 'Finished' && (
+                        <View style={{flexDirection: 'row'}}>
                             {info.status === 'Finished' &&(
                             <Image style={{width: 30, height: 30,top:-5}} source={require('../picture/Finished.png')} />
                             )}

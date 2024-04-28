@@ -57,7 +57,7 @@ const Finish = () => {
             style={styles.logo}
             source={statusImage}
           />
-          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>{language === 'EN' ? "Status" : "สถานะ"}</Text>
+          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>{language === 'EN' ? "STATUS" : "สถานะ"}</Text>
         </View>
       </View>
       <View style={styles.nav2}>

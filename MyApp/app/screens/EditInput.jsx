@@ -29,7 +29,7 @@ const Edit = () => {
     } ,[])
 
   const handleMessageSubmit = async () => {
-    if (displayname!=('' || null) || phoneNumber!=('' || null || undefined)){
+    if (displayname!=('' || null) || phoneNumber!=('' || null || undefined) ){
       try{
         await Promise.all([ 
           db.setDisplayName(displayname),
@@ -39,7 +39,7 @@ const Edit = () => {
       );
         Alert.alert('Profile updated successfully');
         navigation.navigate("Profile2");
-        navigation.navigate("Home");
+        navigation.navigate(language === 'EN' ? "HOME" : "หน้าหลัก");
         return;
       } catch (error) {
         Alert.alert('Profile updated failed');

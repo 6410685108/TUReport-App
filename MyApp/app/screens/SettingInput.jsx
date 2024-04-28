@@ -86,7 +86,7 @@ const SettingInput = () => {
     //   db.unSetPin();
     // }
 
-  } ,[isEnabled])
+  } )
   useFocusEffect(
     React.useCallback(() => {
         getPhoneNumber();
@@ -127,7 +127,7 @@ const SettingInput = () => {
                 </TouchableOpacity>
                 </View>
                 <Text style={[styles.text]}>{username}</Text>
-                <Text style={[styles.text]}>{phoneNumber !== undefined ? phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
+                <Text style={[styles.text]}>{phoneNumber !== null ? phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
                 <Text style={[styles.text]}>{user.email}</Text>
             </View>
             <Text style={[styles.text2]}>{language === 'EN' ? '> Language' : '> ภาษา'}</Text>
