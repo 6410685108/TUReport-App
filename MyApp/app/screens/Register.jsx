@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { data } from "../system/data";
@@ -28,59 +30,68 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <LinearGradient colors={["#b50d2e", "#ffd13e"]} style={styles.background}>
-      <View style={styles.container}>
-        <Text style={styles.header}>Create Account</Text>
-        <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your email"
-              value={email}
-              onChangeText={setEmail}
-              placeholderTextColor="white"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              placeholderTextColor="white"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Confirm Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              secureTextEntry
-              placeholderTextColor="white"
-            />
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleRegister}
-              disabled={loading}
-            >
-              <Text style={styles.buttonText}>Sign Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate("Login")}
-              disabled={loading}
-            >
-              <Text style={styles.buttonText}>Back to Login</Text>
-            </TouchableOpacity>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <View style={styles.container}>
+          <Text style={styles.header}>Create Account</Text>
+          <View style={styles.formContainer}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your email"
+                value={email}
+                onChangeText={setEmail}
+                placeholderTextColor="white"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                placeholderTextColor="white"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Confirm Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                secureTextEntry
+                placeholderTextColor="white"
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              {loading ? (
+                <ActivityIndicator size="large" color="#0000ff" />
+              ) : (
+                <>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={handleRegister}
+                  >
+                    <Text style={styles.buttonText}>Sign Up</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("Login")}
+                  >
+                    <Text style={styles.buttonText}>Back to Login</Text>
+                  </TouchableOpacity>
+                </>
+              )}
+            </View>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </LinearGradient>
   );
 };
