@@ -74,14 +74,11 @@ function AuthenticatedScreens() {
   const [role, setRole] = useState("user");
   const styles = theme == 'light' ? lightStyle : darkStyle;
   const getRole = async () => {
-    const role = await db.getUserRole();
-    return role;
+    const userrole = await db.getUserRole();
+    setRole(userrole);
   }
   useEffect(() => {
-    getRole().then((role) => {
-      setRole(role);
-    });
-    // setRole('admin');
+    getRole();
   }, [role]);
   
   if (role == "admin") {
