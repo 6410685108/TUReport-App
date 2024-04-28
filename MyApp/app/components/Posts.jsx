@@ -92,7 +92,7 @@ const Posts = ({option}) => {
                             {info.status === 'Approved' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
                             )}
-                            {info.status === 'In progress' &&(
+                            {info.status === 'InProgress' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
                             )}
                             {info.status === 'Waiting' &&(
@@ -168,7 +168,7 @@ const Posts = ({option}) => {
                             {info.status === 'Approved' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
                             )}
-                            {info.status === 'in progress' &&(
+                            {info.status === 'InProgress' &&(
                                 <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
                             )}
                             {info.status === 'Waiting' &&(
