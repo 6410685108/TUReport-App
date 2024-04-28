@@ -171,7 +171,7 @@ const Posts = ({option , status}) => {
                         </View>
                     )
                     }
-                    {info.status === 'INProgress' && (
+                    {info.status === 'In progress' && (
                         <View style={{flexDirection: 'row'}}>
                                 <TouchableOpacity style={styles.buttonFinish} onPress={() => handleFinish(info.id)}>
                                     <Text>Finish</Text>
@@ -184,8 +184,8 @@ const Posts = ({option , status}) => {
                     }
                     {info.status === 'Waiting' && (
                         <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.buttonINProgess} onPress={() => handleInprogress(info.id)}>
-                                    <Text>INProgess</Text>
+                                <TouchableOpacity style={styles.buttonINProgress} onPress={() => handleInprogress(info.id)}>
+                                    <Text>In progess</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.buttonReject} onPress={() => handleReject(info.id)}>
                                     <Text>Reject</Text>
