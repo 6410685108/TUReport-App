@@ -72,10 +72,6 @@ const Edit = () => {
     setDisplayname(displayname);
   };
 
-  const handleEmailSubmit = () => {
-    Keyboard.dismiss();
-    setEmail(email);
-  };
 
   const handlePhoneSubmit = () => {
     Keyboard.dismiss();

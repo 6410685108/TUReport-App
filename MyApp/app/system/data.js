@@ -51,7 +51,7 @@ const getSortPosts = async (option) => {
     } else if (option === 'Approved'){
         sortedPosts = posts.filter(post => post.status === 'Approved');
     } else if (option === 'InProgress'){
-        sortedPosts = posts.filter(post => post.status === 'InProgress');
+        sortedPosts = posts.filter(post => post.status === 'In progress');
     } else if (option === 'Waiting'){
         sortedPosts = posts.filter(post => post.status === 'Waiting');
     } else if (option === 'Finished'){
