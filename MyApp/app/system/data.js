@@ -87,11 +87,9 @@ const getComments = async (postId) => {
 
 const login = async (email , password) => {
     try {
-      // const response = await signInWithEmailAndPassword(auth, email, password);
-      await signInWithEmailAndPassword(auth,"ad@ad.com","111111");
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       alert(error.message);
-      console.log(error);
     } 
 };
 
