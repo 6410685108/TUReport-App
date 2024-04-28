@@ -103,7 +103,7 @@ const Posts = ({option}) => {
                             )}
                         </View>
                         )}
-                        {info.status === 'Reject' || info.status === 'Finished' && (
+                        {info.status !== 'Reject' || info.status !== 'Finished' && (
                         <View style={{flexDirection: 'row'}}>
                             {info.status === 'Reject' &&(
                             <Image style={{width: 25, height: 25,top:-2}} source={require('../picture/Reject.png')} />
@@ -114,7 +114,6 @@ const Posts = ({option}) => {
                             <Text style={{fontSize: 14,color: 'black',textAlign: 'center'}}>{info.status}</Text>
                         </View>
                         )}
-
                     </View>
                     <Text style={{fontWeight: 'bold', fontSize: 16, marginTop: 10}}>
                         {info.title}
@@ -176,7 +175,7 @@ const Posts = ({option}) => {
                             )}
                         </View>
                         )}
-                        {info.status === 'Reject' || info.status === 'Finished' && (
+                        {info.status !== 'Reject' || info.status !== 'Finished' && (
                         <View style={{flexDirection: 'row'}}>
                             
                             {info.status === 'Reject' &&(

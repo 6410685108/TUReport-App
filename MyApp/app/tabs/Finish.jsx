@@ -19,7 +19,7 @@ const Finish = () => {
   const { theme, language } = setting;
   const styles = theme === 'light' ? lightstyles : darkstyles;
 
-  const [country, setCountry] = useState("1");
+  const [country, setCountry] = useState('Finished');
   const local_data = [
     {
       value: "Pending",
