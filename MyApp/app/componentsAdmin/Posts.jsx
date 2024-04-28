@@ -66,6 +66,26 @@ const Posts = ({option , status}) => {
         await fetchData();
     }
 
+    const handleApprove = async (postId) => {
+        console.log(postId);
+    }
+
+    const handleReject = async (postId) => {
+        console.log(postId);
+    }
+
+    const handleWainting = async (postId) => {
+        console.log(postId);
+    }
+
+    const handleFinish = async (postId) => {
+        console.log(postId);
+    }
+
+    const handleInprogress = async (postId) => {
+        console.log(postId);
+    }
+
     const handleBookmark = async (postId) => {
         await Promise.all([
             db.userBookmark(postId),
@@ -136,10 +156,10 @@ const Posts = ({option , status}) => {
                     <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
                     {info.status === 'Pending' && (
                         <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.buttonApprove} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonApprove} onPress={() => handleApprove(info.id)}>
                                     <Text>Approve</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleReject(info.id)}>
                                     <Text>Reject</Text>
                                 </TouchableOpacity>
                         </View>
@@ -147,10 +167,10 @@ const Posts = ({option , status}) => {
                     }
                     {info.status === 'Approved' && (
                         <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.buttonINProgress} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonINProgress} onPress={() => handleInprogress(info.id)}>
                                     <Text>INProgress</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleReject(info.id)}>
                                     <Text>Reject</Text>
                                 </TouchableOpacity>
                         </View>
@@ -158,10 +178,10 @@ const Posts = ({option , status}) => {
                     }
                     {info.status === 'INProgress' && (
                         <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.buttonFinish} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonFinish} onPress={() => handleFinish(info.id)}>
                                     <Text>Finish</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonWaiting} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonWaiting} onPress={() => handleWainting(info.id)}>
                                     <Text>Waiting</Text>
                                 </TouchableOpacity>
                         </View>
@@ -169,10 +189,10 @@ const Posts = ({option , status}) => {
                     }
                     {info.status === 'Waiting' && (
                         <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.buttonINProgess} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonINProgess} onPress={() => handleInprogress(info.id)}>
                                     <Text>INProgess</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleRepost(info.id)}>
+                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleReject(info.id)}>
                                     <Text>Reject</Text>
                                 </TouchableOpacity>
                         </View>
