@@ -78,18 +78,19 @@ const SettingInput = () => {
   }
   const getUsername = async () => {
     setUsername(user.displayName);
-    console.log('form setting page',username)
   }
   useEffect (()=>{
     getPhoneNumber();
     getUsername();
-    console.log(username)
-  } ,[])
+    if (!isEnabled) {
+      db.unSetPin();
+    }
+
+  } ,[isEnabled])
   useFocusEffect(
     React.useCallback(() => {
         getPhoneNumber();
         getUsername();
-        console.log('form edit page',username)
       }, [])
   );
   const onSwitchValueChange = () => {

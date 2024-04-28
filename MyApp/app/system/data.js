@@ -106,8 +106,11 @@ const register = async (email , password) => {
         }
         
         const displayname = email.split("@")[0];
-        await db.setDisplayName(displayname)
-        await db.setUserRole("user");
+        Promise.all([
+        db.setDisplayName(displayname),
+        db.setUserRole("user"),
+        db.setPin(null),
+        ]);
     } catch (error) {
         alert("Error registering: " + error.message);
         console.error("Registration error:", error);

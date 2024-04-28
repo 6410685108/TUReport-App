@@ -17,7 +17,7 @@ import { db } from "../system/db";
 import * as ImagePicker from "expo-image-picker";
 import { SettingContext } from "../system/setting";
 // import PinView from 'react-native-pin-view';
-// import ReactNativePinView from "react-native-pin-view";
+import ReactNativePinView from "react-native-pin-view";
 
 const Pin = ({ navigation }) => {
   const { setting } = useContext(SettingContext);
@@ -31,7 +31,6 @@ const Pin = ({ navigation }) => {
   useEffect(() => {
     if (enteredPin.length > 0) {
       setShowRemoveButton(true);
-      console.log("enter now pin", enteredPin);
     } else {
       setShowRemoveButton(false);
     }
@@ -64,6 +63,8 @@ const Pin = ({ navigation }) => {
               console.log("enter now pin", enteredPin);
             }
             if (key === "custom_right") {
+              console.log("completed pin", enteredPin);
+              db.setPin(enteredPin);
               navigation.navigate("Setting");
             }
           }}
@@ -84,6 +85,7 @@ const Pin = ({ navigation }) => {
                 color={theme === "light" ? "black" : "white"}
               />
             ) : undefined
+            
           }
         />
       </SafeAreaView>
