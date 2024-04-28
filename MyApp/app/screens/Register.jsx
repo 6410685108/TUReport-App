@@ -28,10 +28,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <LinearGradient
-      colors={["#b50d2e", "#ffd13e"]}
-      style={styles.background}
-    >
+    <LinearGradient colors={["#b50d2e", "#ffd13e"]} style={styles.background}>
       <View style={styles.container}>
         <Text style={styles.header}>Create Account</Text>
         <View style={styles.formContainer}>
@@ -68,24 +65,20 @@ const RegisterScreen = ({ navigation }) => {
             />
           </View>
           <View style={styles.buttonContainer}>
-            {loading ? (
-              <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-              <>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={handleRegister}
-                >
-                  <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => navigation.navigate("Login")}
-                >
-                  <Text style={styles.buttonText}>Back to Login</Text>
-                </TouchableOpacity>
-              </>
-            )}
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleRegister}
+              disabled={loading}
+            >
+              <Text style={styles.buttonText}>Sign Up</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Login")}
+              disabled={loading}
+            >
+              <Text style={styles.buttonText}>Back to Login</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

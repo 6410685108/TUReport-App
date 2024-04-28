@@ -16,31 +16,31 @@ import {
 import { db } from "../system/db";
 import * as ImagePicker from "expo-image-picker";
 import { SettingContext } from "../system/setting";
-import PinView from 'react-native-pin-view';
-import ReactNativePinView from "react-native-pin-view";
+// import PinView from 'react-native-pin-view';
+// import ReactNativePinView from "react-native-pin-view";
 
-const Pin = ({navigation}) => {
+const Pin = ({ navigation }) => {
   const { setting } = useContext(SettingContext);
   const { theme, language } = setting;
   const styles = theme === "light" ? lightstyles : darkstyles;
 
-  const pinView = useRef(null)
-  const [showRemoveButton, setShowRemoveButton] = useState(false)
-  const [enteredPin, setEnteredPin] = useState("")
-  const [showCompletedButton, setShowCompletedButton] = useState(false)
+  const pinView = useRef(null);
+  const [showRemoveButton, setShowRemoveButton] = useState(false);
+  const [enteredPin, setEnteredPin] = useState("");
+  const [showCompletedButton, setShowCompletedButton] = useState(false);
   useEffect(() => {
     if (enteredPin.length > 0) {
-      setShowRemoveButton(true)
-      console.log("enter now pin",enteredPin)
+      setShowRemoveButton(true);
+      console.log("enter now pin", enteredPin);
     } else {
-      setShowRemoveButton(false)
+      setShowRemoveButton(false);
     }
     if (enteredPin.length === 6) {
-      setShowCompletedButton(true)
+      setShowCompletedButton(true);
     } else {
-      setShowCompletedButton(false)
+      setShowCompletedButton(false);
     }
-  }, [enteredPin])
+  }, [enteredPin]);
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -51,30 +51,45 @@ const Pin = ({navigation}) => {
           ref={pinView}
           pinLength={6}
           buttonSize={60}
-          onValueChange={value => setEnteredPin(value)}
+          onValueChange={(value) => setEnteredPin(value)}
           buttonAreaStyle={{ marginTop: 24 }}
           inputAreaStyle={{ marginBottom: 24 }}
           inputViewEmptyStyle={[styles.inputViewEmptyStyle]}
           inputViewFilledStyle={[styles.inputViewFilledStyle]}
           buttonViewStyle={[styles.buttonViewStyle]}
           buttonTextStyle={styles.buttonTextStyle}
-          onButtonPress={key => {
+          onButtonPress={(key) => {
             if (key === "custom_left") {
               pinView.current.clear();
-              console.log("enter now pin",enteredPin)
+              console.log("enter now pin", enteredPin);
             }
             if (key === "custom_right") {
-              navigation.navigate("Setting")
+              navigation.navigate("Setting");
             }
           }}
-          customLeftButton={showRemoveButton ? <Icon name={"ios-backspace"} size={36} color={theme === "light" ? "black" : "white"} /> : undefined}
-          customRightButton={showCompletedButton ? <Icon name={"lock-open"} size={36} color={theme === "light" ? "black" : "white"} /> : undefined}
+          customLeftButton={
+            showRemoveButton ? (
+              <Icon
+                name={"ios-backspace"}
+                size={36}
+                color={theme === "light" ? "black" : "white"}
+              />
+            ) : undefined
+          }
+          customRightButton={
+            showCompletedButton ? (
+              <Icon
+                name={"lock-open"}
+                size={36}
+                color={theme === "light" ? "black" : "white"}
+              />
+            ) : undefined
+          }
         />
       </SafeAreaView>
     </>
-  )
-}
-
+  );
+};
 
 const lightstyles = StyleSheet.create({
   container: {
