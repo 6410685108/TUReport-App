@@ -19,7 +19,7 @@ import { SettingContext } from "../system/setting";
 import PinView from 'react-native-pin-view';
 import ReactNativePinView from "react-native-pin-view";
 
-const Pin = () => {
+const Pin = ({navigation}) => {
   const { setting } = useContext(SettingContext);
   const { theme, language } = setting;
   const styles = theme === "light" ? lightstyles : darkstyles;
@@ -64,10 +64,7 @@ const Pin = () => {
               console.log("enter now pin",enteredPin)
             }
             if (key === "custom_right") {
-              alert("Entered Pin: " + enteredPin);
-            }
-            if (key === "three") {
-              alert("You just clicked 3");
+              navigation.navigate("Setting")
             }
           }}
           customLeftButton={showRemoveButton ? <Icon name={"ios-backspace"} size={36} color={theme === "light" ? "black" : "white"} /> : undefined}

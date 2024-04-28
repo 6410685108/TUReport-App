@@ -92,6 +92,12 @@ const SettingInput = () => {
         console.log('form edit page',username)
       }, [])
   );
+  const onSwitchValueChange = () => {
+    if (!isEnabled) {
+      navigation.navigate('Pin');
+    }
+    toggleSwitch();
+  };
 
     return (
         <View style={styles.container}>
@@ -151,11 +157,7 @@ const SettingInput = () => {
                         trackColor={{false: styles.thumbColorFalse, true: styles.thumbColorTrue}}
                         thumbColor={isEnabled ? styles.cycleColor : styles.cycleColor}
                         ios_backgroundColor={styles.iosBackgroundColor}
-                        // onValueChange={toggleSwitch}
-                        onValueChange={() => {
-                            navigation.navigate('Pin');
-                            toggleSwitch();
-                        }}                        
+                        onValueChange={onSwitchValueChange}
                         value={isEnabled}
                     />
                 </View>
