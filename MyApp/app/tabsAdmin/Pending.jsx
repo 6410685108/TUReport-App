@@ -165,7 +165,7 @@ const darkstyles = StyleSheet.create({
     borderRadius: 10,
   },
   dropdown: {
-    flex: 0.5,
+    width: '100%',
     padding: 10,
     marginRight: 10,
     borderWidth: 1,
@@ -227,7 +227,7 @@ const lightstyles = StyleSheet.create({
     borderRadius: 10,
   },
   dropdown: {
-    flex: 0.5,
+    width: '50%',
     paddingHorizontal: 10,
     marginRight: 10,
     borderWidth: 1,

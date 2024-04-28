@@ -76,7 +76,7 @@ const Waiting = ({ navigation }) => {
           <View style={styles.inNav}>
             <Image style={styles.logo} source={PendingImage} />
             <Text style={[styles.text, { marginLeft: 5, fontSize: 25 }]}>
-              Approved
+              Waiting
             </Text>
           </View>
           <SelectCountry
@@ -96,7 +96,7 @@ const Waiting = ({ navigation }) => {
             }}
           />
         </View>
-        <Posts option={country} status={"Approved"} />
+        <Posts option={country} status={"Waiting"} />
       </View>
     );
   } else {
@@ -229,7 +229,7 @@ const lightstyles = StyleSheet.create({
     borderRadius: 10,
   },
   dropdown: {
-    flex: 0.5,
+    width: '50%',
     paddingHorizontal: 10,
     marginRight: 10,
     borderWidth: 1,

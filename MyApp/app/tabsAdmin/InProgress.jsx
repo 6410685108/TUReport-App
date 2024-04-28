@@ -228,7 +228,7 @@ const lightstyles = StyleSheet.create({
     borderRadius: 10,
   },
   dropdown: {
-    flex: 0.5,
+    width: '50%',
     paddingHorizontal: 10,
     marginRight: 10,
     borderWidth: 1,
