@@ -100,7 +100,7 @@ import {
                   )}
               </View>
               )}
-              {postInfo.status === 'Reject' || postInfo.status === 'Finished' && (
+              {postInfo.status !== 'Reject' || postInfo.status !== 'Finished' && (
               <View style={{flexDirection: 'row'}}>
                   
                   {postInfo.status === 'Reject' &&(

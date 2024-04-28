@@ -96,7 +96,7 @@ const Inpost = ({ navigation, route }) => {
                 {postInfo.status === 'Approved' &&(
                     <Image style={{width: 70, height: 20}} source={require('../picture/Approved.png')} />
                 )}
-                {postInfo.status === 'InProgress' &&(
+                {postInfo.status === 'In progress' &&(
                     <Image style={{width: 70, height: 20}} source={require('../picture/Inprogress.png')} />
                 )}
                 {postInfo.status === 'Waiting' &&(
@@ -104,7 +104,7 @@ const Inpost = ({ navigation, route }) => {
                 )}
             </View>
             )}
-            {postInfo.status === 'Reject' || postInfo.status === 'Finished' && (
+            {postInfo.status !== 'Reject' || postInfo.status !== 'Finished' && (
             <View style={{flexDirection: 'row'}}>
                 
                 {postInfo.status === 'Reject' &&(
