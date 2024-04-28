@@ -21,29 +21,29 @@ const QandA = () => {
     if (language === "EN") {
       return [
         {
-          question: "LoremxD",
+          question: "How many days does the operation take approximately?",
           answer:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra, mi nec elementum tincidunt, est ex efficitur ligula, id pretium nisi dui quis quam. Cras felis urna, tempus id pulvinar sit amet, dignissim sed nisl. Aenean eu ornare mauris. Nunc velit lorem, molestie at lacus non, blandit porttitor mauris. Donec facilisis risus eros, eu sagittis justo porttitor ac. Phasellus mauris ex, iaculis vel elementum vitae, rhoncus vitae erat. Morbi maximus diam at malesuada vestibulum. Fusce a ultricies magna. Vestibulum consequat id diam quis vestibulum.",
+            "We will escalate the issue to the party responsible for the resolution within 1-3 days, after which they will notify us of the time required for the resolution. We will update the status.",
         },
-        {
-          question: "BBBBB",
-          answer:
-            "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
-        },
-        {
-          question: "BBBBB",
-          answer:
-            "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
-        },
-        {
-          question: "BBBBB",
-          answer:
-            "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
-        },
-        {
-          question: "เทสๆ",
-          answer: "ตอบๆเว้ย",
-        },
+        // {
+        //   question: "BBBBB",
+        //   answer:
+        //     "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+        // },
+        // {
+        //   question: "BBBBB",
+        //   answer:
+        //     "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+        // },
+        // {
+        //   question: "BBBBB",
+        //   answer:
+        //     "Aenean est quam, auctor vel rutrum ac, convallis eget ipsum. Nullam a venenatis purus, a dictum diam. Aliquam malesuada rutrum enim vitae maximus. In vitae mattis erat.",
+        // },
+        // {
+        //   question: "เทสๆ",
+        //   answer: "ตอบๆเว้ย",
+        // },
         // Add more Q&A here
       ];
     }
