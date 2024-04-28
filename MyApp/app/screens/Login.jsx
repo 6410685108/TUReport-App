@@ -27,7 +27,6 @@ const Login = ({ navigation }) => {
 
   return (
     <LinearGradient colors={["#b50d2e", "#ffd13e"]} style={styles.background}>
-      {/* Why use Scrool View ??? */}
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.titleContainer}>
           <Image
