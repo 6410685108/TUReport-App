@@ -144,7 +144,6 @@ const getUserDisplayName = async (userId) => {
 
 const getStatusPosts = async (option,status) => {
     try {
-        const posts = await db.getAllPosts();
         const sortedPosts = getSortPosts(option);
         const statusPosts = sortedPosts.filter(post => post.status === status);
         return statusPosts;
@@ -163,6 +162,7 @@ const data = {
 
     getUserPhotoURL,
     getUserDisplayName,
+    getStatusPosts,
 };
 
 export { data };

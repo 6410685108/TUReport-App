@@ -2,6 +2,7 @@ import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConf
 import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where, setDoc } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
+import { signInWithPhoneNumber , linkWithCredential } from 'firebase/auth';
 
 const createPost = async (title, detail, location , photo , anonymous) => {
     try { 
@@ -355,6 +356,9 @@ const getAllComments = async (postId) => {
 }
 
 const uploadUserPhoto = async (photo) => {
+    if (!photo) {
+        return;
+    }
     try{
         const photoUrl = await uploadImage(photo, 'users');
         const userId = firebase_auth.currentUser.uid;
@@ -402,7 +406,33 @@ const setDisplayName = async (name) => {
 }
 
 const setPhoneNumber = async (phoneNumber) => {
-    updateProfile(firebase_auth.currentUser, { phoneNumber: phoneNumber });
+    try {
+        const uid = firebase_auth.currentUser.uid;
+        const userRef = doc(firebase_db, 'users', uid);
+        await setDoc(userRef, {
+            phoneNumber: phoneNumber,
+        }, { merge: true });
+    } catch (error) {
+        console.error('Error setting user phone number:', error);
+    }
+
+}
+
+const getMyPhoneNumber = async () => {
+    try {
+        const uid = firebase_auth.currentUser.uid;
+        const userRef = doc(firebase_db, 'users', uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+            return userDoc.data().phoneNumber;
+        } else {
+            console.error('User document does not exist');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user phone number:', error);
+        return null;
+    }
 }
 
 const getCurrentUser = () => {
@@ -493,13 +523,13 @@ const db = {
     uploadUserPhoto,
     getThisUserPhoto,
     getUserPhoto,
-    setDisplayName,
-    setPhoneNumber,
     getCurrentUser,
     getDisplayNameOfID,
-
     setUserRole,
     getUserRole,
+    getMyPhoneNumber,
+    setDisplayName,
+    setPhoneNumber,
 
 };
 
