@@ -127,7 +127,6 @@ const Pending = ({ navigation }) => {
             }}
           />
         </View>
-
         <Posts option={country} status={"Pending"} />
       </View>
     );

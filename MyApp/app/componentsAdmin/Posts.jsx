@@ -1,5 +1,5 @@
 import React , {useState , useEffect} from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView , RefreshControl} from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView , RefreshControl, StyleSheet} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../system/db";
 import UserPhoto from "../components/UserPhoto";
@@ -10,7 +10,19 @@ const Posts = ({option , status}) => {
     const [refreshing, setRefreshing] = useState(false); 
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
-    const [sortedPosts, setSortedPosts] = useState([]);
+    // const [sortedPosts, setSortedPosts] = useState([]);
+    const  sortedPosts = [
+        {
+            id: 1,
+            author: 1,
+            time: '2021-10-01 10:00',
+            status: 'Pending',
+            title: 'Post 1',
+            detail: 'This is post 1',
+            photoUrl: 'https://picsum.photos/200',
+            repost: 10
+        },
+    ];
 
     const fetchData = async () => {
         let posts = [];
@@ -19,7 +31,7 @@ const Posts = ({option , status}) => {
         } else{
             posts = await data.getSortPosts(option);
         }
-        setSortedPosts(posts);
+        // setSortedPosts(posts);
         setLoading(false);
     }
 
@@ -121,17 +133,52 @@ const Posts = ({option , status}) => {
                     </Text>
                     <Image style={{width: '100%', height: 250, borderRadius: 20, marginTop: 10}} source={{uri: info.photoUrl}}/>
                     </TouchableOpacity>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
-                        <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => handleRepost(info.id)}>
-                            <Image style={{width: 30, height: 30}} source={require('../picture/repost_icon.png')} />
-                            <Text style={{paddingLeft: 5}}>{info.repost}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                        { pressBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2.png')} /> 
-                            ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />)}
-                        </TouchableOpacity>
+                    <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
+                    {info.status === 'Pending' && (
+                        <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity style={styles.buttonApprove} onPress={() => handleRepost(info.id)}>
+                                    <Text>Approve</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleRepost(info.id)}>
+                                    <Text>Reject</Text>
+                                </TouchableOpacity>
+                        </View>
+                    )
+                    }
+                    {info.status === 'Approved' && (
+                        <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity style={styles.buttonINProgress} onPress={() => handleRepost(info.id)}>
+                                    <Text>INProgress</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleRepost(info.id)}>
+                                    <Text>Reject</Text>
+                                </TouchableOpacity>
+                        </View>
+                    )
+                    }
+                    {info.status === 'INProgress' && (
+                        <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity style={styles.buttonFinish} onPress={() => handleRepost(info.id)}>
+                                    <Text>Finish</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonWaiting} onPress={() => handleRepost(info.id)}>
+                                    <Text>Waiting</Text>
+                                </TouchableOpacity>
+                        </View>
+                    )
+                    }
+                    {info.status === 'Waiting' && (
+                        <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity style={styles.buttonINProgess} onPress={() => handleRepost(info.id)}>
+                                    <Text>INProgess</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonReject} onPress={() => handleRepost(info.id)}>
+                                    <Text>Reject</Text>
+                                </TouchableOpacity>
+                        </View>
+                    )
+                    }
                     </View>
-                    <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginVertical: 10}}/>
                   </View>
                 ))}
             </ScrollView>
@@ -139,3 +186,11 @@ const Posts = ({option , status}) => {
 };
 
 export default Posts;
+
+const styles = StyleSheet.create({
+    buttonApprove: {backgroundColor: 'white', marginHorizontal: 10, padding: 10, borderRadius: 10, width: 100, justifyContent: 'center', alignItems: 'center'},
+    buttonReject: {backgroundColor: '#DC143C', marginHorizontal: 10, padding: 10, borderRadius: 10, width: 100, justifyContent: 'center', alignItems: 'center'},
+    buttonINProgress: {backgroundColor: 'gold', marginHorizontal: 10, padding: 10, borderRadius: 10, width: 100, justifyContent: 'center', alignItems: 'center'},
+    buttonWaiting: {backgroundColor: 'orange', marginHorizontal: 10, padding: 10, borderRadius: 10, width: 100, justifyContent: 'center', alignItems: 'center'},
+    buttonFinish: {backgroundColor: 'lightgreen', marginHorizontal: 10, padding: 10, borderRadius: 10, width: 100, justifyContent: 'center', alignItems: 'center'},
+})
