@@ -88,7 +88,7 @@ const getComments = async (postId) => {
 const login = async (email , password) => {
     try {
       // const response = await signInWithEmailAndPassword(auth, email, password);
-      await signInWithEmailAndPassword(auth,"t@t.com","111111");
+      await signInWithEmailAndPassword(auth,"ad@ad.com","111111");
     } catch (error) {
       alert(error.message);
       console.log(error);
@@ -154,7 +154,8 @@ const getUserDisplayName = async (userId) => {
 
 const getStatusPosts = async (option,status) => {
     try {
-        const sortedPosts = getSortPosts(option);
+        
+        const sortedPosts = await getSortPosts(option);
         const statusPosts = sortedPosts.filter(post => post.status === status);
         return statusPosts;
     } catch (error) {

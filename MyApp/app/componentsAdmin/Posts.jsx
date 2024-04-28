@@ -25,13 +25,8 @@ const Posts = ({option , status}) => {
     // ];
 
     const fetchData = async () => {
-        let posts = [];
-        if(status){
-            posts = await db.getStatusPosts(option,status);
-        } else{
-            posts = await data.getSortPosts(option);
-        }
-        // setSortedPosts(posts);
+        const posts = await data.getStatusPosts(option,status);
+        setSortedPosts(posts);
         setLoading(false);
     }
 
@@ -61,36 +56,30 @@ const Posts = ({option , status}) => {
         return <Text>No Post Available</Text>;
     }
 
-    const handleRepost = async (postId) => {
-        await db.repostPost(postId,);
+
+    const handleApprove = async (postId) => {
+        db.changeStatusPost(postId,'Approved');
         await fetchData();
     }
 
-    const handleApprove = async (postId) => {
-        console.log(postId);
-    }
-
     const handleReject = async (postId) => {
-        console.log(postId);
+        db.changeStatusPost(postId,'Reject');
+        await fetchData();
     }
 
     const handleWainting = async (postId) => {
-        console.log(postId);
+        db.changeStatusPost(postId,'Waiting');
+        await fetchData();
     }
 
     const handleFinish = async (postId) => {
-        console.log(postId);
+        db.changeStatusPost(postId,'Finished');
+        await fetchData();
     }
 
     const handleInprogress = async (postId) => {
-        console.log(postId);
-    }
-
-    const handleBookmark = async (postId) => {
-        await Promise.all([
-            db.userBookmark(postId),
-            fetchData()
-        ]);
+        db.changeStatusPost(postId,'In progress');
+        await fetchData();
     }
 
   return (
@@ -104,7 +93,13 @@ const Posts = ({option , status}) => {
             }>
                 {sortedPosts.map((info) => (
                     <View style={{margin: 10, padding: 15, backgroundColor: '#ECECEC', borderRadius: 20}} key={info.id}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
+                    <TouchableOpacity onPress={() => {
+                        try {
+                            navigation.navigate('InpostAdmin', { postInfo: info });
+                        } catch (error) {
+                            console.error("Navigation error:", error);
+                        }
+                    }}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row'}}>
                             <UserPhoto key={info.id} userId={info.author} />
