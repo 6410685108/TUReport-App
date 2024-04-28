@@ -64,7 +64,7 @@ const Pin = ({ navigation }) => {
             }
             if (key === "custom_right") {
               console.log("completed pin", enteredPin);
-              db.setPin(enteredPin);
+              // db.setPin(enteredPin);
               navigation.navigate("Setting");
             }
           }}

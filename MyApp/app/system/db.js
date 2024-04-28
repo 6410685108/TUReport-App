@@ -513,47 +513,6 @@ const getUserRole = async () => {
     }
 }
 
-const setPin = async (pin) => {
-    const uid = firebase_auth.currentUser.uid;
-    try {
-        const userRef = doc(firebase_db, 'users', uid);
-        await setDoc(userRef, {
-            pin: pin,
-        }, { merge: true });
-    } catch (error) {
-        console.error('Error setting user pin:', error);
-    }
-
-}
-
-const getPin = async () => {
-    const uid = firebase_auth.currentUser.uid;
-    try {
-        const userRef = doc(firebase_db, 'users', uid);
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists()) {
-            return userDoc.data().pin;
-        } else {
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching user pin:', error);
-        return null;
-    }
-
-}
-
-const unSetPin = async () => {
-    const uid = firebase_auth.currentUser.uid;
-    try {
-        const userRef = doc(firebase_db, 'users', uid);
-        await setDoc(userRef, {
-            pin: null,
-        }, { merge: true });
-    } catch (error) {
-        console.error('Error setting user pin:', error);
-    }
-}
 
 
 const db = {
@@ -593,12 +552,7 @@ const db = {
     getUserRole,
     getMyPhoneNumber,
     setPhoneNumber,
-
-    setPin,
-    getPin,
-    unSetPin,
     
-
 };
 
 export { db };
