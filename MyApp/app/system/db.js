@@ -520,15 +520,17 @@ const db = {
     deleteAllNotifications,
     
     showCurrentUserInfo,
+    getCurrentUser,
+
     uploadUserPhoto,
     getThisUserPhoto,
     getUserPhoto,
-    getCurrentUser,
+
     getDisplayNameOfID,
+    setDisplayName,
     setUserRole,
     getUserRole,
     getMyPhoneNumber,
-    setDisplayName,
     setPhoneNumber,
 
 };
