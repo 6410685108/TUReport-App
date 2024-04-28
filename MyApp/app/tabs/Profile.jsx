@@ -79,21 +79,47 @@ const Profile = () => {
           <Text style={[styles.text]}>{user.email}</Text>
         </View>
         <View style={styles.boxx2}>
-          <View style={styles.center}>
-            <TouchableOpacity
-              onPress={() => handleSw(true)}
-            >
-              <Text style={[styles.text]}>{language === 'EN' ? "Your Posts" : "โพสต์ของคุณ"}</Text>
-            </TouchableOpacity>
-          </View>
+
+          
+          {sw ? (
+            <View style={styles.center}>
+              <TouchableOpacity
+                onPress={() => handleSw(true)}
+              >
+                <Text style={[styles.text,{fontWeight:'bold'}]}>{language === 'EN' ? "Your Posts" : "โพสต์ของคุณ"}</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+
+            <View style={styles.center}>
+              <TouchableOpacity
+                onPress={() => handleSw(true)}
+              >
+                <Text style={[styles.text]}>{language === 'EN' ? "Your Posts" : "โพสต์ของคุณ"}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
           <Text style={[styles.text]}>|</Text>
-          <View style={styles.center}>
+
+          {sw ? (
+            <View style={[styles.center]}>
             <TouchableOpacity
               onPress={() => handleSw(false)}
             >
               <Text style={[styles.text]}>{language === 'EN' ? "Saved" : "บันทึก"}</Text>
             </TouchableOpacity>
           </View>
+          ) : (
+            <View style={[styles.center]}>
+            <TouchableOpacity
+              onPress={() => handleSw(false)}
+            >
+              <Text style={[styles.text,{fontWeight:'bold'}]}>{language === 'EN' ? "Saved" : "บันทึก"}</Text>
+            </TouchableOpacity>
+          </View>
+          )}
+
         </View>
       </View>
       <ScrollView style={{width: '84%', height: '100%', fontSize: '100%',left:'8%'}}>
