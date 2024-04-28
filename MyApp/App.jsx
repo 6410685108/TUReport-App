@@ -78,10 +78,10 @@ function AuthenticatedScreens() {
     return role;
   }
   useEffect(() => {
-    // getRole().then((role) => {
-    //   setRole(role);
-    // });
-    setRole('admin');
+    getRole().then((role) => {
+      setRole(role);
+    });
+    // setRole('admin');
   }, [role]);
   
   if (role == "admin") {
