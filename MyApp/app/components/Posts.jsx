@@ -132,7 +132,7 @@ const Posts = ({option}) => {
                             ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1.png')} />)}
                         </TouchableOpacity>
                     </View>
-                    <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginVertical: 10}}/>
+                    {/* <TextInput placeholder="Comment" style={{borderWidth: 1, borderColor: 'black', borderRadius: 10, padding: 5, marginVertical: 10}}/> */}
                   </View>
                 ))}
             </ScrollView>
@@ -208,7 +208,7 @@ const Posts = ({option}) => {
                             ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1_w.png')} />)}
                         </TouchableOpacity>
                     </View>
-                    <TextInput placeholder="Comment" placeholderTextColor={'white'} style={{borderWidth: 1, borderColor: 'white', borderRadius: 10, padding: 5, marginVertical: 10}}/>
+                    {/* <TextInput placeholder="Comment" placeholderTextColor={'white'} style={{borderWidth: 1, borderColor: 'white', borderRadius: 10, padding: 5, marginVertical: 10}}/> */}
                   </View>
                 ))}
             </ScrollView>

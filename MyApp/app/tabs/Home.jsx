@@ -24,7 +24,7 @@ const Home = ({ navigation }) => {
     local_data = [
       {
         value: "1",
-        lable: "Allpost",
+        lable: "Most Recent",
       },
       {
         value: "A-Z",
@@ -43,7 +43,7 @@ const Home = ({ navigation }) => {
     local_data = [
       {
         value: "1",
-        lable: "โพสทั้งหมด",
+        lable: "โพสต์ล่าสุด",
       },
       {
         value: "A-Z",
