@@ -13,7 +13,7 @@ import Pending from "./app/tabsAdmin/Pending";
 import Approved from "./app/tabsAdmin/Approved";
 import { Image,StyleSheet } from "react-native";
 import { SettingProvider , SettingContext } from "./app/system/setting";
-
+import { data } from './app/system/data';
 import HomeNavigator from "./app/navigator/HomeNavigator";
 import ProfileNavigator from "./app/navigator/ProfileNavigator";
 import FinishNavigator from "./app/navigator/FinishNavigator";
@@ -77,10 +77,10 @@ function AuthenticatedScreens() {
     return role;
   }
   useEffect(() => {
-    getRole().then((role) => {
-      setRole(role);
-    });
-    // setRole('admin');
+    // getRole().then((role) => {
+    //   setRole(role);
+    // });
+    setRole('admin');
   }, [role]);
   
   if (role == "admin") {
@@ -116,7 +116,7 @@ function AuthenticatedScreens() {
             tabBarIcon: ({ focused, color, size }) => (
               <Image
                 source={require("./app/picture/Approved.png")}
-                style={{ width: size, height: size, tintColor: color }}
+                style={{ width: size, height: size}}
               />
             ),
             headerShown: false,
@@ -130,7 +130,7 @@ function AuthenticatedScreens() {
             tabBarIcon: ({ focused, color, size }) => (
               <Image
                 source={require("./app/picture/Inprogress.png")}
-                style={{ width: size, height: size, tintColor: color }}
+                style={{ width: size, height: size}}
               />
             ),
             headerShown: false,
@@ -144,7 +144,7 @@ function AuthenticatedScreens() {
             tabBarIcon: ({ focused, color, size }) => (
               <Image
                 source={require("./app/picture/Waiting.png")}
-                style={{ width: size, height: size, tintColor: color }}
+                style={{ width: size, height: size}}
               />
             ),
             headerShown: false,
@@ -153,17 +153,22 @@ function AuthenticatedScreens() {
         />
         <Tab.Screen
           name="Logout"
-          component={ProfileNavigator}
+          component={() => null}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
                 source={require("./app/picture/exit.png")}
-                style={{ width: size, height: size, tintColor: color }}
+                style={{ width: size, height: size}}
               />
             ),
             headerShown: false,
             tabBarStyle: styles.tabBarStyle,
           }}
+          listeners={() => ({
+            tabPress: () => {
+              data.logout();
+            },
+          })}
         />
       </Tab.Navigator>
     );
