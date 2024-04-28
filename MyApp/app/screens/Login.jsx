@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  ActivityIndicator,
   TouchableOpacity,
   Dimensions,
   Image,
@@ -13,16 +12,12 @@ import {
 import { data } from "../system/data";
 import { LinearGradient } from "expo-linear-gradient";
 
-
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const signIn = async () => {
-    setLoading(true);
     await data.login(email, password);
-    setLoading(false);
   };
 
   return (
@@ -67,21 +62,19 @@ const Login = ({ navigation }) => {
             <View style={styles.line}></View>
           </View>
 
-          <View style={{    flexDirection: "row",justifyContent: "space-between",alignItems: "center",}}>
-            <Text style={styles.registerText}>
-              Don't have an account?{" "}
-            </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={styles.registerText}>Don't have an account? </Text>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <Text style={[styles.signUpText]}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
-
-        {loading && (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
       </ScrollView>
     </LinearGradient>
   );
@@ -152,22 +145,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: Dimensions.get("window").height,
-  },
-  iconButtonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10,
-  },
-  iconButton: {
-    marginHorizontal: 15,
-  },
-  loadingContainer: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: height / 2,
-    zIndex: 999,
-    alignItems: "center",
   },
   registerText: {
     fontSize: 16,
