@@ -24,7 +24,7 @@ const Pending = ({ navigation }) => {
     local_data = [
       {
         value: "1",
-        lable: "Allpost",
+        lable: "Most Recent",
       },
       {
         value: "A-Z",
@@ -62,7 +62,7 @@ const Pending = ({ navigation }) => {
 
   const PendingImage =
     theme === "light"
-      ? require("../picture/home.png")
+    ? require("../picture/logo.png")
       : require("../picture/home_w.png");
   const notiImage =
     theme === "light"
@@ -79,8 +79,23 @@ const Pending = ({ navigation }) => {
               Pending
             </Text>
           </View>
+          <SelectCountry
+            style={styles.dropdown}
+            containerStyle={styles.containerStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            placeholderStyle={styles.placeholderStyle}
+            imageStyle={styles.imageStyle}
+            iconStyle={styles.iconStyle}
+            maxHeight={200}
+            value={country}
+            data={local_data}
+            valueField="value"
+            labelField="lable"
+            onChange={(e) => {
+              setCountry(e.value);
+            }}
+          />
         </View>
-
         <Posts option={country} status={"Pending"} />
       </View>
     );
@@ -222,6 +237,8 @@ const lightstyles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
+    backgroundColor: "#D86836",
+    borderRadius: 40,
   },
   text: {
     color: "black",

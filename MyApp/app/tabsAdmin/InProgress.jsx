@@ -1,4 +1,4 @@
-import React, { useState , useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import { SettingContext } from "../system/setting";
 const InProgress = ({ navigation }) => {
   const { setting } = useContext(SettingContext);
   const { theme, language } = setting;
-  const styles = theme === 'light' ? lightstyles : darkstyles;
+  const styles = theme === "light" ? lightstyles : darkstyles;
 
   const [country, setCountry] = useState("1");
 
@@ -24,7 +24,7 @@ const InProgress = ({ navigation }) => {
     local_data = [
       {
         value: "1",
-        lable: "Allpost",
+        lable: "Most Recent",
       },
       {
         value: "A-Z",
@@ -39,7 +39,7 @@ const InProgress = ({ navigation }) => {
         lable: "Repost",
       },
     ];
-  }else{
+  } else {
     local_data = [
       {
         value: "1",
@@ -60,44 +60,76 @@ const InProgress = ({ navigation }) => {
     ];
   }
 
+  const PendingImage =
+    theme === "light"
+      ? require("../picture/logo.png")
+      : require("../picture/home_w.png");
+  const notiImage =
+    theme === "light"
+      ? require("../picture/noti.png")
+      : require("../picture/noti_w.png");
 
-  const homeImage = theme === 'light' ? require('../picture/home.png') : require('../picture/home_w.png');
-  const notiImage = theme === 'light' ? require('../picture/noti.png') : require('../picture/noti_w.png');
-
-
-
-if (language == "EN") {
-  return (
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <View style={styles.inNav}>
-          <Image
-            style={styles.logo}
-            source={homeImage}
+  if (language == "EN") {
+    return (
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <Image style={styles.logo} source={PendingImage} />
+            <Text style={[styles.text, { marginLeft: 5, fontSize: 25 }]}>
+            In progress
+            </Text>
+          </View>
+          <SelectCountry
+            style={styles.dropdown}
+            containerStyle={styles.containerStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            placeholderStyle={styles.placeholderStyle}
+            imageStyle={styles.imageStyle}
+            iconStyle={styles.iconStyle}
+            maxHeight={200}
+            value={country}
+            data={local_data}
+            valueField="value"
+            labelField="lable"
+            onChange={(e) => {
+              setCountry(e.value);
+            }}
           />
-          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>INProgress</Text>
         </View>
+        <Posts option={country} status={"In progress"} />
       </View>
-      <Posts option={country} status={"In progress"}/>
-    </View>
-  );
-}
-else{
-  return (
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <View style={styles.inNav}>
-          <Image
-            style={styles.logo}
-            source={homeImage}
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <View style={styles.nav}>
+          <View style={styles.inNav}>
+            <Image style={styles.logo} source={PendingImage} />
+            <Text style={[styles.text, { marginLeft: 5, fontSize: 25 }]}>
+              หน้าหลัก
+            </Text>
+          </View>
+          <SelectCountry
+            style={styles.dropdown}
+            containerStyle={styles.containerStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            placeholderStyle={styles.placeholderStyle}
+            imageStyle={styles.imageStyle}
+            iconStyle={styles.iconStyle}
+            maxHeight={200}
+            value={country}
+            data={local_data}
+            valueField="value"
+            labelField="lable"
+            onChange={(e) => {
+              setCountry(e.value);
+            }}
           />
-          <Text style={[styles.text,{ marginLeft: 5, fontSize: 25 }]}>ร้องขอ</Text>
         </View>
+        <Posts option={country} status={"Pending"} />
       </View>
-      <Posts option={country} status={"In progress"}/>
-    </View>
-  );
-}
+    );
+  }
 };
 
 const darkstyles = StyleSheet.create({
@@ -135,7 +167,7 @@ const darkstyles = StyleSheet.create({
   dropdown: {
     flex: 0.5,
     padding: 10,
-    margin: 10,
+    marginRight: 10,
     borderWidth: 1,
     borderColor: "white",
     borderRadius: 10,
@@ -146,19 +178,20 @@ const darkstyles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
+    backgroundColor:'black'
   },
   text: {
     color: "white",
   },
   placeholderStyle: {
-    color: 'white',
+    color: "white",
   },
   selectedTextStyle: {
-    color: 'white',
-    textShadowColor: 'black',
-    textShadowOffset: {width: 1, height: 1}, 
+    color: "white",
+    textShadowColor: "black",
+    textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 10,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
 });
 
@@ -196,8 +229,8 @@ const lightstyles = StyleSheet.create({
   },
   dropdown: {
     flex: 0.5,
-    padding: 10,
-    margin: 10,
+    paddingHorizontal: 10,
+    marginRight: 10,
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 10,
@@ -205,21 +238,22 @@ const lightstyles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
+    backgroundColor: "#D86836",
+    borderRadius: 40,
   },
   text: {
     color: "black",
   },
   placeholderStyle: {
-    color: 'black',
+    color: "black",
   },
   selectedTextStyle: {
-    color: 'black',
-    textShadowColor: 'white',
-    textShadowOffset: {width: 1, height: 1}, 
+    color: "black",
+    textShadowColor: "white",
+    textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 10,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
 });
-
 
 export default InProgress;
