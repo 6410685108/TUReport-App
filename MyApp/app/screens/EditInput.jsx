@@ -5,18 +5,27 @@ import * as ImagePicker from 'expo-image-picker';
 import { SettingContext } from '../system/setting';
 
 const Edit = () => {
+    const user = db.getCurrentUser();
     const [photo, setPhoto] = useState(null);
     const { setting } = useContext(SettingContext);
     const { theme, language } = setting;
+    const [myphoto, setMyphoto] = useState(user.photoURL);
 
     const [displayname, setDisplayname] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    
+    const getPhoneNumber = async () => {
+      setPhoneNumber(await db.getMyPhoneNumber());
+    }
 
-
-    const user = db.getCurrentUser();
+    
+   
+    
     useEffect (()=>{
-        setDisplayname(user.displayName)
-        setPhoneNumber(user.phoneNumber)
+      
+      getPhoneNumber();
+      setDisplayname(user.displayName)
+      setPhoneNumber(phoneNumber)
     } ,[])
 
   const handleMessageSubmit = async () => {
@@ -24,8 +33,8 @@ const Edit = () => {
       try{
         await Promise.all([ 
           db.setDisplayName(displayname),
-          // db.setPhoneNumber(phoneNumber), ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
-          // db.uploadUserPhoto(photo), tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+          db.setPhoneNumber(phoneNumber),
+          db.uploadUserPhoto(photo),
         ]);
         Alert.alert('Profile updated successfully');
         return;
@@ -48,6 +57,7 @@ const Edit = () => {
       if (!result.cancelled && result.assets.length > 0) {
         const selectedImage = result.assets[0];
         setPhoto(selectedImage.uri); 
+        setMyphoto(selectedImage.uri);
       }
     } catch (error) {
       setPhoto(photo);
@@ -83,7 +93,7 @@ const Edit = () => {
         <View style={styles.containerContent} >
             <View style={styles.center}>
                 <TouchableOpacity onPress={handleAddPhoto}>
-                <Image style={[styles.logo2]}source={{ uri: user.photoURL }}/>
+                <Image style={[styles.logo2]}source={{ uri: myphoto }}/>
                 </TouchableOpacity>
             </View>
             <Text style={[styles.text2]}>{'Name'}</Text>
