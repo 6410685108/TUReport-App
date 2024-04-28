@@ -1,9 +1,10 @@
-import React, { useState , useContext } from "react";
+import React, { useState , useContext ,useEffect} from "react";
 import { SettingContext } from '../system/setting';
 import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Alert , Keyboard,Switch } from 'react-native';
 import { firebase_auth } from "../../firebaseConfig";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,useFocusEffect } from '@react-navigation/native';
 import { db } from '../system/db';
+import constants from "react-native-ui-lib/src/commons/Constants";
 
 
 
@@ -58,7 +59,6 @@ const SettingInput = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const navigation = useNavigation();
-  const user = db.getCurrentUser();
 
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
   const user_profileImage = theme === 'light' ? require('../picture/user_profile_g.png') : require('../picture/user_profile_g.png');
@@ -68,6 +68,30 @@ const SettingInput = () => {
   const theme2Image = require('../picture/theme2.png');
   const theme3Image = require('../picture/theme3.png');
   const theme4Image = require('../picture/theme4.png');
+
+  const user = db.getCurrentUser();
+  const [username, setUsername] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const getPhoneNumber = async () => {
+    setPhoneNumber(await db.getMyPhoneNumber());
+  }
+  const getUsername = async () => {
+    setUsername(user.displayName);
+    console.log('form setting page',username)
+  }
+  useEffect (()=>{
+    getPhoneNumber();
+    getUsername();
+    console.log(username)
+  } ,[])
+  useFocusEffect(
+    React.useCallback(() => {
+        getPhoneNumber();
+        getUsername();
+        console.log('form edit page',username)
+      }, [])
+  );
 
     return (
         <View style={styles.container}>
@@ -95,8 +119,8 @@ const SettingInput = () => {
                     </View>
                 </TouchableOpacity>
                 </View>
-                <Text style={[styles.text]}>{user.displayName}</Text>
-                <Text style={[styles.text]}>{user.phoneNumber !== null ? user.phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
+                <Text style={[styles.text]}>{username}</Text>
+                <Text style={[styles.text]}>{phoneNumber !== null ? phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
                 <Text style={[styles.text]}>{user.email}</Text>
             </View>
             <Text style={[styles.text2]}>{language === 'EN' ? '> Language' : '> ภาษา'}</Text>
