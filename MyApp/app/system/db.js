@@ -226,15 +226,17 @@ const userBookmark = async (postId) => {
     const userId = firebase_auth.currentUser.uid;
     try {
         if (await isBookmarked(postId)) {
-            console.log('remove bookmark');
+            
             await removeBookmark(postId);
+            console.log('remove bookmark');
         } else {
-            console.log('add bookmark');
+            
             const userRef = doc(firebase_db, 'users', userId);
             const bookmarkRef = collection(userRef, 'bookmark');
             await addDoc(bookmarkRef, {
                 postId: postId,
             });
+            console.log('add bookmark');
         }
     } catch (error) {
         console.error('Error adding post ID:', error);
@@ -286,6 +288,22 @@ const getBookmarkPostsID = async () => {
 
 }
 
+const isUserBookmarked = async (postId) => {
+    const userId = firebase_auth.currentUser.uid;
+    try {
+        const userRef = doc(firebase_db, 'users', userId); 
+        const postCollectionRef = collection(userRef, 'bookmark'); 
+        const q = query(postCollectionRef, where("postId", "==", postId));
+        const querySnapshot = await getDocs(q);
+        return !querySnapshot.empty;
+    } catch (error) {
+        console.error('Error checking bookmark:', error);
+        return false;
+    }
+
+
+}
+
 const notify = async (postid , uid , title) => {
     try { 
         console.log("Create Notify")
@@ -330,14 +348,15 @@ const deleteAllNotifications = async () => {
     }
 }
 
-const createComment = async (postId, comment) => {
+const createComment = async (postId, comment) => {    
     try {
         const commentCollectionRef = collection(firebase_db, 'posts', postId, 'comments');
         await addDoc(commentCollectionRef, {
             comment: comment,
-            author: firebase_auth.currentUser.uid,
+            author: uid,
             time: new Date().toLocaleString(),
         });
+        notify(postId , uid ,  `comment your post`);
     } catch (error) {
         console.error('Error creating comment:', error);
     }
@@ -514,6 +533,7 @@ const db = {
 
     userBookmark ,
     getBookmarkPostsID,
+    isUserBookmarked,
 
     getNotification,
     deleteAllNotifications,
@@ -531,6 +551,7 @@ const db = {
     getUserRole,
     getMyPhoneNumber,
     setPhoneNumber,
+    
 
 };
 
