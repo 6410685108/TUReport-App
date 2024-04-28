@@ -16,7 +16,6 @@ const Posts = ({option}) => {
     const navigation = useNavigation();
     const [sortedPosts, setSortedPosts] = useState([]);
     const [refreshKey, setRefreshKey] = useState(0);
-    const [isBookmark, setIsBookmark] = useState(false);
 
     const fetchData = async () => {
         posts = await data.getSortPosts(option);
@@ -131,7 +130,7 @@ const Posts = ({option}) => {
                             <Text style={{paddingLeft: 5}}>{info.repost}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                            <Bookmark postId={info.id} key={info.id} refreshKey={refreshKey} />
+                            <Bookmark postId={info.id} key={info.id} refreshKey={refreshKey} theme={theme} />
                         </TouchableOpacity>
                     </View>
                   </View>
@@ -205,8 +204,7 @@ const Posts = ({option}) => {
                             <Text style={{paddingLeft: 5,color:'white'}}>{info.repost}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={() => {handleBookmark(info.id)}}>
-                        { isBookmark ? (<Image style={{width: 30, height: 30}} source={require('../picture/save2_w.png')} /> 
-                            ): (<Image style={{width: 30, height: 30}} source={require('../picture/save1_w.png')} />)}
+                            <Bookmark postId={info.id} key={info.id} refreshKey={refreshKey} theme={theme} />
                         </TouchableOpacity>
                     </View>
                   </View>

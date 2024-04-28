@@ -13,6 +13,7 @@ import { db } from "../system/db"
 import { data } from "../system/data";
 import UserPhoto from "../components/UserPhoto";
 import Name from "../components/Name";
+import Bookmark from "../components/Bookmark";
 import { SettingContext } from '../system/setting';
 
 const Inpost = ({ navigation, route }) => {
@@ -25,6 +26,7 @@ const Inpost = ({ navigation, route }) => {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [sendButton, setSendButton] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const fetchComment = async () => {
     const comment = await data.getComments(postid);
@@ -54,9 +56,11 @@ const Inpost = ({ navigation, route }) => {
 
   const handleBookmark = async (postId) => {
     await db.userBookmark(postId);
+    refreshKey === 0 ? setRefreshKey(1) : setRefreshKey(0);
 }
 
   const handleCreateComment = async () => {
+    setComment("");
     await db.createComment(postid,comment);
     await fetchComment();
   }
@@ -156,17 +160,7 @@ const Inpost = ({ navigation, route }) => {
                 handleBookmark(postInfo.id);
               }}
             >
-              {theme === 'light' ? (
-                <Image
-                style={{ width: 30, height: 30 }}
-                source={require("../picture/save1.png")}
-                />
-              ) :            
-                <Image
-                style={{ width: 30, height: 30 }}
-                source={require("../picture/save1_w.png")}
-                />
-              }
+              <Bookmark postId={postInfo.id} key={postInfo.id} refreshKey={refreshKey} theme={theme} />
 
             </TouchableOpacity>
           </View>
