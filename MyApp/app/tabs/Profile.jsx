@@ -5,7 +5,7 @@ import { View, TextInput, Button ,StyleSheet, Image, Text, TouchableOpacity, Ale
 import Posts from "../components/Posts";
 import { data } from '../system/data';
 import { db } from '../system/db';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,useFocusEffect } from '@react-navigation/native';
 
 const Profile = () => {
   const { setting } = useContext(SettingContext);
@@ -13,19 +13,32 @@ const Profile = () => {
   const styles = theme === 'light' ? lightstyles : darkstyles;
 
   const [sw , setSw] = useState(true);
+  const navigation = useNavigation();
   const [reloadKey, setReloadKey] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const getPhoneNumber = async () => {
+    setPhoneNumber(await db.getMyPhoneNumber());
+    setReloadKey(prevKey => prevKey + 1);
+  }
 
   useEffect(() => {
+    getPhoneNumber();
     setReloadKey(prevKey => prevKey + 1);
-  }, [sw , navigation]);
+  }, [sw , navigation, phoneNumber]);
+  useFocusEffect(
+    React.useCallback(() => {
+      getPhoneNumber();
+    }, [])
+  );
 
   const handleSw = (bool) => {
     setSw(bool);
     setReloadKey(prevKey => prevKey + 1);
   }
 
+
   const user = db.getCurrentUser();
-  const navigation = useNavigation();
+
              
   const userImage = theme === 'light' ? require('../picture/user.png') : require('../picture/user_w.png');
   const settingImage = theme === 'light' ? require('../picture/setting.png') : require('../picture/setting_w.png');
@@ -62,7 +75,7 @@ const Profile = () => {
         <View style={styles.boxx}>
           <Image style={styles.logo2} source={{ uri: user.photoURL }}/>
           <Text style={[styles.text]}>{user.displayName}</Text>
-          <Text style={[styles.text]}>{user.phoneNumber !== null ? user.phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
+          <Text style={[styles.text]}>{phoneNumber !== null ? phoneNumber : (language === 'EN' ? "No Phone Number" : "ไม่มีเบอร์")}</Text>
           <Text style={[styles.text]}>{user.email}</Text>
         </View>
         <View style={styles.boxx2}>

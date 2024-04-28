@@ -23,7 +23,6 @@ const Edit = () => {
    
     
     useEffect (()=>{
-      
       getPhoneNumber();
       setDisplayname(user.displayName)
       setPhoneNumber(phoneNumber)
@@ -39,7 +38,8 @@ const Edit = () => {
         ]
       );
         Alert.alert('Profile updated successfully');
-        navigation.navigate('Setting');
+        navigation.navigate("Profile2");
+        navigation.navigate("Home");
         return;
       } catch (error) {
         Alert.alert('Profile updated failed');
