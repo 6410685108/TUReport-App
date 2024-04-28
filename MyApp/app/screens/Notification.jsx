@@ -38,7 +38,7 @@ const Notification =  () => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            console.log("Clear");
+            db.deleteAllNotifications();
           }}
         >
           <Image
