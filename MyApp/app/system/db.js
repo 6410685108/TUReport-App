@@ -486,8 +486,7 @@ const getUserRole = async () => {
         if (userDoc.exists()) {
             return userDoc.data().role;
         } else {
-            console.error('User document does not exist');
-            return null;
+            return "user";
         }
     } catch (error) {
         console.error('Error fetching user role:', error);
