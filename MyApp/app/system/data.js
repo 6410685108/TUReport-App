@@ -46,8 +46,18 @@ const getSortPosts = async (option) => {
         });
     } else if (option === 'Repost'){
         sortedPosts.sort((a, b) => b.repost - a.repost);
-    } else if (option === 'Finish'){
-        sortedPosts = posts.filter(post => post.status === 'Finish');
+    } else if (option === 'Pending'){
+        sortedPosts = posts.filter(post => post.status === 'Pending');
+    } else if (option === 'Approved'){
+        sortedPosts = posts.filter(post => post.status === 'Approved');
+    } else if (option === 'InProgress'){
+        sortedPosts = posts.filter(post => post.status === 'InProgress');
+    } else if (option === 'Waiting'){
+        sortedPosts = posts.filter(post => post.status === 'Waiting');
+    } else if (option === 'Finished'){
+        sortedPosts = posts.filter(post => post.status === 'Finished');
+    } else if (option === 'Reject'){
+        sortedPosts = posts.filter(post => post.status === 'Reject');
     } else if (option == 'MyPost') {
         sortedPosts = posts.filter(post => post.author === db.getCurrentUser().uid);
     } else if (option == 'Bookmark') {

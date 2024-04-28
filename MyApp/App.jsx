@@ -101,7 +101,7 @@ function AuthenticatedScreens() {
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
-                source={require("./app/picture/home.png")}
+                source={require("./app/picture/Pending.png")}
                 style={{ width: size, height: size, tintColor: color }}
               />
             ),
@@ -115,7 +115,7 @@ function AuthenticatedScreens() {
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
-                source={require("./app/picture/finish.png")}
+                source={require("./app/picture/Approved.png")}
                 style={{ width: size, height: size, tintColor: color }}
               />
             ),
@@ -129,7 +129,7 @@ function AuthenticatedScreens() {
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
-                source={require("./app/picture/createpost.png")}
+                source={require("./app/picture/Inprogress.png")}
                 style={{ width: size, height: size, tintColor: color }}
               />
             ),
@@ -143,7 +143,7 @@ function AuthenticatedScreens() {
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
-                source={require("./app/picture/qa_icon.png")}
+                source={require("./app/picture/Waiting.png")}
                 style={{ width: size, height: size, tintColor: color }}
               />
             ),
@@ -152,12 +152,12 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="Profile"
+          name="Logout"
           component={ProfileNavigator}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
-                source={require("./app/picture/user.png")}
+                source={require("./app/picture/exit.png")}
                 style={{ width: size, height: size, tintColor: color }}
               />
             ),
@@ -194,12 +194,12 @@ function AuthenticatedScreens() {
           }}
         />
         <Tab.Screen
-          name="Finish"
+          name="Status"
           component={FinishNavigator}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
-                source={require("./app/picture/finish.png")}
+                source={require("./app/picture/status_b.png")}
                 style={{ width: size, height: size, tintColor: color }}
               />
             ),

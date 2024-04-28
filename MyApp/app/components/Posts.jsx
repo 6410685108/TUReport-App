@@ -42,11 +42,11 @@ const Posts = ({option}) => {
 
     
     if (loading) {
-        return <Text>Loading...</Text>;
+        return <Text style={{color: (theme === 'light' ? 'black':'white')}}>Loading...</Text>;
     }
 
     if (sortedPosts.length === 0) {
-        return <Text>No Post Available</Text>;
+        return <Text style={{color: (theme === 'light' ? 'black':'white')}}>No Post Available</Text>;
     }
 
     const handleRepost = async (postId) => {
