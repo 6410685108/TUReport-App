@@ -90,7 +90,10 @@ const Inpost = ({ navigation, route }) => {
                   <Name userId={postInfo.author} isAnonymous={postInfo.anonymous} />
                 </Text>
                 <Text style={[styles.text,{ fontSize: 12 }]}>
-                  {postInfo.time.split('/')[0] + " " +monthStyle[postInfo.time.split('/')[1]-1] + " " + postInfo.time.split('/')[2]}
+                  {language === "EN" ? 
+                      postInfo.time.split('/')[0] + " " +monthStyle[postInfo.time.split('/')[1]-1] + " " + postInfo.time.split('/')[2] : 
+                      postInfo.time.split('/')[0] + " " +monthStyle[postInfo.time.split('/')[1]-1] + " " + [parseInt(postInfo.time.split(' ')[0].split('/')[2])+543] + " " +postInfo.time.split(' ')[1]
+                  }
                 </Text>
               </View>
             </View>

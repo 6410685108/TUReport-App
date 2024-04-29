@@ -89,7 +89,10 @@ const Posts = ({option}) => {
                             <View style={{flexDirection: 'column', paddingLeft: 5}}>
                             <Text style={{fontSize: 12}}><Name userId={info.author} isAnonymous={info.anonymous} /></Text>
                                 <Text style={{fontSize: 12}}>
-                                    {info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + info.time.split('/')[2]}
+                                    {language === "EN" ? 
+                                        info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + info.time.split('/')[2] : 
+                                        info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + [parseInt(info.time.split(' ')[0].split('/')[2])+543] + " " +info.time.split(' ')[1]
+                                    }
                                 </Text>
                             </View>
                         </View>
@@ -168,7 +171,10 @@ const Posts = ({option}) => {
                             <View style={{flexDirection: 'column', paddingLeft: 5}}>
                                 <Text style={{fontSize: 12,color: 'white'}}><Name userId={info.author} isAnonymous={info.anonymous} /></Text>
                                 <Text style={{fontSize: 12,color: 'white'}}>
-                                    {info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + info.time.split('/')[2]}
+                                    {language === "EN" ? 
+                                        info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + info.time.split('/')[2] : 
+                                        info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + [parseInt(info.time.split(' ')[0].split('/')[2])+543] + " " +info.time.split(' ')[1]
+                                    }
                                 </Text>
                             </View>
                         </View>
