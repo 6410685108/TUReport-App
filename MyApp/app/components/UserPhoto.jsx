@@ -15,7 +15,7 @@ const UserPhoto = ({ userId , isAnonymous}) => {
         }
     }, [userId]);
     if (isAnonymous){
-        return <Image style={{ width: 35, height: 35 , borderRadius: 35 }} source={require("../picture/user_profile_g.png")} />;
+        return <Image style={{ width: 35, height: 35 , borderRadius: 35 }}source={require("../picture/user_profile_g.png")} />;
     }
     return <Image style={{ width: 35, height: 35 , borderRadius: 35 }} source={{ uri: userPhoto }} />;
 };

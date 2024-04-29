@@ -63,6 +63,12 @@ const Posts = ({option}) => {
         ]);
         setRefreshKey(refreshKey + 1)
     }
+    let monthStyle = [];
+    if (language == "EN") {
+      monthStyle = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    }else{
+      monthStyle = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+    }
 
     if (theme == 'light') {
         return (
@@ -82,7 +88,9 @@ const Posts = ({option}) => {
                             <UserPhoto key={info.id} userId={info.author} isAnonymous={info.anonymous} />
                             <View style={{flexDirection: 'column', paddingLeft: 5}}>
                             <Text style={{fontSize: 12}}><Name userId={info.author} isAnonymous={info.anonymous} /></Text>
-                                <Text style={{fontSize: 12}}>{info.time}</Text>
+                                <Text style={{fontSize: 12}}>
+                                    {info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + info.time.split('/')[2]}
+                                </Text>
                             </View>
                         </View>
 
@@ -156,10 +164,12 @@ const Posts = ({option}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row'}}>
-                            <UserPhoto key={info.id} userId={info.author} />
+                            <UserPhoto key={info.id} userId={info.author} isAnonymous={info.anonymous} />
                             <View style={{flexDirection: 'column', paddingLeft: 5}}>
-                                <Text style={{fontSize: 12,color: 'white'}}><Name userId={info.author} /></Text>
-                                <Text style={{fontSize: 12,color: 'white'}}>{info.time}</Text>
+                                <Text style={{fontSize: 12,color: 'white'}}><Name userId={info.author} isAnonymous={info.anonymous} /></Text>
+                                <Text style={{fontSize: 12,color: 'white'}}>
+                                    {info.time.split('/')[0] + " " +monthStyle[info.time.split('/')[1]-1] + " " + info.time.split('/')[2]}
+                                </Text>
                             </View>
                         </View>
 
