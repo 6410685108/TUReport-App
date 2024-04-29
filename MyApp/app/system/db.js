@@ -437,16 +437,18 @@ const setDisplayName = async (name) => {
 
 const setPhoneNumber = async (phoneNumber) => {
     try {
-        const uid = firebase_auth.currentUser.uid;
-        const userRef = doc(firebase_db, 'users', uid);
-        await setDoc(userRef, {
-            phoneNumber: phoneNumber,
-        }, { merge: true });
+      if (phoneNumber === undefined) {
+        return;
+      }
+      const uid = firebase_auth.currentUser.uid;
+      const userRef = doc(firebase_db, 'users', uid);
+      await setDoc(userRef, {
+        phoneNumber
+      }, { merge: true });
     } catch (error) {
-        console.error('Error setting user phone number:', error);
+      console.error('Error setting user phone number:', error);
     }
-
-}
+  }
 
 const getMyPhoneNumber = async () => {
     try {
