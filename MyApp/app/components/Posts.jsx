@@ -79,9 +79,9 @@ const Posts = ({option}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('Inpost', {postInfo: info})}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row'}}>
-                            <UserPhoto key={info.id} userId={info.author} />
+                            <UserPhoto key={info.id} userId={info.author} isAnonymous={info.anonymous} />
                             <View style={{flexDirection: 'column', paddingLeft: 5}}>
-                            <Text style={{fontSize: 12}}><Name userId={info.author} /></Text>
+                            <Text style={{fontSize: 12}}><Name userId={info.author} isAnonymous={info.anonymous} /></Text>
                                 <Text style={{fontSize: 12}}>{info.time}</Text>
                             </View>
                         </View>

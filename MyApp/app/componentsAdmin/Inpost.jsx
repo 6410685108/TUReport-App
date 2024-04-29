@@ -75,10 +75,10 @@ import {
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View style={{ flexDirection: "row" }}>
-              <UserPhoto userId={postInfo.author} />
+              <UserPhoto userId={postInfo.author} isAnonymous={postInfo.anonymous}/>
                 <View style={{ flexDirection: "column", paddingLeft: 5 }}>
                   <Text style={[styles.text,{ fontWeight: "bold", fontSize: 14 }]}>
-                    <Name userId={postInfo.author} />
+                    <Name userId={postInfo.author} isAnonymous={postInfo.anonymous} />
                   </Text>
                   <Text style={[styles.text,{ fontSize: 12 }]}>{postInfo.time}</Text>
                 </View>

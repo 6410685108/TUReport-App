@@ -4,6 +4,17 @@ import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
 import { signInWithPhoneNumber , linkWithCredential } from 'firebase/auth';
 
+const getDate = () => {
+    const now = new Date();
+    const date = now.getDate();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+    return `${date}/${month}/${year} ${hour}:${minute}:${second}`;
+}
+
 const createPost = async (title, detail, location , photo , anonymous) => {
     try { 
         const photoUrl = await uploadImage(photo, 'posts');
@@ -15,7 +26,7 @@ const createPost = async (title, detail, location , photo , anonymous) => {
             photoUrl: photoUrl,
             anonymous: anonymous,
             author: firebase_auth.currentUser.uid,
-            time: new Date().toLocaleString(),
+            time: getDate(),
             status: 'Pending',
             repost: 0,
         });
@@ -355,7 +366,7 @@ const createComment = async (postId, comment) => {
         await addDoc(commentCollectionRef, {
             comment: comment,
             author: uid,
-            time: new Date().toLocaleString(),
+            time: getDate(),
         });
         notify(postId , uid ,  `comment your post`);
     } catch (error) {
@@ -514,6 +525,23 @@ const getUserRole = async () => {
     }
 }
 
+const getUserByUID = async (uid) => {
+    try {
+        const userRef = doc(firebase_db, 'users', uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+            return userDoc.data();
+        } else {
+            console.error('User document does not exist');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        return null;
+    }
+
+}
+
 
 
 const db = {
@@ -542,6 +570,7 @@ const db = {
     
     showCurrentUserInfo,
     getCurrentUser,
+    getUserByUID,
 
     uploadUserPhoto,
     getThisUserPhoto,
@@ -553,7 +582,7 @@ const db = {
     getUserRole,
     getMyPhoneNumber,
     setPhoneNumber,
-    
+    getDate,
 };
 
 export { db };

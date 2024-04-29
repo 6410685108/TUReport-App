@@ -68,7 +68,7 @@ const getSortPosts = async (option) => {
 }
 
 const parseThaiDate = (timeString) => {
-    const [datePart, timePart] = timeString.split(', ');
+    const [datePart, timePart] = timeString.split(' ');
     const [day, month, year] = datePart.split('/').map(part => parseInt(part));
     const [hour, minute, second] = timePart.split(':').map(part => parseInt(part));
     const yearAD = year - 543;
