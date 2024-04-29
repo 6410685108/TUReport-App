@@ -64,7 +64,12 @@ const Inpost = ({ navigation, route }) => {
     await db.createComment(postid,comment);
     await fetchComment();
   }
-
+  let monthStyle = [];
+  if (language == "EN") {
+    monthStyle = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  }else{
+    monthStyle = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={{ marginTop: "10%", height: "90%" }}>
@@ -84,7 +89,9 @@ const Inpost = ({ navigation, route }) => {
                 <Text style={[styles.text,{ fontWeight: "bold", fontSize: 14 }]}>
                   <Name userId={postInfo.author} isAnonymous={postInfo.anonymous} />
                 </Text>
-                <Text style={[styles.text,{ fontSize: 12 }]}>{postInfo.time}</Text>
+                <Text style={[styles.text,{ fontSize: 12 }]}>
+                  {postInfo.time.split('/')[0] + " " +monthStyle[postInfo.time.split('/')[1]-1] + " " + postInfo.time.split('/')[2]}
+                </Text>
               </View>
             </View>
             {postInfo.status !== 'Finished' && postInfo.status !== 'Reject' && (
