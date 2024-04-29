@@ -2,7 +2,6 @@ import { firebase_auth, firebase_db , firebase_storage} from '../../firebaseConf
 import { collection , addDoc , getDocs , updateDoc , doc , getDoc , deleteDoc ,query , where, setDoc } from 'firebase/firestore';
 import { ref , getDownloadURL , uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth'
-import { signInWithPhoneNumber , linkWithCredential } from 'firebase/auth';
 
 const getDate = () => {
     const now = new Date();

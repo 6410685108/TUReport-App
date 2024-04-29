@@ -71,8 +71,7 @@ const parseThaiDate = (timeString) => {
     const [datePart, timePart] = timeString.split(' ');
     const [day, month, year] = datePart.split('/').map(part => parseInt(part));
     const [hour, minute, second] = timePart.split(':').map(part => parseInt(part));
-    const yearAD = year - 543;
-    return new Date(yearAD, month - 1, day, hour, minute, second);
+    return new Date(year, month - 1, day, hour, minute, second);
 }
 
 const getComments = async (postId) => {
