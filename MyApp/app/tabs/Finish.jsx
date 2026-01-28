@@ -2,17 +2,12 @@ import React, { useState, useContext } from "react";
 import {
   View,
   Text,
-  Button,
-  TextInput,
   StyleSheet,
   Image,
-  TouchableOpacity,
 } from "react-native";
 import Posts from "../components/Posts";
 import { SelectCountry } from "react-native-element-dropdown";
 import { SettingContext } from "../system/setting";
-
-// import { TextInput } from "react-native-gesture-handler";
 
 const Finish = () => {
   const { setting } = useContext(SettingContext);

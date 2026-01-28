@@ -6,7 +6,8 @@ import { getStorage } from 'firebase/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCGyBzOxbZmNRBFHdUwUmFJajPLQedmcAM",
+  // apiKey: "AIzaSyCGyBzOxbZmNRBFHdUwUmFJajPLQedmcAM",
+  apiKey: "AIzaSyBsDYRgdOnDb0cYKJEIF59fBnFcCFnR7fQ",
   authDomain: "tu-reports.firebaseapp.com",
   databaseURL: "https://tu-reports-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "tu-reports",

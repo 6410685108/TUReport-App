@@ -5,10 +5,81 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff7fe785-5cd1-4b1f-a122-a5715738d41c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deviceManager.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/debug.keystore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/java/com/CN333/TUReports/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/java/com/CN333/TUReports/MainApplication.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable-hdpi/splashscreen_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable-mdpi/splashscreen_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable-xhdpi/splashscreen_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable-xxhdpi/splashscreen_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable-xxxhdpi/splashscreen_image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable/rn_edit_text_material.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/drawable/splashscreen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/values-night/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/android/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/components/Bookmark.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/components/Name.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/components/Posts.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/components/UserPhoto.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/componentsAdmin/Inpost.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/componentsAdmin/Posts.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/navigator/AdminNavigator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/navigator/FinishNavigator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/navigator/HomeNavigator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/navigator/ProfileNavigator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/EditInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/Inpost.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/Login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/Notification.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/PinInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/Register.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/screens/SettingInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/system/data.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/system/db.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/app/system/setting.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/firebaseConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyApp/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/screens/Inpost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/screens/Inpost.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/system/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/system/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/app/tabs/CreatePost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/tabs/CreatePost.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/app/tabs/Finish.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/tabs/Finish.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/app/tabs/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/app/tabs/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/firebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/firebaseConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +109,15 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/OneDrive/Desktop/University Project/TUReport-App&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
 }</component>
